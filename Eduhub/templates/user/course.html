@@ -1,0 +1,415 @@
+{% load static %}
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+       <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+
+       <!--=============== BOXICONS ===============-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+       <!--=============== SWIPER CSS ===============--> 
+       <link rel="stylesheet" href="static/css/swiper-bundle.min.css">
+
+       <!--=============== CSS ===============-->
+       <link rel="stylesheet" href="static/css/styles.css">
+
+       <title>EduHub</title>
+   </head>
+   <body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="{% url 'HomePage' %}" class="nav__logo">
+                    <img src="static/img/logo1.png" style="width:100%; height:100%">
+                </a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="{% url 'HomePage' %}" class="nav__link ">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'AboutPage' %}" class="nav__link ">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'CoursePage' %}" class="nav__link active-link">Course</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'PlacementPage' %}" class="nav__link ">Placement</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class='bx bx-x' ></i>
+                    </div>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                    <div class="nav__shop" id="cart-shop">
+                        <i class='bx bxs-chat'></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-grid-alt' ></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+           <!--==================== CART ====================-->
+           <div class="cart" id="cart">
+            <i class='bx bx-x cart__close' id="cart-close"></i>
+
+            <h2 class="cart__title-center">My Cart</h2>
+
+            <div class="cart__container">
+                <article class="cart__card">
+                    <div class="cart__box">
+                        <img src="static/img/featured1.png" alt="" class="cart__img">
+                    </div>
+
+                    <div class="cart__details">
+                        <h3 class="cart__title">Jazzmaster</h3>
+                        <span class="cart__price">$1050</span>
+
+                        <div class="cart__amount">
+                            <div class="cart__amount-content">
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-minus' ></i>
+                                </span>
+
+                                <span class="cart__amount-number">1</span>
+
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-plus' ></i>
+                                </span>
+                            </div>
+
+                            <i class='bx bx-trash-alt cart__amount-trash' ></i>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="cart__card">
+                    <div class="cart__box">
+                        <img src="static/img/featured3.png" alt="" class="cart__img">
+                    </div>
+
+                    <div class="cart__details">
+                        <h3 class="cart__title">Rose Gold</h3>
+                        <span class="cart__price">$850</span>
+
+                        <div class="cart__amount">
+                            <div class="cart__amount-content">
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-minus' ></i>
+                                </span>
+
+                                <span class="cart__amount-number">1</span>
+
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-plus' ></i>
+                                </span>
+                            </div>
+
+                            <i class='bx bx-trash-alt cart__amount-trash' ></i>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="cart__card">
+                    <div class="cart__box">
+                        <img src="static/img/new1.png" alt="" class="cart__img">
+                    </div>
+
+                    <div class="cart__details">
+                        <h3 class="cart__title">Longines Rose</h3>
+                        <span class="cart__price">$980</span>
+
+                        <div class="cart__amount">
+                            <div class="cart__amount-content">
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-minus' ></i>
+                                </span>
+
+                                <span class="cart__amount-number">1</span>
+
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-plus' ></i>
+                                </span>
+                            </div>
+
+                            <i class='bx bx-trash-alt cart__amount-trash' ></i>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="cart__prices">
+                <span class="cart__prices-item">3 items</span>
+                <span class="cart__prices-total">$2880</span>
+            </div>
+        </div>
+
+
+        <main class="main">
+                 <!--==================== HOME ====================-->
+                 <section class="home" id="home">
+                    <div class="home__container container grid">
+                        <div class="home__img-bg">
+                            <img src="#" alt="" class="home__img">
+                        </div>
+        
+                        <div class="home__social">
+                            <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="home__social-link">
+                                Facebook
+                            </a>
+                            <a href="https://wa.me/919074156818" target="_blank" class="home__social-link">
+                                What's up
+                            </a>
+                            <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="home__social-link">
+                                Instagram
+                            </a>
+                        </div>
+        
+        
+                        <div class="home__data">
+                            <h1 class="home__title">ALTOS EDUHUB <br> On The Job Training </h1>
+                            <p class="home__description">
+                                Welcome to Altos Eduhub - the premier software training company in Kerala, 
+                                and a subsidiary of Altos Technologies - one of the leading software development 
+                                companies in Kochi. We offer a range of on-the-job training programs in Python, 
+                                React JS, Front End Development, REST API, and Digital Marketing. Our courses are 
+                                designed to equip you with the skills and knowledge you need to succeed in the 
+                                competitive world of software development.
+                            </p>
+                            <!-- <span class="home__price">$1245</span> -->
+    
+                            <div class="home__btns">
+                                <a href="#second-section" class="button button--gray button--small">
+                                    Explore
+                                </a>
+    
+                                <!-- <button class="button home__button">ADD TO CART</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                 <!--==================== STORY ====================-->
+                 <section class="story section container" id="second-section">
+                    <div class="story__container grid">
+                        <div class="story__data">
+                            <h2 class="section__title story__section-title">
+                                EDUHUB
+                            </h2>
+        
+                            <h1 class="story__title">
+                              TRAINING PROGRAMS<br>
+                            </h1>
+        
+                            <p class="story__description">
+                                Our training programs are six months in duration, with the first three months focused 
+                                on fundamental training and the remaining three months dedicated to practical work on 
+                                live projects. Upon successful completion of the training, you will receive an experience 
+                                certificate. For Python training, we also offer guaranteed placement at Altos Technologies, 
+                                while for other programs, we provide placement assistance.
+                            </p>
+                            
+                            <p class="story__description">
+                                To ensure the best possible training experience for our candidates, we have implemented several 
+                                measures. As a part of our training program, we provide candidates with access to Altos core software,
+                                 where they can update their tasks and track their work status efficiently. Additionally, 
+                                 we conduct weekly meetings for each of the candidates to evaluate their work and performance. 
+                                 We believe in providing continuous support to our candidates and offer a doubt clearing section 
+                                 that is available 24 hours a day, seven days a week.
+                            </p>
+        
+                            <a href="#" class="button button--small">READ TOP</a>
+                        </div>
+
+                        <div class="story__images">
+                            <img src="#" alt="" class="story__img">
+                            <div class="story__square"></div>
+                        </div>
+                    </div>
+                </section>
+
+                    
+         
+              
+              
+            <!--==================== FEATURED ====================-->
+            <div id="offered-courses"></div><!-- For Redriction form Home Page-->
+            <section class="featured section container" id="featured">
+                <h2 class="section__title" >
+                    OFFERED COURSES
+                </h2>
+
+                <div class="featured__container grid">
+                    <article class="featured__card">
+                        <span class="featured__tag">New</span>
+
+                        <img src="#" alt="" class="featured__img">
+
+                        <div class="featured__data">
+                            <h3 class="featured__title">course</h3>
+                            <span class="featured__price"></span>
+                        </div>
+                        <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
+                        <!-- <button class="button featured__button">JOIN NOW</button> -->
+                    </article>
+
+                    <article class="featured__card">
+                        <span class="featured__tag">New</span>
+
+                        <img src="#" alt="" class="featured__img">
+
+                        <div class="featured__data">
+                            <h3 class="featured__title">course</h3>
+                            <span class="featured__price"></span>
+                        </div>
+
+                        <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
+                    </article>
+                    
+
+                    <article class="featured__card">
+                        <span class="featured__tag">New</span>
+
+                        <img src="#" alt="" class="featured__img">
+
+                        <div class="featured__data">
+                            <h3 class="featured__title">course</h3>
+                            <span class="featured__price"></span>
+                        </div>
+
+                        <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
+                    </article>
+                </div>
+            </section>
+
+                
+    
+
+        </main>
+
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <h3 class="footer__title">ALTOS EDUHUB</h3>
+
+                <ul class="footer__list">
+                    <li> 1st Floor - Thapasya Building Infopark</li>
+                    <li>Kakkanad, Cochin</li>
+                    <li> +91 974 663 2202</li>
+                    <li> info@Altostechnologies.in</li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">Quick Link</h3>
+
+                <ul class="footer__links">
+                   
+                    <li>
+                        <a href="{% url 'AboutPage' %}" class="footer__link">About Us</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'ContactPage' %}" class="footer__link">Contact</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">FAQs & Help</a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            
+
+            <div class="footer__content">
+                <h3 class="footer__title">Social</h3>
+
+                <ul class="footer__social">
+                    <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+                    <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-whatsapp' ></i>
+                    </a>
+                  
+                    <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-youtube' ></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-linkedin' ></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-instagram' ></i>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+        <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+    </footer>
+
+
+    <!--=============== SCROLL UP ===============-->
+    <a href="#" class="scrollup" id="scroll-up"> 
+        <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+        
+    </a>
+    <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+           
+        <i class='bx bxl-whatsapp scrollwh__icon' ></i>
+    </a>
+
+    <!--=============== SWIPER JS ===============-->
+    <script src="static/js/swiper-bundle.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="static/js/main.js"></script>
+
+     <!--===============PARALLS JS ===============-->
+     <script src="static/js/index.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+     
+     <script>
+        var image = document.getElementsByClassName('home__img');
+        new simpleParallax(image, {
+            delay: .4,
+            scale: 0.9,
+            transition: 'cubic-bezier(0,0,0,1)'
+            
+        });
+        
+
+        
+        
+     </script>
+
+
+</body>
+</html>
+        
