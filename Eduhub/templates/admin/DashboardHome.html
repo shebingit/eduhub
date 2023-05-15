@@ -1,0 +1,298 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<style>
+    .msg-box
+    {
+        padding: 1em;
+        text-align: center;
+        font-size: 0.85em;
+     
+        margin-bottom: 1em;
+    }
+    .msg-box .delete-msg
+    {
+        color: rgb(238, 23, 23);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+    #msgbox {
+        transition: opacity 1s ease-in-out;
+    }
+    #msgbox.hidden {
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+    }
+   
+    .text-bold-7
+    {
+        font-weight: 700;
+    }
+    .recent-files-box
+    {
+       
+        padding:0.60em 1em;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+       
+      
+       
+    }
+
+    
+    .recent-files-box .card
+    {
+
+      
+        border: none;
+        outline: none;
+        font-size: 0.90em;
+        margin: 0.60em;
+        padding: 0.90em 1.3em;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border: 16px;
+        font-size: 0.87em;
+        font-weight: 500;
+    }
+    .enroll-box h5, .enquery-box h5{
+        font-size: 0.98em;
+        color: rgb(21, 21, 85);
+        letter-spacing: 0.06em;
+        margin-top: 1em;
+    }
+    .recent-files-box .card .card-header
+    {
+        border: none;
+        outline: none;
+     
+    }
+   
+</style>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        
+    </div>
+
+    
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                               Popular Courses</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{file_up_count}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Enrolls</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{enrolls_count}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Enquery</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Reports</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        
+    </div>
+
+    {% if delete_msg%}
+    <div class="msg-box" id="msgbox">
+        <span class="delete-msg" id="msgbox">{{delete_msg}}</span>
+    </div>
+    {% endif %}
+    
+
+    <!-- Content Row -->
+    
+   
+
+
+    <h6 class="mt-3 mb-4 text-bold-7">Todays Enrolls and Enquery</h6>
+    <div class="row recent-files-box">
+       
+        <div class="col-6 enroll-box p-3">
+            {% if enrolls %}
+            <h5 class="mb-3 text-center"> Enrolls </h5>
+            {% for enrl in enrolls %}
+            <div class="card">
+                <h6>Name : {{enrl.name}} </h6>
+                <p> Email: {{enrl.email}}</p>
+                <p>
+                    <span> Phone No: {{enrl.phone}} </span>&nbsp; &nbsp; 
+                    <span> Course : {{enrl.course.course_name}} </span> 
+                 </p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5 class="mb-3 text-center"> No New Enrolls </h5>
+            {% endif %}
+        </div>
+        <div class="col-6 enquery-box p-3">
+            {% if enquerys %}
+            <h5 class="mb-3 text-center"> Enquries </h5>
+            {% for enq in enquerys %}
+            <div class="card">
+                <h6>Name : </h6>
+                <p> Email: </p>
+                <p>
+                    <span>Phone No:</span> 
+                    <span>Course :</span> 
+                 </p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5 class="mb-3 text-center"> No New Enquries </h5>
+            {% endif %}
+           
+        </div>
+       
+       
+
+    </div>
+
+
+</div>
+
+<!-- Confirmation Modal css -->
+<style>
+    .modal-content
+    {
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    }
+    .modal-content, .modal-header, .modal-footer
+    {
+        border: none;
+        outline: none;
+        border-radius: 0px;
+    }
+    .titlesize
+    {
+        font-size: 1.1em;
+        font-weight: 600;
+        color: rgb(227, 59, 33);
+    }
+    .modal-body
+    {
+        font-size: 0.90em;
+        font-weight: 600;
+        
+    }
+    .modal-body .file_name
+    {
+        font-size: 1em;
+        font-weight: 700;
+        color: rgb(227, 23, 23);
+    }
+    .btn
+    {
+        font-size: 0.85em;
+        border-radius: 0px;
+        font-weight: 600;
+    }
+</style>
+
+<!-- end-->
+
+
+<!-- Delete Model -->
+{% for i in file_up %}
+
+<div class="modal fade" id="delete-modal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title titlesize" id="delete-modal-label">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete <span class='file_name'> {{i.file_Name}} </span> file ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <a href="#"><button type="button" class="btn btn-danger" id="delete-confirm">Delete</button></a>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<!--- end -->
+
+
+<script>
+    setTimeout(function() {
+        document.getElementById('msgbox').classList.add('hidden');
+    }, 5000);
+</script>
+
+
+
+{% endblock %}

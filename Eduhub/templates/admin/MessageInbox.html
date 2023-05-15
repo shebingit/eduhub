@@ -1,0 +1,93 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+
+<style>
+    .table_box
+    {
+        padding: 2em 1.7em;
+        background: #FFFFF7;
+        font-size: 0.87em;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+        border-radius: 10px;
+    }
+    .msg_remove
+    {
+        font-size: 0.85em;
+        color: rgb(220, 40, 40);
+        font-weight: 800;
+
+    }
+    .info_box
+    {
+        text-align: center;
+        padding: 1em ;
+        font-size: 0.85em;
+        font-weight: 500;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        margin: 0.60em;
+    }
+</style>
+
+
+<!-- Message Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h4 mb-0 text-Primary-600">Admin inbox</h1>
+    </div>
+    {% if confirm_msg %}
+    <div class="info_box">
+       
+        <p>{{confirm_msg}}</p>
+       
+    </div>
+    {% endif %}
+    <!-- Main table-Box content -->
+    <div class=" table_box">
+
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                   
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for msg in inboxmsg %}
+                <tr class="">
+                    <td class="text-center">
+                        <a href="{% url 'inboxmsg_remove' msg.id %}" class="msg_remove">❌</a>
+                    </td>
+                    <td>{{msg.msg_date}}</td>
+                    <td>{{msg.name}}</td>
+                    <td>{{msg.email}}</td>
+                    <td>{{msg.subject}}</td>
+                    <td>{{msg.message}}</td>
+                    
+                    
+                </tr>
+                {% endfor %}
+                
+          
+            </tbody>
+            
+        </table>
+
+    </div>
+    <!-- End table-Box content -->
+</div>
+<!-- End Page Content -->
+
+
+
+
+{% endblock %}

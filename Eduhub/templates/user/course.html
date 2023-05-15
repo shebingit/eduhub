@@ -66,16 +66,16 @@
             </nav>
         </header>
 
-           <!--==================== CART ====================-->
-           <div class="cart" id="cart">
+         <!--==================== CART ====================-->
+         <div class="cart" id="cart">
             <i class='bx bx-x cart__close' id="cart-close"></i>
 
-            <h2 class="cart__title-center">My Cart</h2>
+            <h2 class="cart__title-center">Chat</h2>
 
-            <div class="cart__container">
+            <!-- <div class="cart__container">
                 <article class="cart__card">
                     <div class="cart__box">
-                        <img src="static/img/featured1.png" alt="" class="cart__img">
+                        <img src="#" alt="" class="cart__img">
                     </div>
 
                     <div class="cart__details">
@@ -102,7 +102,7 @@
                 
                 <article class="cart__card">
                     <div class="cart__box">
-                        <img src="static/img/featured3.png" alt="" class="cart__img">
+                        <img src="#" alt="" class="cart__img">
                     </div>
 
                     <div class="cart__details">
@@ -129,7 +129,7 @@
 
                 <article class="cart__card">
                     <div class="cart__box">
-                        <img src="static/img/new1.png" alt="" class="cart__img">
+                        <img src="#" alt="" class="cart__img">
                     </div>
 
                     <div class="cart__details">
@@ -156,11 +156,10 @@
             </div>
 
             <div class="cart__prices">
-                <span class="cart__prices-item">3 items</span>
-                <span class="cart__prices-total">$2880</span>
-            </div>
+                <span class="cart__prices-item"></span>
+                <span class="cart__prices-total"></span>
+            </div> -->
         </div>
-
 
         <main class="main">
                  <!--==================== HOME ====================-->
@@ -245,62 +244,82 @@
                     </div>
                 </section>
 
-                    
-         
-              
-              
-            <!--==================== FEATURED ====================-->
-            <div id="offered-courses"></div><!-- For Redriction form Home Page-->
-            <section class="featured section container" id="featured">
-                <h2 class="section__title" >
-                    OFFERED COURSES
-                </h2>
+                 <!--==================== CATEGEORY ====================-->
 
-                <div class="featured__container grid">
-                    <article class="featured__card">
-                        <span class="featured__tag">New</span>
 
-                        <img src="#" alt="" class="featured__img">
-
-                        <div class="featured__data">
-                            <h3 class="featured__title">course</h3>
-                            <span class="featured__price"></span>
+                 <section class="newsletter section container">
+                    <div class="newsletter__bg grid">
+                        <div>
+                            <h2 class="newsletter__title">Different Categoryies  <br> of Courses</h2>
+                            <p class="newsletter__description">
+                                The Lorem Ipsum Company has been an integral part of our content marketing success. 
+                                We have seen a notable increase in organic .
+                            </p>
                         </div>
-                        <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
-                        <!-- <button class="button featured__button">JOIN NOW</button> -->
-                    </article>
-
-                    <article class="featured__card">
-                        <span class="featured__tag">New</span>
-
-                        <img src="#" alt="" class="featured__img">
-
-                        <div class="featured__data">
-                            <h3 class="featured__title">course</h3>
-                            <span class="featured__price"></span>
-                        </div>
-
-                        <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
-                    </article>
-                    
-
-                    <article class="featured__card">
-                        <span class="featured__tag">New</span>
-
-                        <img src="#" alt="" class="featured__img">
-
-                        <div class="featured__data">
-                            <h3 class="featured__title">course</h3>
-                            <span class="featured__price"></span>
-                        </div>
-
-                        <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
-                    </article>
-                </div>
-            </section>
-
-                
     
+                        <div class="categeory_box" >
+                            <a href="#">
+                              
+                                <div class="card" >
+                                    <i class='bx bxs-cube-alt'></i>
+                                    <p>SHORT TEAM INTERNSHIP</p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="card">
+                                    <i class='bx bxs-book-bookmark'></i>
+                                    <p>INTERNSHIP</p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="card">
+                                    <i class='bx bxs-bookmarks'></i>
+                                    <p>ON JOB TRAINING</p>
+                                    
+                                   </div>
+                            </a>
+                           
+
+                        </div>
+                    </div>
+                </section>
+
+ 
+                <!--==================== FEATURED ====================-->
+                <div id="offered-courses"></div><!-- For Redriction form Home Page-->
+                <section class="featured section container" id="featured">
+                    <h2 class="section__title" >
+                        OFFERED COURSES
+                    </h2>
+
+                    <div class="featured__container grid">
+                        {% for cours in courses %}
+                        <article class="featured__card">
+                            {% if cours.offer_fee %}
+                            <span class="featured__tag"><del>₹ {{cours.fee}}/-</span>
+                            {% endif %}
+                            {% if cours.image %}
+                            <img src="{{cours.image.url}}" alt="" class="featured__img">
+                            {% endif %}
+
+                            <div class="featured__data">
+                                <h3 class="featured__title">{{cours.course_name}}</h3>
+                                {% if cours.offer_fee %}
+                            
+                                <span class="featured__price">₹ {{cours.offer_fee}}/-</span>
+                                {% else %}
+                                <span class="featured__price">₹ {{cours.fee}}/-</span>
+                                {% endif %}
+                            </div>
+                            <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>
+                            <!-- <button class="button featured__button">JOIN NOW</button> -->
+                        </article>
+                        {% endfor %}
+
+
+                    </div>
+                </section>
+
 
         </main>
 

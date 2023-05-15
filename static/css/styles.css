@@ -733,6 +733,16 @@ body.dark-theme {
   font-size: 0.88rem;
   letter-spacing: 0.05em;
 }
+.benift_box
+{ margin-bottom: var(--mb-2-5);
+  line-height: 1.75rem;
+  font-size: 0.86rem;
+  letter-spacing: 0.05em;
+}
+.benifts .bx
+{
+  color: var(--first-color);
+}
 
 .story__images {
   position: relative;
@@ -751,7 +761,7 @@ body.dark-theme {
 .story__img {
   position: absolute;
   left: 3rem;
-  top: -3rem;
+  top: 2rem;
 }
 
 /*=============== PRODUCTS ===============*/
@@ -825,6 +835,8 @@ body.dark-theme {
 
 .testimonial__description {
   margin-bottom: var(--mb-1);
+  font-size: 0.93rem;
+  line-height: 1.5rem;
 }
 
 .testimonial__date {
@@ -936,7 +948,7 @@ body.dark-theme {
 }
 
 .new__img {
-  height: 215px;
+  height: 125px;
   margin-bottom: var(--mb-1);
 }
 
@@ -1007,6 +1019,17 @@ body.dark-theme {
   font-size: 0.88rem;
   letter-spacing: 0.05em;
 }
+.about_list_box ul 
+{
+  text-align: start;
+}
+
+.about_list_box ul li {
+  color: hsl(0, 0%, 34%);
+  line-height: 1.80rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+}
 .contact_icons
 {
   margin-top: 0.95rem;
@@ -1041,6 +1064,12 @@ body.dark-theme {
   padding: 1.05rem 1rem;
   color: hsl(0, 0%, 15%);
   font-size: 0.90rem;
+}
+.regisrter_info
+{
+  color: hsl(0, 0%, 35%);
+  font-size: 0.85rem;
+  padding: 0.60rem 0.20rem;
 }
 
 /*=============== FOOTER ===============*/
@@ -1459,7 +1488,7 @@ body.dark-theme {
 
   .story__square,
   .testimonial__square {
-    height: 450px;
+    height: 320px;
   }
 
   .products__container,
@@ -1735,5 +1764,38 @@ body.dark-theme {
     grid-template-columns:repeat(2,1fr);
     gap: 1rem;
   }
+}
+
+/* ========== CATEGEORY =========== */
+.categeory_box
+{
+    display: grid;
+    grid-template-columns:repeat(1,1fr);
+    gap: 1rem;
+}
+.categeory_box .card{
+    height: 100px;
+    font-size: 0.95rem;
+    color: hsl(216, 91%, 17%);
+    font-weight: 600;
+    margin-top: 0.70em;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    background:rgba(255,255,255,0.3);
+}
+.categeory_box .card .bx{
+  font-size: 1.6rem;
+  margin-bottom: 0.60rem;
+}
+.message_data
+{
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+  color: hsl(31, 100%, 80%);
+  letter-spacing: 0.05em;
 }
 

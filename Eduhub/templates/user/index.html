@@ -71,9 +71,9 @@
         <div class="cart" id="cart">
             <i class='bx bx-x cart__close' id="cart-close"></i>
 
-            <h2 class="cart__title-center">My Cart</h2>
+            <h2 class="cart__title-center">Chat</h2>
 
-            <div class="cart__container">
+            <!-- <div class="cart__container">
                 <article class="cart__card">
                     <div class="cart__box">
                         <img src="#" alt="" class="cart__img">
@@ -157,9 +157,9 @@
             </div>
 
             <div class="cart__prices">
-                <span class="cart__prices-item">3 items</span>
-                <span class="cart__prices-total">$2880</span>
-            </div>
+                <span class="cart__prices-item"></span>
+                <span class="cart__prices-total"></span>
+            </div> -->
         </div>
 
         <!--==================== MAIN ====================-->
@@ -187,7 +187,9 @@
                     <div class="home__data">
                         <h1 class="home__title">Best Software Training <br> Institute of Kerala </h1>
                         <p class="home__description1 ">
-                            Enhance Your Skills with Top-Rated Software Courses in Kochi<br>
+                            <span>Enhance Your Skills with Top-Rated Software Courses in Kochi</span>
+                            <span>Empowering Your Tech Career with Expert Guidance.</span>
+                            
                         </p>
                         
                         <div class="home__btns">
@@ -205,8 +207,6 @@
             </section>
             
         
-
-            
             <!--==================== STORY ====================-->
             <section class="story section container">
                 <div class="story__container grid">
@@ -247,57 +247,93 @@
                     <article class="featured__card">
                         <span class="featured__tag"></span>
 
-                        <img src="#" alt="" class="featured__img">
+                        <img src="{% static 'img/jumpcarrer.jpg' %}" alt="Jumpstart Your IT Career" class="featured__img">
 
                         <div class="featured__data">
-                            <h3 class="featured__title">head name</h3>
+                            <h3 class="featured__title">Jumpstart Your IT Career</h3>
                             <span class="featured__price"></span>
                         </div>
-
-                        <button class="button featured__button">Explore</button>
+                       
+                        <a href="{% url 'CarrerStart' %}"  class="button featured__button">Explore</a>
+                        <!-- <button class="button featured__button">Explore</button> -->
                     </article>
 
                     <article class="featured__card">
                         <span class="featured__tag"></span>
 
-                        <img src="#" alt="" class="featured__img">
+                        <img src="{% static 'img/transit.jpg' %}" alt="Transitioning to IT" class="featured__img">
 
                         <div class="featured__data">
-                            <h3 class="featured__title">head name</h3>
+                            <h3 class="featured__title">Transitioning to IT</h3>
                             <span class="featured__price"></span>
                         </div>
 
-                        <button class="button featured__button">Explore</button>
+                        <a href="{% url 'CarrerTransit' %}"  class="button featured__button">Explore</a>
                     </article>
 
                     <article class="featured__card">
                         <span class="featured__tag"></span>
 
-                        <img src="#" alt="" class="featured__img">
+                        <img src="{% static 'img/brigeup.jpg' %}" alt="Bridging the Gap" class="featured__img">
 
                         <div class="featured__data">
-                            <h3 class="featured__title">head name</h3>
+                            <h3 class="featured__title">Bridging the Gap</h3>
                             <span class="featured__price"></span>
                         </div>
 
-                        <button class="button featured__button">Explore</button>
+                        <a href="{% url 'BridgingGap' %}"  class="button featured__button">Explore</a>
                     </article>
                     
 
                     <article class="featured__card">
                         <span class="featured__tag"></span>
 
-                        <img src="#" alt="" class="featured__img">
+                        <img src="{% static 'img/restart.jpg' %}" alt="Bridging the Gap" class="featured__img">
+                        
 
                         <div class="featured__data">
-                            <h3 class="featured__title">head name</h3>
+                            <h3 class="featured__title">Restart Your IT Career</h3>
                             <span class="featured__price"></span>
                         </div>
 
-                        <button class="button featured__button">Explore</button>
+                        <a href="{% url 'CarrerRestart' %}"  class="button featured__button">Explore</a>
                     </article>
                 </div>
             </section>
+
+            <!--==================== NEW ====================-->
+            <section class="new section container" id="new">
+                <h2 class="section__title">
+                    Popular Courses
+                </h2>
+                
+                <div class="new__container">
+                    <div class="swiper new-swiper">
+                        <div class="swiper-wrapper">
+                            {% for cours in courses %}
+                            <article class="new__card swiper-slide">
+                                <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span>
+                                {% if cours.image %}
+                                <img src="{{cours.image.url}}" alt="" class="new__img">
+                                {% endif %}
+        
+                                <div class="new__data">
+                                    <h3 class="new__title">{{cours.course_name}}</h3>
+                                    <!-- <span class="new__price">980</span> -->
+                                </div>
+
+                                <a class="button new__button"href="{% url 'RegisterForm' %}" class="button home__button">
+                                    Join Now
+                                </a>
+        
+                                
+                            </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <!--==================== SUPPORT ====================-->
             <section class="newsletter section_suport container">
@@ -365,116 +401,49 @@
 
 
 
-             <!--==================== NEW ====================-->
-             <section class="new section container" id="new">
-                <h2 class="section__title">
-                    Popular Courses
-                </h2>
-                
-                <div class="new__container">
-                    <div class="swiper new-swiper">
-                        <div class="swiper-wrapper">
-                            <article class="new__card swiper-slide">
-                                <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span>
-        
-                                <img src="#" alt="" class="new__img">
-        
-                                <div class="new__data">
-                                    <h3 class="new__title">course</h3>
-                                    <span class="new__price">980</span>
-                                </div>
-        
-                                <button class="button new__button">Join Now</button>
-                            </article>
+            <!--==================== COUNT ====================-->
 
-                            <article class="new__card swiper-slide">
-                                <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span>
-        
-                                <img src="#" alt="" class="new__img">
-        
-                                <div class="new__data">
-                                    <h3 class="new__title">course</h3>
-                                    <span class="new__price">1150</span>
-                                </div>
-        
-                                <button class="button new__button">Join Now</button>
-                            </article>
+            <section class="newsletter section container"  id="counter">
+                <div class="newsletter__bg grid">
+                    <div>
+                        <h2 class="newsletter__title">We Take Pride in  <br> Our Numbers</h2>
+                        <p class="newsletter__description">
+                            The Lorem Ipsum Company has been an integral part of our content marketing success. 
+                            We have seen a notable increase in organic .
+                        </p>
+                    </div>
 
-                            <article class="new__card swiper-slide">
-                                <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span>
-        
-                                <img src="#" alt="" class="new__img">
-        
-                                <div class="new__data">
-                                    <h3 class="new__title">course</h3>
-                                    <span class="new__price">750</span>
-                                </div>
-        
-                                <button class="button new__button">Join Now</button>
-                            </article>
-
-                            <article class="new__card swiper-slide">
-                                <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span>
-        
-                                <img src="#" alt="" class="new__img">
-        
-                                <div class="new__data">
-                                    <h3 class="new__title">course</h3>
-                                    <span class="new__price">1590</span>
-                                </div>
-        
-                                <button class="button new__button">Join Now</button>
-                            </article>                       
+                    <div class="number_counter_box" >
+                       <div class="card" >
+                        <div class="card_cont">
+                            <p><span class="counters" data-count="10">10</span></p>
+                            <span class="count_head">Experience</span>
+                         
                         </div>
+                       </div>
+                       <div class="card">
+                        <div class="card_cont">
+                            <p><span class="counters" data-count="500">500</span></p>
+                            <span class="count_head"> Placements</span>
+                        </div>
+                       </div>
+                       <div class="card">
+                        
+                        <div class="card_cont">
+                            <p><span class="counters"  data-count="100">100</span></p>
+                            <span class="count_head">Faculties</span>
+                        </div>
+                       </div>
+                       <div class="card">
+                     
+                        <div class="card_cont">
+                            <p><span class="counters"  data-count="50">50</span></p>
+                            <span class="count_head">Courses</span>
+                        </div>
+                       </div>
                     </div>
                 </div>
             </section>
-
-
-        
-                <!--====================  ====================-->
-                <section class="newsletter section container"  id="counter">
-                    <div class="newsletter__bg grid">
-                        <div>
-                            <h2 class="newsletter__title">We Take Pride in  <br> Our Numbers</h2>
-                            <p class="newsletter__description">
-                                Don't miss out on your discounts. Subscribe to our email 
-                                newsletter to get the best offers, discounts, coupons, 
-                                gifts and much more.
-                            </p>
-                        </div>
-    
-                        <div class="number_counter_box" >
-                           <div class="card" >
-                            <div class="card_cont">
-                                <p><span class="counters" data-count="10">10</span></p>
-                                <span class="count_head">Experience</span>
-                             
-                            </div>
-                           </div>
-                           <div class="card">
-                            <div class="card_cont">
-                                <p><span class="counters" data-count="500">500</span></p>
-                                <span class="count_head"> Placements</span>
-                            </div>
-                           </div>
-                           <div class="card">
-                            
-                            <div class="card_cont">
-                                <p><span class="counters"  data-count="100">100</span></p>
-                                <span class="count_head">Faculties</span>
-                            </div>
-                           </div>
-                           <div class="card">
-                         
-                            <div class="card_cont">
-                                <p><span class="counters"  data-count="50">50</span></p>
-                                <span class="count_head">Courses</span>
-                            </div>
-                           </div>
-                        </div>
-                    </div>
-                </section>
 
              
 
@@ -485,60 +454,22 @@
                 </h2>
 
                 <div class="products__container grid">
+                    {% for inst in instrs %}
                     <article class="products__card">
-                        <img src="#" alt="" class="products__img">
+                        {% if inst.image %}
+                        <img src="{{inst.image.url}}" alt="Instructor" class="products__img">
+                        {% endif %}
 
-                        <h3 class="products__title">Instructor</h3>
-                        <span class="products__price">Position</span>
+                        <h3 class="products__title">{{inst.name}}</h3>
+                        <span class="products__price">{{inst.designation}}</span>
 
                         <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
+                            <i class='bx bx-heart'></i>
                         </button>
                     </article>
+                    {% endfor %}
 
-                    <article class="products__card">
-                        <img src="#" alt="" class="products__img">
-
-                        <h3 class="products__title">Instructor</h3>
-                        <span class="products__price">Position</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
-
-                    <article class="products__card">
-                        <img src="#" alt="" class="products__img">
-
-                        <h3 class="products__title">Instructor</h3>
-                        <span class="products__price">Position</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
-
-                    <article class="products__card">
-                        <img src="#" alt="" class="products__img">
-
-                        <h3 class="products__title">Instructor</h3>
-                        <span class="products__price">Position</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
-
-                    <article class="products__card">
-                        <img src="#" alt="" class="products__img">
-
-                        <h3 class="products__title">Instructor</h3>
-                        <span class="products__price">Position</span>
-
-                        <button class="products__button">
-                            <i class='bx bx-shopping-bag'></i>
-                        </button>
-                    </article>
+                    
                 </div>
             </section>
 
@@ -546,70 +477,36 @@
             <section class="testimonial section container">
                 <div class="testimonial__container grid">
                     <div class="swiper testimonial-swiper">
+                     
                         <div class="swiper-wrapper">
+                            {% for testi in testims %}
                             <div class="testimonial__card swiper-slide">
                                 <div class="testimonial__quote">
                                     <i class='bx bxs-quote-alt-left' ></i>
                                 </div>
                                 <p class="testimonial__description">
-                                    They are the best watches that one acquires, also they are always with the latest 
-                                    news and trends, with a very comfortable price and especially with the attention 
-                                    you receive, they are always attentive to your questions.
+                                   {{testi.description}}
                                 </p>
-                                <h3 class="testimonial__date">March 27. 2021</h3>
+                                <div class="testimonial__quote">
+                                    <i class='bx bxs-quote-alt-right' ></i>
+                                </div>
+                                <!-- <h3 class="testimonial__date">March 27. 2021</h3> -->
         
                                 <div class="testimonial__perfil">
-                                    <img src="static/img/testimonial1.jpg" alt="" class="testimonial__perfil-img">
+                                    {% if testi.image %}
+                                    <img src="{{testi.image.url}}" alt="" class="testimonial__perfil-img">
+                                    {% endif %}
         
                                     <div class="testimonial__perfil-data">
-                                        <span class="testimonial__perfil-name">Lee Doe</span>
-                                        <span class="testimonial__perfil-detail">Director of a company</span>
+                                        <span class="testimonial__perfil-name"> {{testi.name}}</span>
+                                        <span class="testimonial__perfil-detail">{{testi.profession}}</span>
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
 
-                            <div class="testimonial__card swiper-slide">
-                                <div class="testimonial__quote">
-                                    <i class='bx bxs-quote-alt-left' ></i>
-                                </div>
-                                <p class="testimonial__description">
-                                    They are the best watches that one acquires, also they are always with the latest 
-                                    news and trends, with a very comfortable price and especially with the attention 
-                                    you receive, they are always attentive to your questions.
-                                </p>
-                                <h3 class="testimonial__date">March 27. 2021</h3>
-        
-                                <div class="testimonial__perfil">
-                                    <img src="static/img/testimonial2.jpg" alt="" class="testimonial__perfil-img">
-        
-                                    <div class="testimonial__perfil-data">
-                                        <span class="testimonial__perfil-name">Samantha Mey</span>
-                                        <span class="testimonial__perfil-detail">Director of a company</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="testimonial__card swiper-slide">
-                                <div class="testimonial__quote">
-                                    <i class='bx bxs-quote-alt-left' ></i>
-                                </div>
-                                <p class="testimonial__description">
-                                    They are the best watches that one acquires, also they are always with the latest 
-                                    news and trends, with a very comfortable price and especially with the attention 
-                                    you receive, they are always attentive to your questions.
-                                </p>
-                                <h3 class="testimonial__date">March 27. 2021</h3>
-        
-                                <div class="testimonial__perfil">
-                                    <img src="static/img/testimonial3.jpg" alt="" class="testimonial__perfil-img">
-        
-                                    <div class="testimonial__perfil-data">
-                                        <span class="testimonial__perfil-name">Raul Zaman</span>
-                                        <span class="testimonial__perfil-detail">Director of a company</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                       
                         
                         <div class="swiper-button-next">
                             <i class='bx bx-right-arrow-alt' ></i>

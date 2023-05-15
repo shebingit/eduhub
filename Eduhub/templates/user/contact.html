@@ -71,16 +71,17 @@
                 </div>
             </nav>
         </header>
-           <!--==================== CART ====================-->
-           <div class="cart" id="cart">
+       
+         <!--==================== CART ====================-->
+         <div class="cart" id="cart">
             <i class='bx bx-x cart__close' id="cart-close"></i>
 
-            <h2 class="cart__title-center">My Cart</h2>
+            <h2 class="cart__title-center">Chat</h2>
 
-            <div class="cart__container">
+            <!-- <div class="cart__container">
                 <article class="cart__card">
                     <div class="cart__box">
-                        <img src="static/img/featured1.png" alt="" class="cart__img">
+                        <img src="#" alt="" class="cart__img">
                     </div>
 
                     <div class="cart__details">
@@ -107,7 +108,7 @@
                 
                 <article class="cart__card">
                     <div class="cart__box">
-                        <img src="static/img/featured3.png" alt="" class="cart__img">
+                        <img src="#" alt="" class="cart__img">
                     </div>
 
                     <div class="cart__details">
@@ -134,7 +135,7 @@
 
                 <article class="cart__card">
                     <div class="cart__box">
-                        <img src="static/img/new1.png" alt="" class="cart__img">
+                        <img src="#" alt="" class="cart__img">
                     </div>
 
                     <div class="cart__details">
@@ -161,9 +162,9 @@
             </div>
 
             <div class="cart__prices">
-                <span class="cart__prices-item">3 items</span>
-                <span class="cart__prices-total">$2880</span>
-            </div>
+                <span class="cart__prices-item"></span>
+                <span class="cart__prices-total"></span>
+            </div> -->
         </div>
 
 
@@ -188,6 +189,9 @@
                     </div>
     
                     <div class="home__data">
+                        {% if msg %}
+                        <p class="message_data" >{{msg}}</p>
+                        {% endif %}
                         <h1 class="home__title">Contact For Any Query </h1>
                         <p class="home__description">
                             Welcome to Altos Eduhub's Contact Us page! We're thrilled that you're interested 
@@ -233,11 +237,13 @@
                         </div>
                     </div>
 
-                    <form action="" class="newsletter__subscribe">
-                        <input type="text" placeholder="Enter your name" class="newsletter__input" required>
-                        <input type="email" placeholder="Enter your email" class="newsletter__input" required>
-                        <input type="text" placeholder="Enter your subject" class="newsletter__input" required>
-                        <textarea class="newsletter__input" placeholder="Enter your message" required></textarea>
+                    <form action="{% url 'contactuss' %}" method="post" class="newsletter__subscribe">
+                        {% csrf_token %}
+        
+                        <input type="text" placeholder="Enter your name" name="name" class="newsletter__input" required>
+                        <input type="email" placeholder="Enter your email" name="email" class="newsletter__input" required>
+                        <input type="text" placeholder="Enter your subject" name="subject" class="newsletter__input" required>
+                        <textarea class="newsletter__input" placeholder="Enter your message" name="msg" required></textarea>
                        
                         <button class="button" type="submit">
                             SEND

@@ -1,0 +1,342 @@
+{% load static %}
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+       <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+
+       <!--=============== BOXICONS ===============-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+       <!--=============== SWIPER CSS ===============--> 
+       <link rel="stylesheet" href="static/css/swiper-bundle.min.css">
+
+       <!--=============== CSS ===============-->
+       <link rel="stylesheet" href="static/css/styles.css">
+
+       <title>EduHub</title>
+   </head>
+   <body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="{% url 'HomePage' %}" class="nav__logo">
+                    <img src="static/img/logo1.png" style="width:100%; height:100%">
+                </a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="{% url 'HomePage' %}" class="nav__link ">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'AboutPage' %}" class="nav__link ">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'CoursePage' %}" class="nav__link active-link">Course</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'PlacementPage' %}" class="nav__link ">Placement</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class='bx bx-x' ></i>
+                    </div>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                    <div class="nav__shop" id="cart-shop">
+                        <i class='bx bxs-chat'></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-grid-alt' ></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+         <!--==================== CART ====================-->
+         <div class="cart" id="cart">
+            <i class='bx bx-x cart__close' id="cart-close"></i>
+
+            <h2 class="cart__title-center">Chat</h2>
+
+            <!-- <div class="cart__container">
+                <article class="cart__card">
+                    <div class="cart__box">
+                        <img src="#" alt="" class="cart__img">
+                    </div>
+
+                    <div class="cart__details">
+                        <h3 class="cart__title">Jazzmaster</h3>
+                        <span class="cart__price">$1050</span>
+
+                        <div class="cart__amount">
+                            <div class="cart__amount-content">
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-minus' ></i>
+                                </span>
+
+                                <span class="cart__amount-number">1</span>
+
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-plus' ></i>
+                                </span>
+                            </div>
+
+                            <i class='bx bx-trash-alt cart__amount-trash' ></i>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="cart__card">
+                    <div class="cart__box">
+                        <img src="#" alt="" class="cart__img">
+                    </div>
+
+                    <div class="cart__details">
+                        <h3 class="cart__title">Rose Gold</h3>
+                        <span class="cart__price">$850</span>
+
+                        <div class="cart__amount">
+                            <div class="cart__amount-content">
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-minus' ></i>
+                                </span>
+
+                                <span class="cart__amount-number">1</span>
+
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-plus' ></i>
+                                </span>
+                            </div>
+
+                            <i class='bx bx-trash-alt cart__amount-trash' ></i>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="cart__card">
+                    <div class="cart__box">
+                        <img src="#" alt="" class="cart__img">
+                    </div>
+
+                    <div class="cart__details">
+                        <h3 class="cart__title">Longines Rose</h3>
+                        <span class="cart__price">$980</span>
+
+                        <div class="cart__amount">
+                            <div class="cart__amount-content">
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-minus' ></i>
+                                </span>
+
+                                <span class="cart__amount-number">1</span>
+
+                                <span class="cart__amount-box">
+                                    <i class='bx bx-plus' ></i>
+                                </span>
+                            </div>
+
+                            <i class='bx bx-trash-alt cart__amount-trash' ></i>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="cart__prices">
+                <span class="cart__prices-item"></span>
+                <span class="cart__prices-total"></span>
+            </div> -->
+        </div>
+
+        <main class="main">
+                 <!--==================== HOME ====================-->
+                 <section class="home" id="home">
+                    <div class="home__container container grid">
+                        <div class="home__img-bg">
+                            <img src="#" alt="Transitioning to IT" class="home__img">
+                        </div>
+        
+                        <div class="home__social">
+                            <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="home__social-link">
+                                Facebook
+                            </a>
+                            <a href="https://wa.me/919074156818" target="_blank" class="home__social-link">
+                                What's up
+                            </a>
+                            <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="home__social-link">
+                                Instagram
+                            </a>
+                        </div>
+        
+        
+                        <div class="home__data">
+                            <h1 class="home__title">Transitioning to <br> IT Industry </h1>
+                            <p class="home__description">
+                                Switch to IT with our Career Training Program!
+                            </p>
+                            <!-- <span class="home__price">$1245</span> -->
+    
+                            <div class="home__btns">
+                                <a href="#second-section" class="button button--gray button--small">
+                                    Explore
+                                </a>
+    
+                                <!-- <button class="button home__button">ADD TO CART</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                 <!--==================== STORY ====================-->
+                 <section class="story section container" id="second-section">
+                    <div class="story__container grid">
+                        <div class="story__data">
+                            <h2 class="section__title story__section-title">
+                                 We Provide
+                            </h2>
+                           
+                                <ul class="benift_box">
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i>  A program designed to help you transition smoothly from a non-IT field to the IT industry.</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i>  Comprehensive training that covers all the essential IT skills and technologies</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i>  Real-world experience with hands-on training and project-based learning</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i>  Access to experienced IT professionals who can provide mentorship and guidance</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Customized career support, including resume and interview coaching, to help you land your dream IT job after completing the program</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Opportunities to build your professional network and gain valuable insights into the IT industry.</li>
+                                   
+                                </ul>
+                      
+        
+                            <a href="{% url 'RegisterForm' %}" class="button button--small">JOIN NOW</a>
+                        </div>
+
+                        <div class="story__images">
+                            <img src="{% static 'img/transit.jpg' %}" alt="Transitioning to IT" class="story__img">
+                            <div class="story__square"></div>
+                        </div>
+                    </div>
+                </section>
+
+     
+        </main>
+
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <h3 class="footer__title">ALTOS EDUHUB</h3>
+
+                <ul class="footer__list">
+                    <li> 1st Floor - Thapasya Building Infopark</li>
+                    <li>Kakkanad, Cochin</li>
+                    <li> +91 974 663 2202</li>
+                    <li> info@Altostechnologies.in</li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">Quick Link</h3>
+
+                <ul class="footer__links">
+                   
+                    <li>
+                        <a href="{% url 'AboutPage' %}" class="footer__link">About Us</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'ContactPage' %}" class="footer__link">Contact</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">FAQs & Help</a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            
+
+            <div class="footer__content">
+                <h3 class="footer__title">Social</h3>
+
+                <ul class="footer__social">
+                    <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+                    <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-whatsapp' ></i>
+                    </a>
+                  
+                    <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-youtube' ></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-linkedin' ></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-instagram' ></i>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+        <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+    </footer>
+
+
+    <!--=============== SCROLL UP ===============-->
+    <a href="#" class="scrollup" id="scroll-up"> 
+        <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+        
+    </a>
+    <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+           
+        <i class='bx bxl-whatsapp scrollwh__icon' ></i>
+    </a>
+
+    <!--=============== SWIPER JS ===============-->
+    <script src="static/js/swiper-bundle.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="static/js/main.js"></script>
+
+     <!--===============PARALLS JS ===============-->
+     <script src="static/js/index.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+     
+     <script>
+        var image = document.getElementsByClassName('home__img');
+        new simpleParallax(image, {
+            delay: .4,
+            scale: 0.9,
+            transition: 'cubic-bezier(0,0,0,1)'
+            
+        });
+        
+
+        
+        
+     </script>
+
+
+</body>
+</html>
