@@ -165,10 +165,10 @@
         <!--==================== MAIN ====================-->
         <main class="main">
             <!--==================== HOME ====================-->
-            <section class="home" id="home">
+            <section class="home" id="home" style="background-image: url('static/img/bg3.jpg'); background-size:cover;">
                 <div class="home__container container grid">
-                    <div class="home__img-bg">
-                        <img src="#" alt="" class="home__img">
+                    <div class="home__img-bg" style="background-image: url('static/img/hb1.jpg'); background-size:cover;">
+                        <img src="{% static 'img/hb1.jpg' %}" alt="" class="home__img">
                     </div>
     
                     <div class="home__social">
@@ -230,9 +230,9 @@
                         <a href="{% url 'AboutPage' %}" class="button button--small">Discover</a>
                     </div>
 
-                    <div class="story__images">
-                        <img src="#" alt="" class="story__img">
-                        <div class="story__square"></div>
+                    <div class="story__images" >
+                        <img src="{% static 'img/about_bg.jpg' %}" alt="" class="story__img">
+                        <div class="story__square" ></div>
                     </div>
                 </div>
             </section>
@@ -474,7 +474,7 @@
             </section>
 
             <!--==================== TESTIMONIAL ====================-->
-            <section class="testimonial section container">
+            <section class="testimonial section container" >
                 <div class="testimonial__container grid">
                     <div class="swiper testimonial-swiper">
                      
@@ -517,8 +517,8 @@
                     </div>
 
                     <div class="testimonial__images">
-                        <div class="testimonial__square"></div>
-                        <img src="#" alt="" class="testimonial__img">
+                        <div class="testimonial__square" style="background-image: url('static/img/testimonial.jpg'); background-repeat: no-repeat;background-size:cover;"></div>
+                        <img src="{% static 'img/testimonial1.jpg' %}" alt="" class="testimonial__img">
                     </div>
                 </div>
             </section>
@@ -626,8 +626,8 @@
          <script>
             var image = document.getElementsByClassName('home__img');
             new simpleParallax(image, {
-                delay: .4,
-                scale: 0.9,
+                delay: .6,
+                scale: 1,
                 transition: 'cubic-bezier(0,0,0,1)'
                 
             });

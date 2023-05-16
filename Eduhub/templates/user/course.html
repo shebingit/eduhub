@@ -163,10 +163,10 @@
 
         <main class="main">
                  <!--==================== HOME ====================-->
-                 <section class="home" id="home">
+                 <section class="home" id="home"style="background-image: url('static/img/home_bg.jpg'); background-repeat: no-repeat;background-size:cover;" >
                     <div class="home__container container grid">
-                        <div class="home__img-bg">
-                            <img src="#" alt="" class="home__img">
+                        <div class="home__img-bg" style="background-image: url('static/img/bg13.jpg'); background-repeat: no-repeat;background-size:cover;">
+                            <img src="{% static 'img/bg13.jpg' %}" alt="" class="home__img">
                         </div>
         
                         <div class="home__social">
@@ -206,7 +206,7 @@
                 </section>
 
                  <!--==================== STORY ====================-->
-                 <section class="story section container" id="second-section">
+                 <section class="story section container" id="second-section" >
                     <div class="story__container grid">
                         <div class="story__data">
                             <h2 class="section__title story__section-title">
@@ -238,7 +238,7 @@
                         </div>
 
                         <div class="story__images">
-                            <img src="#" alt="" class="story__img">
+                            <img src="{% static 'img/bg7.jpg' %}" alt="" class="story__img">
                             <div class="story__square"></div>
                         </div>
                     </div>
@@ -247,13 +247,13 @@
                  <!--==================== CATEGEORY ====================-->
 
 
-                 <section class="newsletter section container">
+                 <section class="newsletter section container"  >
                     <div class="newsletter__bg grid">
                         <div>
-                            <h2 class="newsletter__title">Different Categoryies  <br> of Courses</h2>
+                            <h2 class="newsletter__title">Explore Our Course   <br>Categories</h2>
                             <p class="newsletter__description">
-                                The Lorem Ipsum Company has been an integral part of our content marketing success. 
-                                We have seen a notable increase in organic .
+                                Discover your passion and expand your knowledge with our diverse range 
+                                of courses across various categories.
                             </p>
                         </div>
     
@@ -418,7 +418,7 @@
         var image = document.getElementsByClassName('home__img');
         new simpleParallax(image, {
             delay: .4,
-            scale: 0.9,
+            scale: 1,
             transition: 'cubic-bezier(0,0,0,1)'
             
         });
