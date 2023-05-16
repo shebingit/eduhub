@@ -239,7 +239,7 @@
 
                         <div class="story__images">
                             <img src="{% static 'img/bg7.jpg' %}" alt="" class="story__img">
-                            <div class="story__square"></div>
+                            <div class="story__square" style="background-image: url('static/img/home_bg.jpg'); background-repeat: no-repeat;background-size:cover;"></div>
                         </div>
                     </div>
                 </section>
@@ -258,20 +258,20 @@
                         </div>
     
                         <div class="categeory_box" >
-                            <a href="#">
+                            <a href="{% url 'shortTeamInternship' %}">
                               
                                 <div class="card" >
                                     <i class='bx bxs-cube-alt'></i>
                                     <p>SHORT TEAM INTERNSHIP</p>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="{% url 'Internship'  %}">
                                 <div class="card">
                                     <i class='bx bxs-book-bookmark'></i>
                                     <p>INTERNSHIP</p>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="{% url 'Course_full'  %}">
                                 <div class="card">
                                     <i class='bx bxs-bookmarks'></i>
                                     <p>ON JOB TRAINING</p>
@@ -418,7 +418,7 @@
         var image = document.getElementsByClassName('home__img');
         new simpleParallax(image, {
             delay: .4,
-            scale: 1,
+            scale: 1.1,
             transition: 'cubic-bezier(0,0,0,1)'
             
         });

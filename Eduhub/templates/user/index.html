@@ -167,8 +167,8 @@
             <!--==================== HOME ====================-->
             <section class="home" id="home" style="background-image: url('static/img/bg3.jpg'); background-size:cover;">
                 <div class="home__container container grid">
-                    <div class="home__img-bg" style="background-image: url('static/img/hb1.jpg'); background-size:cover;">
-                        <img src="{% static 'img/hb1.jpg' %}" alt="" class="home__img">
+                    <div class="home__img-bg" style="background-image: url('static/img/home_bg.jpg'); background-size:cover;">
+                        <img src="{% static 'img/about_bg.jpg' %}" alt="" class="home__img">
                     </div>
     
                     <div class="home__social">
@@ -232,7 +232,7 @@
 
                     <div class="story__images" >
                         <img src="{% static 'img/about_bg.jpg' %}" alt="" class="story__img">
-                        <div class="story__square" ></div>
+                        <div class="story__square" style="background-image: url('static/img/bg5.jpg'); background-size:cover;"></div>
                     </div>
                 </div>
             </section>
@@ -627,7 +627,7 @@
             var image = document.getElementsByClassName('home__img');
             new simpleParallax(image, {
                 delay: .6,
-                scale: 1,
+                scale: 1.1,
                 transition: 'cubic-bezier(0,0,0,1)'
                 
             });

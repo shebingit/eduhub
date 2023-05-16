@@ -33,18 +33,19 @@
                             <a href="{% url 'HomePage' %}" class="nav__link ">Home</a>
                         </li>
                         <li class="nav__item">
-                            <a href="{% url 'AboutPage' %}" class="nav__link active-link">About</a>
+                            <a href="{% url 'AboutPage' %}" class="nav__link ">About</a>
                         </li>
                         <li class="nav__item">
-                            <a href="{% url 'CoursePage' %}" class="nav__link">Course</a>
+                            <a href="{% url 'CoursePage' %}" class="nav__link active-link">Course</a>
                         </li>
                         <li class="nav__item">
-                            <a href="{% url 'PlacementPage' %}" class="nav__link">Placement</a>
+                            <a href="{% url 'PlacementPage' %}" class="nav__link ">Placement</a>
                         </li>
                         <li class="nav__item">
                             <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
                         </li>
                     </ul>
+
                     <div class="nav__close" id="nav-close">
                         <i class='bx bx-x' ></i>
                     </div>
@@ -160,13 +161,12 @@
             </div> -->
         </div>
 
-
         <main class="main">
                  <!--==================== HOME ====================-->
-                 <section class="home" id="home" style="background-image: url('static/img/bg4.jpg'); background-repeat: no-repeat;background-size:cover;">
+                 <section class="home" id="home">
                     <div class="home__container container grid">
-                        <div class="home__img-bg" style="background-image: url('static/img/bg14.png'); background-repeat: no-repeat;background-size:cover;">
-                            <img src="static/img/bg14.png" alt="" class="home__img">
+                        <div class="home__img-bg" style="background-image: url('static/img/home_bg.jpg'); background-repeat: no-repeat;background-size:cover;">
+                            <img src="static/img/jumpcarrer.jpg" alt="" class="home__img">
                         </div>
         
                         <div class="home__social">
@@ -181,128 +181,113 @@
                             </a>
                         </div>
         
+        
                         <div class="home__data">
-                            <h1 class="home__title">Welcome to <br> ALTOS INSTITUTE </h1>
+                            <h1 class="home__title"> Short Term Internship<br>  Introduction </h1>
                             <p class="home__description">
-                                Welcome to Altos Eduhub, the best software training company in Kochi, Kerala. 
-                                We are a subsidiary of Altos Technologies, a well-known software development company in Kochi. 
-                                At Altos Eduhub, we provide comprehensive on-the-job training programs to help graduates gain 
-                                the skills and experience they need to secure a job in the software industry.
+                                Altos Technologies offers a short-term internship program for studying graduates to gain
+                                real-world experience and academic credit. Our program provides flexibility with options ranging
+                                from 2 days to 1 month. Interns will have the opportunity to work on real-world projects,
+                                collaborate with experienced professionals, and receive feedback from mentors. The program
+                                also provides the chance to build valuable connections and gain a competitive edge in the job
+                                market. Upon completion, interns will receive a valuable certificate highlighting their skills and
+                                experience. Our program is designed to enhance both academic and professional careers.
                             </p>
                             <!-- <span class="home__price">$1245</span> -->
     
                             <div class="home__btns">
-                                <!-- <a href="#" class="button button--gray button--small">
-                                    Discover
-                                </a> -->
-                                <a href="#second-section"><button class="button home__button">READ MORE</button></a>
-                                
+                                <a href="#second-section" class="button button--gray button--small">
+                                    Explore
+                                </a>
+    
+                                <!-- <button class="button home__button">ADD TO CART</button> -->
                             </div>
                         </div>
                     </div>
                 </section>
 
                  <!--==================== STORY ====================-->
-                <section class="story section container" id="second-section">
+                 <section class="story section container" id="second-section">
                     <div class="story__container grid">
                         <div class="story__data">
                             <h2 class="section__title story__section-title">
-                                EDUHUB
+                                Why to choose us for an Internship
                             </h2>
+                           
+                                <ul class="benift_box">
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Live project training that provides practical skills and real-world experience</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Experienced mentors who provide individualized guidance and feedback</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Opportunity to collaborate with experienced professionals in the industry</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Flexible program options ranging from 2 days to 1 month</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Valuable internship certificate highlighting skills and experience</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Chance to build connections and gain a competitive edge in the job market</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Enhance academic and professional careers with our immersive program</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Practical application of classroom theories and concepts</li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Opportunity to network with professionals in the industry                                    </li>
+                                    <li class="benifts"> <i class='bx bx-chevrons-right'></i> Interns will receive academic points for their participation in our program</li>
+                                   
+                                </ul>
+                              
         
-                            <h1 class="story__title">
-                              What We Do<br>
-                            </h1>
-        
-                            <p class="story__description">
-                                Our training programs cover a range of topics, including Python, React JS, front-end development, 
-                                digital marketing, and REST API. Our goal is to equip our students with the knowledge and practical 
-                                experience they need to succeed in today's competitive job market. As the best software training company 
-                                in Kochi, we take great pride in our team of experienced instructors who are passionate about teaching 
-                                and helping students achieve their goals. Our training programs are designed to be hands-on, with a 
-                                focus on real-world applications and practical experience.
-                            </p>
-                            <h1 class="story__title">
-                               Our Vission<br>
-                              </h1>
-                            <p class="story__description">
-                                At Altos Eduhub, we are committed to providing our students with the best possible training experience. 
-                                Our state-of-the-art facilities are equipped with the latest technology, and our curriculum is constantly 
-                                updated to reflect the latest industry trends and best practices. We look forward to helping you achieve your 
-                                career goals and become a part of the thriving software industry.
-                            </p>
-        
-                            <a href="#" class="button button--small">READ TOP</a>
+                            <a href="{% url 'RegisterForm' %}" class="button button--small">JOIN NOW</a>
                         </div>
 
                         <div class="story__images">
-                            <img src="{% static 'img/bg6.jpg' %}" alt="" class="story__img">
+                            <img src="{% static 'img/jumpcarrer.jpg' %}" alt="Jumpstart Your IT Career" class="story__img">
                             <div class="story__square" style="background-image: url('static/img/home_bg.jpg'); background-repeat: no-repeat;background-size:cover;"></div>
                         </div>
                     </div>
                 </section>
 
-
+                <!-- ================== SHORT TEAM COURSE DETAILS =========-->
+                
+                {% for course in courses %}
                 <section class="newsletter section container" >
                     <div class="newsletter__bg grid">
                         <div>
-                            <h2 class="newsletter__title">Why Choose Us </h2>
-                            <p class="newsletter__description">
-                                Some Of The Reason For Choosing Our  IT Solutions.<br>
-                                Discover why ALTOS Technologies is the premier choice for IT solutions 
+                            <h2 class="newsletter__title">{{course.course_name}} </h2>
+                            <p class="course__description mb-3">
+                                {{course.description}}
                             </p>
+                            <div class=" course_details_img_box">
+                                {% if course.image %}
+                                <img src="{{course.image.url}}" alt="Short Term Internship">
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="about_list_box">
+                            <!-- <h4 class="course_sub_head">Why Choose Us </h4> -->
                             <ul>
-                                <li><i class='bx bx-chevrons-right'></i> Experienced Professionals</li>
-                                <li><i class='bx bx-chevrons-right'></i> Unique Designs</li>
-                                <li><i class='bx bx-chevrons-right'></i> On-time Delivery</li>
-                                <li><i class='bx bx-chevrons-right'></i> Customized Services</li>
-                                <li><i class='bx bx-chevrons-right'></i> Faster Responses</li>
-                                <li><i class='bx bx-chevrons-right'></i> Dedicated Client Support</li>
+                                {% for point in course_points %}
+                                    {% if point.course_id.id == course.id %}
+                                        <li><i class='bx bx-chevrons-right'></i> {{point.course_points}}</li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
+                            <div class="course_bottom_details">
+                                <div>Duration : {{course.duration}}</div>
+                                <div>Next Batch On : {{course.start_date}}</div>
+                                
+                                {% if course.offer_fee %}
+                                <div>Fee :Rs <del class="course_price">{{course.fee}} /-</del> &nbsp; Rs&nbsp;<span class="offer_price">{{course.offer_fee}}</span>/-</div>
+                                {% else %}
+                                <div class="course_price" >Fee :Rs {{course.fee}} /-</div>
+                                {% endif %}
+                            </div>
+                            <div class="course_btn_box">
+                                <a href="{% url 'RegisterForm' %}" class="button button--small">Enroll Now</a>
+                            </div>
+                            
                         </div>
+                       
+
     
                         
                     </div>
                 </section>
+                {% endfor %}
 
-
-                 <!--==================== INSTRUCTORS ====================-->
-                <section class="new section container" id="new">
-                    <h2 class="section__title">
-                        Expert Instructors
-                    </h2>
-                    
-                    <div class="new__container">
-                        <div class="swiper new-swiper">
-                            <div class="swiper-wrapper">
-                                {% for inst in instrs %}
-                                <article class="new__card swiper-slide">
-                                    <!-- <span class="new__tag">New</span> -->
-                                    {% if inst.image %}
-                                    <img src="{{inst.image.url}}" alt="Instructor" class="new__img">
-                                    {% endif %}
-            
-                                    <div class="new__data">
-                                        <h3 class="new__title"> {{inst.name}}</h3>
-                                        <span class="new__price">{{inst.designation}}</span>
-                                    </div>
-
-                                    <a href="#" class="button new__button"><i class='bx bx-heart'></i></a>
-            
-                                </article>
-                                {% endfor %}
-
-                                                
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-            
-                
+     
         </main>
 
     </main>
@@ -379,6 +364,7 @@
     <!--=============== SCROLL UP ===============-->
     <a href="#" class="scrollup" id="scroll-up"> 
         <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+        
     </a>
     <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
            
@@ -393,10 +379,8 @@
 
      <!--===============PARALLS JS ===============-->
      <script src="static/js/index.js"></script>
-     
      <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
      
-
      <script>
         var image = document.getElementsByClassName('home__img');
         new simpleParallax(image, {
@@ -405,8 +389,6 @@
             transition: 'cubic-bezier(0,0,0,1)'
             
         });
-
-        
         
      </script>
 

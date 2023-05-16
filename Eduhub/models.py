@@ -23,6 +23,19 @@ class course_details(models.Model):
     start_date = models.DateField(null=True,blank=True)
     # course_url = models.URLField(max_length=200,null=True,blank=True)
 
+class courseinternship_details(models.Model):
+    course_id = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
+    course_points = models.TextField(null=True,blank=True,default='')
+
+class courojt_details(models.Model):
+    course_id = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
+    course_subhead =  models.CharField(max_length=255,null=True,blank=True)
+    course_subetails = models.TextField(null=True,blank=True,default='')   
+
+class courseojt_points(models.Model):
+    courseojt_id = models.ForeignKey(courojt_details, on_delete=models.CASCADE, null=True,default='')
+    courseojt_points = models.TextField(null=True,blank=True,default='')
+
 class course_description_list(models.Model):
     list_item = models.CharField(max_length=100)
     course = models.ManyToManyField('course_details')
@@ -32,6 +45,14 @@ class instructors(models.Model):
     name = models.CharField(max_length=255, null=True,blank=True)
     designation = models.CharField(max_length=255,null=True,blank=True)
     description = models.CharField(max_length=255,null=True,blank=True)
+
+    
+class placements(models.Model):
+    image = models.ImageField(null=True,blank = True,upload_to = 'img/placement')
+    name = models.CharField(max_length=255, null=True,blank=True)
+    company = models.CharField(max_length=255,null=True,blank=True)
+    desig = models.CharField(max_length=255,null=True,blank=True)
+    plyear = models.CharField(max_length=255,null=True,blank=True)
 
 class testimonial(models.Model):
     image = models.ImageField(null=True,blank = True,upload_to = 'img/testimonial')

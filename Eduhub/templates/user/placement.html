@@ -215,16 +215,20 @@
                 </h2>
 
                 <div class="products__container grid">
+                    {% for pla in placement %}
                     <article class="products__card">
-                        <img src="{% static 'img/instr1.jpg' %}" alt="" class="products__img">
+                        {% if pla.image %}
+                        <img src="{{pla.image.url}}" alt="No 1 Placment Company" class="products__img">
+                        {% endif %}
 
-                        <h3 class="products__title">Ramjith</h3>
-                        <span class="products__price">AltosTechnologies</span>
+                        <h3 class="products__title">{{pla.name}}</h3>
+                        <span class="products__price">{{pla.company}}</span>
 
                         <button class="products__button">
                             <i class='bx bx-heart' ></i>
                         </button>
                     </article>
+                    {% endfor %}
 
         
                 </div>

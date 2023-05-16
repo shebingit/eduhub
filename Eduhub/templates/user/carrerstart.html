@@ -165,7 +165,7 @@
                  <!--==================== HOME ====================-->
                  <section class="home" id="home">
                     <div class="home__container container grid">
-                        <div class="home__img-bg" style="background-image: url('static/img/jumpcarrer.jpg'); background-repeat: no-repeat;background-size:cover;">
+                        <div class="home__img-bg" style="background-image: url('static/img/home_bg.jpg'); background-repeat: no-repeat;background-size:cover;">
                             <img src="static/img/jumpcarrer.jpg" alt="" class="home__img">
                         </div>
         
@@ -224,7 +224,7 @@
 
                         <div class="story__images">
                             <img src="{% static 'img/jumpcarrer.jpg' %}" alt="Jumpstart Your IT Career" class="story__img">
-                            <div class="story__square"></div>
+                            <div class="story__square" style="background-image: url('static/img/home_bg.jpg'); background-repeat: no-repeat;background-size:cover;"></div>
                         </div>
                     </div>
                 </section>
@@ -327,13 +327,10 @@
         var image = document.getElementsByClassName('home__img');
         new simpleParallax(image, {
             delay: .4,
-            scale: 0.9,
+            scale: 1.1,
             transition: 'cubic-bezier(0,0,0,1)'
             
         });
-        
-
-        
         
      </script>
 

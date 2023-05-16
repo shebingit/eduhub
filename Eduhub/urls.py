@@ -11,6 +11,11 @@ urlpatterns = [
     path('Placement',views.PlacementPage,name='PlacementPage'),
     path('Contact',views.ContactPage,name='ContactPage'),
 
+    path('Short-Team-Internship',views.shortTeamInternship,name='shortTeamInternship'),
+    path('Internship',views.Internship,name='Internship'),
+    path('On-Job-Training',views.Course_full,name='Course_full'),
+    
+
     path('Course-Register-Form',views.RegisterForm,name='RegisterForm'),
     path('Jumpstart-Your-IT-Career',views.CarrerStart,name='CarrerStart'),
     path('Transitioning-to-IT',views.CarrerTransit,name='CarrerTransit'),
@@ -33,10 +38,24 @@ urlpatterns = [
 
     path('Course-page',views.Course_page,name="Course_page"),
     path('Course-Save',views.Course_save,name="Course_save"),
-    path('Course_Delete/<pk>',views.Course_Delete,name = "Course_Delete"),
+    path('Course-Delete/<pk>',views.Course_Delete,name = "Course_Delete"),
+
+    path('Course-Details/<pk>',views.Course_Details,name = "Course_Details"),
+    path('Course-Details-Save/<pk>',views.Courseinternship_save,name = "Courseinternship_save"),
+    path('OJT-Details-Save/<pk>',views.Courseojt_save,name = "Courseojt_save"),
+    path('OJT-Points/<pk>',views.ojtpoints_page,name = "ojtpoints_page"),
+    path('OJT-Points-Save/<pk>',views.Ojt_save,name = "Ojt_save"),
+    
+    
+
     path('Instructors',views.InstructorPage,name="InstructorPage"),
     path('Instructors-Save',views.Instructor_save,name="Instructor_save"),
     path('Instuctor-Remove/<pk>',views.instuctor_remove,name = "instuctor_remove"),
+
+    path('Placement-Page',views.Placementpage,name="Placementpage"),
+    path('Placement-Save',views.Placement_save,name="Placement_save"),
+    path('Placement-Remove/<pk>',views.Placement_remove,name = "Placement_remove"),
+
     path('Testimonial-Page',views.TestimonialPage,name="TestimonialPage"),
     path('Testimonial-save',views.Testimonial_save,name="Testimonial_save"),
     path('Testimonial-Remove/<pk>',views.Testimonial_remove,name = "Testimonial_remove"),

@@ -205,6 +205,14 @@
     {
         font-weight: 600;
     }
+    .points_box
+    {
+        padding-bottom: 0.30em;
+    }
+    .points_box li
+    {
+        font-size: 0.87em;
+    }
 
    
    
@@ -227,53 +235,18 @@
                 
             {% endif %}
            
-            <form action="{% url 'Course_save' %}" class="form-submit" method="post" enctype="multipart/form-data">
+            <form action="{% url 'Ojt_save' course_ojt.id %}" class="form-submit" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <a href="{% url 'Course_page' %}"><i class="fas fa-arrow-left"></i></a>
-                <h6 class="course-head"> Add on courses</h6>
+                <a href="{% url 'loginDashboard' %}"><i class="fas fa-arrow-left"></i></a>
+                <h6 class="course-head"> Add on {{courses.course_name}} Details</h6>
 
-                <div class="group-input-course">
-                    <label> Course Name : </label>
-                    <input type="text" name="cname" required>
-                </div>
-                <div class="group-input-course">
-                    <label>Type of Course : </label>
-                    <select name="ctype">
-                        <option value="1">Short Term Internship</option>
-                        <option value="2">Internship</option>
-                        <option value="3">OJT</option>
-                    </select>
-                    
-                </div>
+                
                 <div class="group-input-course">
                     <label> Course Discription : </label>
-                    <textarea name="cdiscr" required></textarea>
+                    <textarea name="ojt_points" required></textarea>
                 </div>
 
-                <div class="group-input-course">
-                    <label> Course Fee : </label>
-                    <input type="number" min="0" name="cfee" required>
-                </div>
-                <div class="group-input-course">
-                    <label> Course Offer Head : </label>
-                    <input type="text"  name="coffer_head" >
-                </div>
-                <div class="group-input-course">
-                    <label> Course Offer Fee : </label>
-                    <input type="number" min="0" name="coffer_fee" >
-                </div>
-                <div class="group-input-course">
-                    <label> Course Duration : </label>
-                    <input type="text" name="cduriation" required>
-                </div>
-                <div class="group-input-course">
-                    <label> Course Start Date : </label>
-                    <input type="date" name="cstart" required>
-                </div>
-                <div class="group-input-course">
-                    <label> Course Image : </label>
-                    <input type="file" name="cimage" required>
-                </div>
+                
                 <div class="group-input-coursebtns">
                     <button type="reset" class="resetbtn">Reset</button>
                     <button type="submit" class="savebtn">Save</button>
@@ -289,34 +262,42 @@
                 </div>
                 
             {% endif %}
-            <h5 class="course-head" > Courses </h5>
-
-            {% for course in courses %}
+            <h5 class="course-head" >{{courses.course_name}} Courses Details </h5>
+       
             <div class="card">
-                
+            
                 <div class="card-body">
                     <div class="course-img">
-                        {% if course.image %}
-                        <img src="{{course.image.url}}" class="cimg" alt="course-Image">
+                        {% if courses.image %}
+                        <img src="{{courses.image.url}}" class="cimg" alt="course-Image">
                         {% endif %}
                     </div>
                     <div class="course-details">
-                        <div class="action">
-                            <span><a href="{% url 'Course_Details' course.id  %}">Details</a></span>
+                        <!-- <div class="action">
+                            <span><a href="#">Details</a></span>
                             <span><a href="#">Edit</a></span>
-                            <span><a href="{% url 'Course_Delete' course.id  %}" class="remove">Remove</a></span>
-                        </div>
-                        <h6>{{course.course_name}}</h6>
-                        <p class="course-dis">{{course.description}}</p>
+                            <span><a href="#" class="remove">Remove</a></span>
+                        </div> -->
+                        <h6>{{courses.course_name}}</h6>
+                        <p class="course-dis">{{courses.description}}</p>
                         <hr>
+                        <h6>{{course_ojt.course_subhead}}</h6>
+                        <p class="course-dis">{{course_ojt.course_subetails}}</p>
+                        <ul class="points_box">
+                            {% for points in course_ojt_points %}
+                            <li>{{points.courseojt_points}}</li>
+                            {% endfor %} 
+                        </ul>
+                      
                         <div class="section_bottom">
-                            <span>Course Duration : {{course.duration}} </span>
-                            <span>Course Start Date : {{course.start_date}} </span>
+                            <span>Course Duration : {{courses.duration}} </span>
+                            <span>Course Start Date : {{courses.start_date}} </span>
                         </div>
                         <div class="section_bottom">
-                            <span>Course Fee : {{course.fee}} </span>
+                            <span>Course Fee : {{courses.fee}} </span>
                             <span>Course Offer Fees : </span>
                         </div>
+                        
 
                     </div>
                     
@@ -324,7 +305,9 @@
                 </div>
 
             </div>
-            {% endfor %}
+         
+
+           
         </div>
     </div>
 
