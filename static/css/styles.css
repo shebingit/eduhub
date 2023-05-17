@@ -329,10 +329,9 @@ body.dark-theme {
 }
 
 .home__img-bg {
-  /* background-color: var(--button-color);  */
-  
+  /* background-color: var(--first-color);  */
   width: 258px;
-  height: 400px;
+  height: 420px;
   padding-bottom: 2rem;
   display: flex;
   justify-content: center;
@@ -1816,6 +1815,7 @@ body.dark-theme {
   margin-bottom: 2rem;
   color: hsl(31, 100%, 80%);
   letter-spacing: 0.05em;
+  line-height: 1.5rem;
 }
 .course__description {
   color: hsl(0, 0%, 35%);

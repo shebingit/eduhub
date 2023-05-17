@@ -213,6 +213,9 @@
     {
         font-size: 0.87em;
     }
+    .points_box a{
+        font-size: 0.80em;
+    }
 
    
    
@@ -273,18 +276,14 @@
                         {% endif %}
                     </div>
                     <div class="course-details">
-                        <div class="action">
-                            <span><a href="#">Details</a></span>
-                            <span><a href="#">Edit</a></span>
-                            <span><a href="#" class="remove">Remove</a></span>
-                        </div>
+                        
                         <h6>{{courses.course_name}}</h6>
                         <p class="course-dis">{{courses.description}}</p>
                         <hr>
                         
                         <ul class="points_box">
-                            {% for course in course_inter %}
-                            <li>{{course.course_points}}</li>
+                            {% for points in course_inter %}
+                            <li>{{points.course_points}}</li> &nbsp;<span><a href="{% url 'Coursepoint_edit' points.id %}">Edit</a></span> &nbsp;<span><a href="{% url 'Coursepoint_delete' points.id %}">Remove</a></span>
                             {% endfor %} 
                         </ul>
                       

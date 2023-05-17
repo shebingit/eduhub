@@ -305,7 +305,7 @@
                     </div>
                     <div class="course-details">
                         <div class="action">
-                            <span><a href="#">Edit</a></span>
+                            <span><a href="{% url 'instuctor_edit' inst.id %}">Edit</a></span>
                             <span><a href="{% url 'instuctor_remove' inst.id %}" class="remove">Remove</a></span>
                         </div>
                         <h6>{{inst.name}}</h6>

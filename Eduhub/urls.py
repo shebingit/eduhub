@@ -24,6 +24,10 @@ urlpatterns = [
 
     path('contact-us',views.contactuss,name='contactuss'),
     path('Join',views.saveEnquiry,name='saveEnquiry'),
+    path('Enquiry-Form',views.EnquirForm,name='EnquirForm'),
+    path('Enquiry-Send',views.enquery_save,name='enquery_save'),
+    
+    
     
 
 
@@ -38,26 +42,45 @@ urlpatterns = [
 
     path('Course-page',views.Course_page,name="Course_page"),
     path('Course-Save',views.Course_save,name="Course_save"),
-    path('Course-Delete/<pk>',views.Course_Delete,name = "Course_Delete"),
+    path('Course-Edit-Page/<pk>',views.Course_pageedit,name ="Course_pageedit"),
+    path('Course-Edit-Save/<pk>',views.Course_edit_save,name ="Course_edit_save"),
+    path('Course-Delete/<pk>',views.Course_Delete,name ="Course_Delete"),
 
-    path('Course-Details/<pk>',views.Course_Details,name = "Course_Details"),
-    path('Course-Details-Save/<pk>',views.Courseinternship_save,name = "Courseinternship_save"),
+    path('Course-Details/<pk>',views.Course_Details,name ="Course_Details"),
+    path('Course-Details-Save/<pk>',views.Courseinternship_save,name ="Courseinternship_save"),
+    path('Course-Points-Edit/<pk>',views.Coursepoint_edit,name = "Coursepoint_edit"),
+    path('Course-Points-Edit-Save/<pk>',views.Courseinternship_edit_save,name ="Courseinternship_edit_save"),
+    path('Course-Points-Remove/<pk>',views.Coursepoint_delete,name = "Coursepoint_delete"),
+
     path('OJT-Details-Save/<pk>',views.Courseojt_save,name = "Courseojt_save"),
+    path('OJT-Subcontent-Edit/<pk>',views.ojtsubcontent_edit,name = "ojtsubcontent_edit"),
+    path('OJT-Subcontent-Edit-Save/<pk>',views.Courseojtedit_save,name = "Courseojtedit_save"),
+    path('OJT-Subcontent-Remove/<pk>',views.ojtsubcontent_remove,name = "ojtsubcontent_remove"),
     path('OJT-Points/<pk>',views.ojtpoints_page,name = "ojtpoints_page"),
     path('OJT-Points-Save/<pk>',views.Ojt_save,name = "Ojt_save"),
+     path('OJT-Points-Edit/<pk>',views.ojtpoints_edit,name = "ojtpoints_edit"),
+    path('OJT-Points-Edit-Save/<pk>',views.ojtpoints_edit_save,name = "ojtpoints_edit_save"),
+    path('OJT-Points-Remove/<pk>',views.ojtpoints_remove,name = "oojtpoints_remove"),
+    
     
     
 
     path('Instructors',views.InstructorPage,name="InstructorPage"),
     path('Instructors-Save',views.Instructor_save,name="Instructor_save"),
+    path('Instuctor-Edit/<pk>',views.instuctor_edit,name = "instuctor_edit"),
+    path('Instuctor-Edit-Save/<pk>',views.Instructoredit_save,name = "Instructoredit_save"),
     path('Instuctor-Remove/<pk>',views.instuctor_remove,name = "instuctor_remove"),
 
     path('Placement-Page',views.Placementpage,name="Placementpage"),
     path('Placement-Save',views.Placement_save,name="Placement_save"),
+    path('Placement-Edit/<pk>',views.Placementpageedit,name = "Placementpageedit"),
+    path('Placement-Edit-Save/<pk>',views.Placementedit_save,name = "Placementedit_save"),
     path('Placement-Remove/<pk>',views.Placement_remove,name = "Placement_remove"),
 
     path('Testimonial-Page',views.TestimonialPage,name="TestimonialPage"),
     path('Testimonial-save',views.Testimonial_save,name="Testimonial_save"),
+    path('Testimonial-Edit/<pk>',views.Testimonial_edit,name = "Testimonial_edit"),
+    path('Testimonial-Edit-Save/<pk>',views.Testimonial_edit_save,name = "Testimonial_edit_save"),
     path('Testimonial-Remove/<pk>',views.Testimonial_remove,name = "Testimonial_remove"),
     
     path('Message-Inbox',views.inbox_view,name="inbox_view"),
@@ -65,9 +88,15 @@ urlpatterns = [
     path('Shot_course',views.shot_course,name="shot_course"),
     path('OJT_course',views.ojt_course,name="ojt_course"),
     path('Internship_course',views.internship_course,name="internship_course"),
-    path('Enquery',views.enquery_view,name="enquery_view"),
-    path('Enquery-Remove/<pk>',views.enq_remove,name = "enq_remove"),
-    path('Enquery-Update/<pk>',views.enq_update,name = "enq_update"),
+
+    path('Enroll',views.enroll_view,name="enroll_view"),
+    path('Enroll-Remove/<pk>',views.enroll_remove,name = "enroll_remove"),
+    path('Enroll-Update/<pk>',views.enroll_update,name = "enroll_update"),
+
+    path('Enquiry',views.enquery_view,name="enquery_view"),
+    path('Enquiry-Remove/<pk>',views.enquery_remove,name = "enquery_remove"),
+    path('Enquiry-Update/<pk>',views.enquery_upadte,name = "enquery_upadte"),
+
 
     path('logout',views.logout,name="logout"),
 

@@ -1,12 +1,7 @@
 from django.db import models
 
 
-class Subscriber(models.Model):
-    email = models.EmailField(unique=True)
 
-    def __str__(self):
-        return self.email
-    
 class about_model(models.Model):
     video_file = models.FileField(upload_to='videos/',null= True)
     description = models.CharField(max_length=255,null=True,blank=True)
@@ -32,13 +27,11 @@ class courojt_details(models.Model):
     course_subhead =  models.CharField(max_length=255,null=True,blank=True)
     course_subetails = models.TextField(null=True,blank=True,default='')   
 
-class courseojt_points(models.Model):
+class courseojtPoints(models.Model):
     courseojt_id = models.ForeignKey(courojt_details, on_delete=models.CASCADE, null=True,default='')
     courseojt_points = models.TextField(null=True,blank=True,default='')
 
-class course_description_list(models.Model):
-    list_item = models.CharField(max_length=100)
-    course = models.ManyToManyField('course_details')
+
 
 class instructors(models.Model):
     image = models.ImageField(null=True,blank = True,upload_to = 'img/instructors')
@@ -71,7 +64,7 @@ class contactus(models.Model):
     msg_status = models.CharField(max_length=50,null=True,default=0)
 
 
-class enquiry(models.Model):
+class Enroll(models.Model):
     name = models.CharField(max_length=255, null=True,blank=True,default='')
     email = models.CharField(max_length=255,null=True,blank=True,default='')
     phone = models.CharField(max_length=100,null=True,blank=True,default='')
@@ -89,5 +82,13 @@ class enquiry(models.Model):
     enq_status = models.CharField(max_length=50,null=True,default=0)
     enq_date = models.DateField(auto_now_add=True,blank=False,null=True)
 
-class gallery(models.Model):
-    image = models.ImageField(null=True,blank = True,upload_to = 'img/gallery')
+class Enquir(models.Model):
+    name = models.CharField(max_length=255, null=True,blank=True,default='')
+    email = models.CharField(max_length=255,null=True,blank=True,default='')
+    phone = models.CharField(max_length=100,null=True,blank=True,default='')
+    place = models.CharField(max_length=100,null=True,blank=True,default='')
+    enq_msg = models.TextField(null=True,blank=True,default='')
+    enq_date = models.DateField(auto_now_add=True,blank=False,null=True)
+    enq_status = models.CharField(max_length=50,null=True,blank=True,default='0')
+
+

@@ -309,7 +309,7 @@
                     </div>
                     <div class="course-details">
                         <div class="action">
-                            <span><a href="#">Edit</a></span>
+                            <span><a href="{% url 'Testimonial_edit' testim.id %}">Edit</a></span>
                             <span><a href="{% url 'Testimonial_remove' testim.id %}" class="remove">Remove</a></span>
                         </div>
                         <h6>{{testim.name}}</h6>

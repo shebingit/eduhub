@@ -218,7 +218,19 @@
         font-size: 0.80em;
         font-weight: 600;
     }
-
+.links_box
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 0.80em;
+}
+.points_box a{
+    font-size: 0.80em;
+    font-weight: 400;
+    margin-bottom: 0.90em;
+    text-align: end;
+}
    
    
 </style>
@@ -282,17 +294,15 @@
                         {% endif %}
                     </div>
                     <div class="course-details">
-                        <div class="action">
-                            <!-- <span><a href="#">Details</a></span> -->
-                            <span><a href="#">Edit</a></span>
-                            <span><a href="#" class="remove">Remove</a></span>
-                        </div>
+                        
                         <h6>{{courses.course_name}} </h6>
                         <p class="course-dis">{{courses.description}}</p>
                         <hr>
-                        <hr>
+                     
                         {% for course in course_ojt %}
-                        <div style="text-align: end;"> <a href="{% url 'ojtpoints_page' course.id %}" class="points" >Add Points</a></div>
+                        <div class="links_box"> <a href="{% url 'ojtpoints_page' course.id %}" class="points" >Add Points</a>
+                            <a href="{% url 'ojtsubcontent_edit' course.id %}" class="points" >Edit</a>
+                            <a href="{% url 'ojtsubcontent_remove' course.id %}" class="points" >Remove</a></div>
                        
                         <div>
                             
@@ -303,12 +313,13 @@
                               
                                     {% for points in course_ojt_points %}
                                         {% if points.courseojt_id.id == course.id %}
-                                        <li>{{points.courseojt_points}}</li>
+                                        <li>{{points.courseojt_points}}</li>&nbsp;<span><a href="{% url 'ojtpoints_edit' points.id %}">Edit</a></span>&nbsp;&nbsp;<span><a href="{% url 'oojtpoints_remove' points.id %}">Remove</a></span>
                                         {% endif %}
                                     {% endfor %} 
                                
                             </ul>
                         </div>
+                        <hr>
                         {% endfor %} 
                         
                      

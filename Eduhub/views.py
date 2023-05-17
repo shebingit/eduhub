@@ -61,7 +61,7 @@ def Course_full(request):
     courses = course_details.objects.filter(type='3')
     ojt = courojt_details.objects.all()
     ojtcourse_sub=courseinternship_details.objects.all()
-    ojtpoints = courseojt_points.objects.all()
+    ojtpoints = courseojtPoints.objects.all()
     return render(request, 'user/coursefull.html',{'courses':courses,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
    
 
@@ -70,11 +70,15 @@ def RegisterForm(request):
     courses = course_details.objects.all()
     return render(request, 'user/registerform.html',{'courses':courses})
 
+def EnquirForm(request):
+    return render(request, 'user/enquirform.html')
+
+
 
 def saveEnquiry(request):
 
     if request.method == 'POST':
-        enq=enquiry()
+        enq=Enroll()
         
         enq.name = request.POST['join_name']
         enq.email = request.POST['join_email']
@@ -102,15 +106,27 @@ def contactuss(request):
         email = request.POST['email']
         subject = request.POST['subject']
         message = request.POST['msg']
-        print(name)
-    
+     
         contactus(name = name, email = email, subject = subject, message = message).save()
-        msg='We Recived your mail, We will get you soon as posible.'
+        msg='We have recieved your mail, We will get back to you as soon as possible.'
         return render(request, 'user/contact.html',{'msg':msg})
 
-    return redirect('/contact')
+    return redirect('ContactPage')
 
 
+def enquery_save(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        place = request.POST['place']
+        ph = request.POST['phno']
+        message = request.POST['msg']
+    
+        Enquir(name = name, email = email,place = place, phone = ph, enq_msg = message).save()
+        msg='We have recieved your mail, We will get back to you as soon as possible.'
+        return render(request, 'user/enquirform.html',{'msg':msg})
+
+    return redirect('EnquirForm')
 
 
 
@@ -134,8 +150,8 @@ def loginadmin(request):
     
             auth.login(request,user)    
             file_up_count=course_details.objects.all().count
-            enrolls = enquiry.objects.filter(enq_date=date.today())
-            enrolls_count= enquiry.objects.all().count()
+            enrolls = Enroll.objects.filter(enq_date=date.today())
+            enrolls_count= Enroll.objects.all().count()
             return render(request,'admin/DashboardHome.html',{'file_up_count':file_up_count,'enrolls':enrolls,'enrolls_count':enrolls_count})
         else:
             messages.info(request, 'Invalid Username or Password. Try Again.')
@@ -151,10 +167,12 @@ def loginDashboard(request):
         else:
             return redirect('/')
         file_up_count=course_details.objects.all().count
-        enrolls = enquiry.objects.filter(enq_date=date.today())
-        enrolls_count= enquiry.objects.all().count()
-        # enquerys = enquiry.objects.filter(enq_date=date.today())
-        return render(request,'admin/DashboardHome.html',{'file_up_count':file_up_count,'enrolls':enrolls,'enrolls_count':enrolls_count})
+        enrolls = Enroll.objects.filter(enq_date=date.today())
+        enrolls_count= Enroll.objects.all().count()
+        enquerys= Enquir.objects.filter(enq_date=date.today())
+        enquerys_count= Enquir.objects.all().count()
+      
+        return render(request,'admin/DashboardHome.html',{'file_up_count':file_up_count,'enrolls':enrolls,'enrolls_count':enrolls_count,'enquerys':enquerys,'enquerys_count':enquerys_count})
     else:
         return redirect('login_page')
     
@@ -207,6 +225,65 @@ def Course_save(request):
             error_value=1
     else:
         return redirect('login_page')
+    
+def Course_pageedit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        courses = course_details.objects.get(id=pk)
+        return render(request,'admin/CoursePageedit.html',{'courses':courses})
+    else:
+        return redirect('login_page')
+    
+
+    
+def Course_edit_save(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        if request.method=='POST':
+                
+                course=course_details.objects.get(id=pk)
+                course.course_name = request.POST.get('cname')
+                course.type = request.POST.get('ctype')
+                course.description = request.POST.get('cdiscr')
+                course.fee = request.POST.get('cfee')
+                course.offer_head = request.POST.get('coffer_head')
+                course.offer_fee = request.POST.get('coffer_fee')
+                course.duration = request.POST.get('cduriation')
+               
+
+                if request.POST.get('cstart'):
+                    course.start_date = request.POST.get('cstart')
+                else:
+                    course.start_date = course.start_date 
+
+                if request.FILES.get('cimage'):
+                    course.image = request.FILES.get('cimage')
+                else:
+                    course.image = course.image
+                course.save()
+                courses=course_details.objects.get(id=pk)
+
+                msg='Course Edit Success !'
+                return render(request,'admin/CoursePageedit.html',{'msg':msg,'courses':courses})
+            
+        else:
+                msg='Course Error !'
+                courses=course_details.objects.get(id=pk)
+                return render(request,'admin/CoursePageedit.html',{'msg':msg,'courses':courses})
+
+   
+
+            
+        
+    else:
+        return redirect('login_page')
 
 
 def Course_Delete(request,pk):
@@ -233,7 +310,7 @@ def Course_Details(request,pk):
         courses = course_details.objects.get(id=pk)
         if courses.type == '3':
             course_ojt = courojt_details.objects.filter(course_id__id=pk)
-            course_ojt_points = courseojt_points.objects.all()
+            course_ojt_points = courseojtPoints.objects.all()
             return render(request,'admin/OJTcourseDetails.html', {'courses':courses,'course_ojt':course_ojt,'course_ojt_points':course_ojt_points})
         
         else:
@@ -273,6 +350,57 @@ def Courseinternship_save(request,pk):
     else:
         return redirect('login_page')
     
+    
+
+def Coursepoint_edit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        course_inter = courseinternship_details.objects.get(id=pk)
+        courses = course_details.objects.get(id=course_inter.course_id.id)
+
+        return render(request,'admin/CourseDetailspointsEdit.html', {'courses':courses,'course_inter':course_inter})
+    else:
+        return redirect('login_page')
+    
+
+def Courseinternship_edit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        if request.method=='POST':
+                
+                course=courseinternship_details.objects.get(id=pk)
+                course.course_points = request.POST.get('cinter_points')
+                course.save()
+                cid=course.course_id.id
+                return redirect('Course_Details',cid)
+
+    else:
+        return redirect('login_page')
+    
+    
+def Coursepoint_delete(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        course_points = courseinternship_details.objects.get(id=pk)
+        cid=course_points.course_id.id
+        course_points.delete()
+        return redirect('Course_Details',cid)
+        
+        
+    else:
+        return redirect('login_page')
+    
 
 
 # =============== Ojt Course Section ================
@@ -285,7 +413,7 @@ def Courseojt_save(request,pk):
             return redirect('/')
         
         courses = course_details.objects.get(id=pk)
-        course_ojt_points = courseojt_points.objects.all()
+        course_ojt_points = courseojtPoints.objects.all()
 
         try:
 
@@ -323,8 +451,8 @@ def ojtpoints_page(request,pk):
         course_ojt = courojt_details.objects.get(id=pk)
         courses = course_details.objects.get(id=course_ojt.course_id.id)
         try:
-            course_ojt_points = courseojt_points.objects.filter(courseojt_id__id=pk)
-        except courseojt_points.DoesNotExist:
+            course_ojt_points = courseojtPoints.objects.filter(courseojt_id__id=pk)
+        except courseojtPoints.DoesNotExist:
             course_ojt_points=None
         return render(request,'admin/OJTcourseDetailspoints.html', {'courses':courses,'course_ojt':course_ojt,'course_ojt_points':course_ojt_points})
          
@@ -346,12 +474,12 @@ def Ojt_save(request,pk):
 
             if request.method=='POST':
                 
-                ojtpoint=courseojt_points()
+                ojtpoint=courseojtPoints()
                 ojtpoint.courseojt_id=course_ojt
                 ojtpoint.courseojt_points = request.POST['ojt_points']
                 ojtpoint.save()
 
-                course_ojt_points = courseojt_points.objects.filter(courseojt_id__id=pk)
+                course_ojt_points = courseojtPoints.objects.filter(courseojt_id__id=pk)
                 msg='OJT Course Point added. !'
                 return render(request,'admin/OJTcourseDetailspoints.html', {'msg':msg,'courses':courses,'course_ojt':course_ojt,'course_ojt_points':course_ojt_points})
                 
@@ -362,6 +490,123 @@ def Ojt_save(request,pk):
             error_value=1
     else:
         return redirect('login_page')
+    
+
+
+def ojtsubcontent_edit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        course_ojt = courojt_details.objects.get(id=pk)
+        courses = course_details.objects.get(id=course_ojt.id)
+       
+        return render(request,'admin/OJTcourseDetailsedit.html', {'courses':courses,'course_ojt':course_ojt})
+        
+    else:
+        return redirect('login_page')
+    
+
+def Courseojtedit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        ojt=courojt_details.objects.get(id=pk)
+        cid=ojt.course_id.id
+
+        if request.method=='POST':
+                
+                ojt=courojt_details.objects.get(id=pk)
+                ojt.course_subhead = request.POST.get('ojtsub_head')
+                ojt.course_subetails = request.POST.get('ojtsub_disc')
+                ojt.save()
+                return redirect('Course_Details',cid)
+
+        else:
+            return redirect('Course_Details',cid)
+  
+    else:
+        return redirect('login_page')
+    
+
+
+def ojtsubcontent_remove(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+       
+        course_ojt = courojt_details.objects.get(id=pk)
+        cid=course_ojt.course_id.id
+        course_ojt.delete()
+        return redirect('Course_Details',cid)
+         
+    else:
+        return redirect('login_page')
+    
+
+def ojtpoints_edit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        ojtpoint=courseojtPoints.objects.get(id=pk)
+        ojtsub=courojt_details.objects.get(id=ojtpoint.courseojt_id.id)
+        return render(request,'admin/OJTpoints_edit.html',{'ojtpoint':ojtpoint,'ojtsub':ojtsub})
+            
+    else:
+        return redirect('login_page')
+
+
+
+def ojtpoints_edit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        course_ojt_point=courseojtPoints.objects.get(id=pk)
+      
+
+
+        if request.method =='POST':
+           
+            course_ojt_point.courseojt_points =request.POST['ojt_point']
+            course_ojt_point.save()
+               
+            return redirect('Course_page')
+               
+        else:
+            return redirect('Course_page')
+        
+    else:
+        return redirect('login_page')
+
+
+def ojtpoints_remove(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+       
+        course_ojt_point = courseojtPoints.objects.get(id=pk)
+        cid=course_ojt_point.courseojt_id.course_id.id
+        course_ojt_point.delete()
+        return redirect('Course_Details',cid)
+         
+    else:
+        return redirect('login_page')
+    
     
 
 # =================== Instructor Section =======================
@@ -401,6 +646,56 @@ def Instructor_save(request):
             
             else:
                 return render(request,'admin/InstructorPage.html')
+        except:
+            error_value=1
+            return render(request,'admin/InstructorPage.html')
+    else:
+        return redirect('login_page')
+    
+ 
+def instuctor_edit(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        instrs = instructors.objects.get(id=pk)
+
+        return render(request,'admin/InstructorPageedit.html', {'instrs':instrs})
+    else:
+        return redirect('login_page')
+    
+
+def Instructoredit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        instrs = instructors.objects.all()
+        try:
+
+            if request.method=='POST':
+                
+                instr=instructors.objects.get(id=pk)
+                instr.name = request.POST.get('instname')
+                instr.designation = request.POST.get('instdesig')
+                instr.description = request.POST.get('instdiscr')
+
+                if request.FILES.get('instimage'):
+
+                    instr.image = request.FILES.get('instimage')
+                else:
+                      instr.image = instr.image 
+                instr.save()
+              
+
+                msg='Instructor edit Success !'
+                return render(request,'admin/InstructorPage.html', {'msg':msg,'instrs':instrs})
+            
+            else:
+                return render(request,'admin/InstructorPage.html',{'instrs':instrs})
         except:
             error_value=1
             return render(request,'admin/InstructorPage.html')
@@ -462,6 +757,54 @@ def Placement_save(request):
                 placement = placements.objects.all()
 
                 msg='Placement added Success !'
+                return render(request,'admin/Placements.html', {'msg':msg,'placement':placement})
+            
+            else:
+                return render(request,'admin/Placements.html')
+        except:
+            error_value=1
+            return render(request,'admin/Placements.html')
+    else:
+        return redirect('login_page')
+    
+
+def Placementpageedit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        placement = placements.objects.get(id=pk)
+        return render(request,'admin/Placementsedit.html',{'placement':placement})
+    else:
+        return redirect('login_page')
+    
+    
+
+def Placementedit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        try:
+
+            if request.method=='POST':
+                
+                pla=placements.objects.get(id=pk)
+                pla.name = request.POST.get('planame')
+                pla.company = request.POST.get('placompny')
+                pla.desig = request.POST.get('pladesig')
+                pla.plyear = request.POST.get('playear')
+                
+                if request.FILES.get('plaimage'):
+                    pla.image = request.FILES.get('plaimage')
+                else:
+                     pla.image = pla.image
+                pla.save()
+                placement = placements.objects.all()
+
+                msg='Placement edit Success !'
                 return render(request,'admin/Placements.html', {'msg':msg,'placement':placement})
             
             else:
@@ -537,6 +880,57 @@ def Testimonial_save(request):
             return render(request,'admin/TestimonialPage.html')
     else:
         return redirect('login_page')
+    
+    
+def Testimonial_edit(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        testims = testimonial.objects.get(id=pk)
+        return render(request,'admin/TestimonialPageedit.html',{'testims':testims})
+    else:
+        return redirect('login_page')
+    
+
+    
+def Testimonial_edit_save(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        try:
+
+            if request.method=='POST':
+                
+                testim=testimonial.objects.get(id=pk)
+                testim.name = request.POST.get('testname')
+                testim.profession = request.POST.get('testprof')
+                testim.company = request.POST.get('testcomp')
+                testim.description = request.POST.get('testdiscr')
+                
+                if request.FILES.get('testimage'):
+                    testim.image = request.FILES.get('testimage')
+                else:
+                     testim.image = testim.image
+                testim.save()
+                testims = testimonial.objects.all()
+
+                msg='Testimonial edit Success !'
+                return render(request,'admin/TestimonialPage.html', {'msg':msg,'testims':testims})
+            
+            else:
+                return render(request,'admin/TestimonialPage.html')
+        except:
+            error_value=1
+            return render(request,'admin/TestimonialPage.html')
+    else:
+        return redirect('login_page')
+
 
 
 
@@ -603,7 +997,7 @@ def shot_course(request):
         else:
             return redirect('/')
         couse=course_details.objects.filter(type='1')
-        enqs= enquiry.objects.filter(course__in=couse).order_by('-id')
+        enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
         return redirect('login_page')
@@ -616,7 +1010,7 @@ def ojt_course(request):
         else:
                 return redirect('/')
         couse=course_details.objects.filter(type='3')
-        enqs= enquiry.objects.filter(course__in=couse).order_by('-id')
+        enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
         return redirect('login_page')
@@ -630,11 +1024,68 @@ def internship_course(request):
         else:
             return redirect('/')
         couse=course_details.objects.filter(type='2')
-        enqs= enquiry.objects.filter(course__in=couse).order_by('-id')
+        enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
         return redirect('login_page')
+    
 
+
+#================== Enroll section ================================
+
+def enroll_view(request):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        enqs= Enroll.objects.all().order_by('-id')
+        return render(request,'admin/Enroll.html', {'enqs':enqs})
+    else:
+        return redirect('login_page')
+    
+
+def enroll_remove(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        try:
+           
+            enqs = Enroll.objects.get(id=pk)
+            enqs.delete()
+            confirm_msg='Enquery Removed'
+
+        except Enroll.DoesNotExist:
+            confirm_msg='No data found.'
+        enqs= Enroll.objects.all().order_by('-id')
+        return render(request,'admin/Enroll.html', {'enqs':enqs,'confirm_msg':confirm_msg})
+    else:
+        return redirect('login_page')
+
+
+def enroll_update(request,pk):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        enqs= Enroll.objects.get(id=pk)
+        enqs.enq_status=1
+        enqs.save()
+        confirm_msg='Enquery Updated'
+        enqs= Enroll.objects.all().order_by('-id')
+        return render(request,'admin/Enquiry.html', {'enqs':enqs,'confirm_msg':confirm_msg})
+    else:
+        return redirect('login_page')
+    
+
+
+#================ Enquiry Section =========================
 
 
 def enquery_view(request):
@@ -644,48 +1095,42 @@ def enquery_view(request):
             uid = request.session['uid']
         else:
             return redirect('/')
-        enqs= enquiry.objects.all().order_by('-id')
-        return render(request,'admin/Enquery.html', {'enqs':enqs})
+        enqs= Enquir.objects.all().order_by('-id')
+        return render(request,'admin/Enquiry.html', {'enqs':enqs})
     else:
         return redirect('login_page')
     
 
-def enq_remove(request,pk):
+def enquery_upadte(request,pk):
 
     if 'uid' in request.session:
         if request.session.has_key('uid'):
             uid = request.session['uid']
         else:
             return redirect('/')
-        try:
-            enquiry.objects.get(id=pk)
-            enqs = enquiry.objects.get(id=pk)
-            enqs.delete()
-            confirm_msg='Enquery Removed'
-
-        except enquiry.DoesNotExist:
-            confirm_msg='No data found.'
-        enqs= enquiry.objects.all().order_by('-id')
-        return render(request,'admin/Enquery.html', {'enqs':enqs,'confirm_msg':confirm_msg})
+        enq=Enquir.objects.get(id=pk)
+        enq.enq_status=1
+        enq.save()
+        enqs= Enquir.objects.all().order_by('-id')
+        return render(request,'admin/Enquiry.html', {'enqs':enqs})
     else:
         return redirect('login_page')
+    
 
-
-def enq_update(request,pk):
+def enquery_remove(request,pk):
 
     if 'uid' in request.session:
         if request.session.has_key('uid'):
             uid = request.session['uid']
         else:
             return redirect('/')
-        enqs= enquiry.objects.get(id=pk)
-        enqs.enq_status=1
-        enqs.save()
-        confirm_msg='Enquery Updated'
-        enqs= enquiry.objects.all().order_by('-id')
-        return render(request,'admin/Enquery.html', {'enqs':enqs,'confirm_msg':confirm_msg})
+        enq=Enquir.objects.get(id=pk)
+        enq.delete()
+        enqs= Enquir.objects.all().order_by('-id')
+        return render(request,'admin/Enquiry.html', {'enqs':enqs})
     else:
         return redirect('login_page')
+
     
 
 def logout(request):
