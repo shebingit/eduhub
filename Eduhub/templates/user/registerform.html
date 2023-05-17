@@ -189,6 +189,9 @@
                     </div>
     
                     <div class="home__data">
+                        {% if msg %}
+                        <p class="message_data" >{{msg}}</p>
+                        {% endif %}
                         <h1 class="home__title">Explore Your Future With Us </h1>
                         <p class="home__description">
                             Welcome to Altos Eduhub's Contact Us page! We're thrilled that you're interested 
@@ -241,6 +244,12 @@
                             {% for course in courses %}
                             <option value="{{course.id}}" style="color: rgb(49, 48, 48);">{{course.course_name}}</option>
                             {% endfor %}
+                        </select>
+                        <select class="newsletter__input" name="join_course_type" required >
+                            <option value="0" style="color: rgb(49, 48, 48);">select the course Duration</option>
+                            <option value="1" style="color: rgb(49, 48, 48);">Short Team Internship</option>
+                            <option value="2" style="color: rgb(49, 48, 48);">Internship</option>
+                            <option value="3" style="color: rgb(49, 48, 48);">On Job Training</option>
                         </select>
                         <input type="text" name="join_desig" placeholder="Enter your designation" class="newsletter__input" >
                         

@@ -229,7 +229,7 @@
                                 </ul>
                               
         
-                            <a href="{% url 'RegisterForm' %}" class="button button--small">JOIN NOW</a>
+                            <a href="{% url 'EnquirForm' %}" class="button button--small">ENQUIR NOW</a>
                         </div>
 
                         <div class="story__images">
@@ -239,7 +239,8 @@
                     </div>
                 </section>
 
-                <!-- ================== SHORT TEAM COURSE DETAILS =========-->
+              
+                <!-- ================== INTERNSHIP COURSE DETAILS =========-->
                 
                 {% for course in courses %}
                 <section class="newsletter section container" >
@@ -255,37 +256,44 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="about_list_box">
-                            <!-- <h4 class="course_sub_head">Why Choose Us </h4> -->
-                            <ul>
-                                {% for point in course_points %}
-                                    {% if point.course_id.id == course.id %}
-                                        <li><i class='bx bx-chevrons-right'></i> {{point.course_points}}</li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                            <div class="course_bottom_details">
-                                <div>Duration : {{course.duration}}</div>
-                                <div>Next Batch On : {{course.start_date}}</div>
-                                
-                                {% if course.offer_fee %}
-                                <div>Fee :Rs <del class="course_price">{{course.fee}} /-</del> &nbsp; Rs&nbsp;<span class="offer_price">{{course.offer_fee}}</span>/-</div>
-                                {% else %}
-                                <div class="course_price" >Fee :Rs {{course.fee}} /-</div>
-                                {% endif %}
-                            </div>
-                            <div class="course_btn_box">
-                                <a href="{% url 'RegisterForm' %}" class="button button--small">Enroll Now</a>
-                            </div>
-                            
-                        </div>
-                       
-
+                        {% for ojts in ojt %}
+                            {% if ojts.course_id.id == course.id %}
+                                <div class="course_sub_details">
+                                    <h5>{{ojts.course_subhead}}</h5>
+                                    <p>{{ojts.course_subetails}}</p>
+                                    <div class="about_list_box">
+                                        <!-- <h4 class="course_sub_head">Why Choose Us </h4> -->
+                                        <ul>
+                                            {% for point in ojtpoints %}
+                                                {% if point.courseojt_id.id == ojts.id %}
+                                                    <li><i class='bx bx-chevrons-right'></i> {{point.courseojt_points}}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
     
+                                    </div>
+                                </div>
+                                
+                            {% endif %}
+                        {% endfor %}
+                        <div class="course_bottom_details">
+                            <div>Duration : {{course.duration}}</div>
+                            <div>Next Batch On : {{course.start_date}}</div>
+                            
+                            {% if course.offer_fee %}
+                            <div>Fee :Rs <del class="course_price">{{course.fee}} /-</del> &nbsp; Rs&nbsp;<span class="offer_price">{{course.offer_fee}}</span>/-</div>
+                            {% else %}
+                            <div class="course_price" >Fee :Rs {{course.fee}} /-</div>
+                            {% endif %}
+                        </div>
+                        <div class="course_btn_box">
+                            <a href="{% url 'RegisterForm' %}" class="button button--small">Enroll Now</a>
+                        </div>
                         
                     </div>
                 </section>
                 {% endfor %}
+
 
      
         </main>

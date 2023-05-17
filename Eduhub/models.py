@@ -10,13 +10,21 @@ class course_details(models.Model):
     image = models.ImageField(null=True,blank = True,upload_to = 'img/courses')
     course_name = models.CharField(max_length=255, null=True,blank=True)
     description = models.CharField(max_length=255,null=True,blank=True)
-    type = models.CharField(max_length=50,null=True,blank=True)
     offer_head=models.CharField(max_length=100,null=True,blank=True,default='')
     offer_fee =models.CharField(max_length=100,null=True,blank=True,default='')
     fee = models.IntegerField(null=True,blank=True)
-    duration = models.CharField(max_length=100,null=True,blank=True)
-    start_date = models.DateField(null=True,blank=True)
-    # course_url = models.URLField(max_length=200,null=True,blank=True)
+    
+
+
+class Course_catgeorys(models.Model):
+    Cate_course_id = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
+    Type = models.CharField(max_length=50,null=True,blank=True)
+    Offer_Head=models.CharField(max_length=100,null=True,blank=True,default='')
+    Offer_Fee =models.CharField(max_length=100,null=True,blank=True,default='')
+    Fee = models.IntegerField(null=True,blank=True)
+    Duration = models.CharField(max_length=100,null=True,blank=True)
+    Start_date = models.DateField(null=True,blank=True)
+    
 
 class courseinternship_details(models.Model):
     course_id = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
@@ -77,6 +85,7 @@ class Enroll(models.Model):
     expe = models.CharField(max_length=100,null=True,blank=True,default='')
     expe_no = models.CharField(max_length=100,null=True,blank=True,default='')
     course = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
+    ctype = models.CharField(max_length=25,null=True,blank=True,default='')
     message = models.CharField(max_length=255,null=True,blank=True,default='')
     designation = models.CharField(max_length=255,null=True,blank=True,default='')
     enq_status = models.CharField(max_length=50,null=True,default=0)

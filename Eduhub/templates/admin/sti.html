@@ -73,11 +73,11 @@
                     <td>{{enq.phone}}</td>
                     <td>{{enq.course.course_name}}</td>
                     <td>
-                        {% if enq.course.type == '1' %}
+                        {% if enq.ctype == '1' %}
                             Short Term Internship
-                        {% elif enq.course.type == '2' %}
+                        {% elif enq.ctype == '2' %}
                              Internship
-                        {% elif enq.course.type == '3' %}
+                        {% elif enq.ctype == '3' %}
                            OJT
                         {% else %}
                             No Data
@@ -87,11 +87,11 @@
                     <td class="text-center">
                        
                         {% if enq.enq_status == '0' %}
-                            <a href="{% url 'enq_update' enq.id %}">check</a>
+                            <a href="{% url 'enroll_update' enq.id %}">check</a>
                         {% else %}
                             <span>checked</span>
                         {% endif %}
-                        <a href="{% url 'enq_remove' enq.id %}" style="color: red; padding-left:0.70em">remove</a>
+                        <a href="{% url 'enroll_remove' enq.id %}" style="color: red; padding-left:0.70em">remove</a>
                     </td>
                     
                     

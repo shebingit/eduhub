@@ -200,41 +200,18 @@
         justify-content: space-between;
         font-size: 0.80em;
         margin-bottom: 0.70em;
+        gap: 0.60em;
     }
     .section_bottom span
     {
         font-weight: 600;
     }
-    .points_box
-    {
-        padding-bottom: 0.30em;
+    .table {
+        font-size: 0.75em;
+        font-weight: 500;
+        color: rgb(27, 26, 26);
     }
-    .points_box li
-    {
-        font-size: 0.87em;
-    }
-    .points
-    {
-        font-size: 0.80em;
-        font-weight: 600;
-    }
-.links_box
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: 0.80em;
-}
-.points_box a{
-    font-size: 0.80em;
-    font-weight: 400;
-    margin-bottom: 0.90em;
-    text-align: end;
-}
-.sub_disc
-{
-    font-size: 0.85em;
-}
+
    
    
 </style>
@@ -256,25 +233,46 @@
                 
             {% endif %}
            
-            <form action="{% url 'Courseojtedit_save' courses.id %}" class="form-submit" method="post" enctype="multipart/form-data">
+            <form action="{% url 'Course_category_save' courses.id %}" class="form-submit" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <a href="{% url 'loginDashboard' %}"><i class="fas fa-arrow-left"></i></a>
-                <h6 class="course-head"> Edit on {{courses.course_name}} Details</h6>
+                <a href="{% url 'Course_page' %}"><i class="fas fa-arrow-left"></i></a>
+                <h6 class="course-head"> Add Categeory to {{courses.course_name}}</h6>
+
+              
+                <div class="group-input-course">
+                    <label>Type of Course : </label>
+                    <select name="ctype">
+                        <option value="1">Short Term Internship</option>
+                        <option value="2">Internship</option>
+                        <option value="3">OJT</option>
+                    </select>
+                    
+                </div>
 
                 <div class="group-input-course">
-                    <label> Course Sub Head : </label>
-                    <input name="ojtsub_head" required value="{{course_ojt.course_subhead}}">
+                    <label> Course Fee : </label>
+                    <input type="number" min="0" name="cfee" required>
                 </div>
-                
                 <div class="group-input-course">
-                    <label> Course Sub Discription : </label>
-                    <textarea name="ojtsub_disc" style="height: 150px;" >{{course_ojt.course_subetails}}</textarea>
+                    <label> Course Offer Head : </label>
+                    <input type="text"  name="coffer_head" >
                 </div>
-
+                <div class="group-input-course">
+                    <label> Course Offer Fee : </label>
+                    <input type="number" min="0" name="coffer_fee" >
+                </div>
+                <div class="group-input-course">
+                    <label> Course Duration : </label>
+                    <input type="text" name="cduriation" required>
+                </div> 
+                <div class="group-input-course">
+                    <label> Course Start Date : </label>
+                    <input type="date" name="cstart" required>
+                </div>
                 
                 <div class="group-input-coursebtns">
-                    <a href="{% url 'Course_page' %}" class="resetbtn">Back</a>
-                    <button type="submit" class="savebtn">Update</button>
+                    <button type="reset" class="resetbtn">Reset</button>
+                    <button type="submit" class="savebtn">Save</button>
                 </div>
 
             </form>
@@ -287,10 +285,10 @@
                 </div>
                 
             {% endif %}
-            <h5 class="course-head" >{{courses.course_name}} Courses Details </h5>
-       
+            <h5 class="course-head" > Courses </h5>
+
             <div class="card">
-            
+                
                 <div class="card-body">
                     <div class="course-img">
                         {% if courses.image %}
@@ -299,29 +297,57 @@
                     </div>
                     <div class="course-details">
                         
-                       
-                            <h6>{{course_ojt.course_subhead}}</h6>
-                            <p class="sub_disc">{{course_ojt.course_subetails}}</p>
-
-                        
+                        <h6>{{courses.course_name}}</h6>
+                        <p class="course-dis">{{courses.description}}</p>
                         <hr>
-                      
+                       
                         <div class="section_bottom">
-                            <span>Course Fee : Rs {{courses.fee}} /-</span>
+                            <span> Fee : Rs {{courses.fee}}/- </span>
                             <span> Offer Head : {{courses.offer_head}} </span>
                             <span> Offer Fee : Rs {{courses.offer_fee}}/- </span>
                         </div>
-                        
 
                     </div>
-                    
-
+                </div>
+                <div class="card-footer" style="border-top: none;">
+                    <table class="table">
+                        <thead>
+                            
+                            <th>Start Date</th>
+                            <th>Type</th>
+                            <th>Fee</th>
+                            <th>Offer Head</th>
+                            <th>Offer</th>
+                            <th>Duration</th>
+                        </thead>
+                        <tbody>
+                            {% for categ in coategs %}
+                            
+                            <tr>
+                                
+                                <td>{{categ.Start_date}}</td>
+                                <td>
+                                    {% if categ.Type == '1' %}
+                                        Shot Team Internship
+                                    {% elif categ.Type == '2' %}
+                                         Internship
+                                    {% else %}
+                                        OJT
+                                    {% endif %}
+                                </td>
+                                <td>{{categ.Fee}}</td>
+                                <td>{{categ.Offer_Head}}</td>
+                                <td>{{categ.Offer_Fee}}</td>
+                                <td>{{categ.Duration}}</td>
+                            </tr>
+                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
-         
-
-           
+            
         </div>
     </div>
 

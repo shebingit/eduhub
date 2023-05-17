@@ -73,11 +73,11 @@
                     <td>{{enq.phone}}</td>
                     <td>{{enq.course.course_name}}</td>
                     <td>
-                        {% if enq.course.type == '1' %}
+                        {% if enq.ctype == '1' %}
                             Short Term Internship
-                        {% elif enq.course.type == '2' %}
+                        {% elif enq.ctype == '2' %}
                              Internship
-                        {% elif enq.course.type == '3' %}
+                        {% elif enq.ctype == '3' %}
                            OJT
                         {% else %}
                             No Data

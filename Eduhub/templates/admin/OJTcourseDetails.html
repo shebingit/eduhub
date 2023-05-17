@@ -200,6 +200,7 @@
         justify-content: space-between;
         font-size: 0.80em;
         margin-bottom: 0.70em;
+        gap: 0.60em;
     }
     .section_bottom span
     {
@@ -230,6 +231,10 @@
     font-weight: 400;
     margin-bottom: 0.90em;
     text-align: end;
+}
+.sub_disc
+{
+    font-size: 0.85em;
 }
    
    
@@ -302,12 +307,12 @@
                         {% for course in course_ojt %}
                         <div class="links_box"> <a href="{% url 'ojtpoints_page' course.id %}" class="points" >Add Points</a>
                             <a href="{% url 'ojtsubcontent_edit' course.id %}" class="points" >Edit</a>
-                            <a href="{% url 'ojtsubcontent_remove' course.id %}" class="points" >Remove</a></div>
+                            <a href="{% url 'ojtsubcontent_remove' course.id %}" class="points" style="color: rgb(226, 21, 21);" >Remove</a></div>
                        
                         <div>
                             
                             <h6>{{course.course_subhead}}</h6>
-                            <p>{{course.course_subetails}}</p>
+                            <p class="sub_disc">{{course.course_subetails}}</p>
 
                             <ul class="points_box">
                               
@@ -324,12 +329,9 @@
                         
                      
                         <div class="section_bottom">
-                            <span>Course Duration : {{courses.duration}} </span>
-                            <span>Course Start Date : {{courses.start_date}} </span>
-                        </div>
-                        <div class="section_bottom">
-                            <span>Course Fee : {{courses.fee}} </span>
-                            <span>Course Offer Fees : </span>
+                            <span>Course Fee : Rs {{courses.fee}} /- </span>
+                            <span> Offer Head : {{courses.offer_head}} </span>
+                            <span> Offer Fee : Rs {{courses.offer_fee}}/- </span>
                         </div>
                         
 

@@ -47,22 +47,30 @@ def CarrerRestart(request):
 
 
 def shortTeamInternship(request):
-    courses = course_details.objects.filter(type='1')
-    course_points=courseinternship_details.objects.all()
-    return render(request, 'user/shortTeamInternship.html',{'courses':courses,'course_points':course_points})
-
-def Internship(request):
-    courses = course_details.objects.filter(type='2')
-    course_points=courseinternship_details.objects.all()
-    return render(request, 'user/internship.html',{'courses':courses,'course_points':course_points})
-
-
-def Course_full(request):
-    courses = course_details.objects.filter(type='3')
+    categ = Course_catgeorys.objects.filter(Type='1')
+    courses = course_details.objects.filter(id__in=categ)
     ojt = courojt_details.objects.all()
     ojtcourse_sub=courseinternship_details.objects.all()
     ojtpoints = courseojtPoints.objects.all()
-    return render(request, 'user/coursefull.html',{'courses':courses,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
+    return render(request, 'user/shortTeamInternship.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
+
+
+def Internship(request):
+    categ = Course_catgeorys.objects.filter(Type='2')
+    courses = course_details.objects.filter(id__in=categ)
+    ojt = courojt_details.objects.all()
+    ojtcourse_sub=courseinternship_details.objects.all()
+    ojtpoints = courseojtPoints.objects.all()
+    return render(request, 'user/internship.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
+
+
+def Course_full(request):
+    categ = Course_catgeorys.objects.filter(Type='3')
+    courses = course_details.objects.filter(id__in=categ)
+    ojt = courojt_details.objects.all()
+    ojtcourse_sub=courseinternship_details.objects.all()
+    ojtpoints = courseojtPoints.objects.all()
+    return render(request, 'user/coursefull.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
    
 
 
@@ -93,10 +101,12 @@ def saveEnquiry(request):
         enq.expe_no = request.POST['join_expno']
         enq.designation = request.POST['join_desig']
         enq.course = course_details.objects.get(id=int(request.POST['join_course']))
+        enq.ctype = request.POST['join_course_type']
         enq.message = request.POST['join_message']
         enq.save()
-
-    return redirect('CoursePage')
+        msg='We Appreciate Your Interest In Our Training Programme , Registration Successful '
+        courses = course_details.objects.all()
+        return render(request, 'user/registerform.html',{'courses':courses,'msg':msg})
 
 
 
@@ -187,7 +197,8 @@ def Course_page(request):
         else:
             return redirect('/')
         courses = course_details.objects.all()
-        return render(request,'admin/CoursePage.html',{'courses':courses})
+        coategs = Course_catgeorys.objects.all()
+        return render(request,'admin/CoursePage.html',{'courses':courses,'coategs':coategs})
     else:
         return redirect('login_page')
 
@@ -205,19 +216,17 @@ def Course_save(request):
                 
                 course=course_details()
                 course.course_name = request.POST['cname']
-                course.type = request.POST['ctype']
                 course.description = request.POST['cdiscr']
                 course.fee = request.POST['cfee']
                 course.offer_head = request.POST['coffer_head']
                 course.offer_fee = request.POST['coffer_fee']
-                course.duration = request.POST['cduriation']
-                course.start_date = request.POST['cstart']
                 course.image = request.FILES.get('cimage')
                 course.save()
                 courses = course_details.objects.all()
+                coategs = Course_catgeorys.objects.all()
 
                 msg='Course added Success !'
-                return render(request,'admin/CoursePage.html', {'msg':msg,'courses':courses})
+                return render(request,'admin/CoursePage.html', {'msg':msg,'courses':courses,'coategs':coategs})
             
             else:
                 return render(request,'admin/CoursePage.html')
@@ -225,6 +234,128 @@ def Course_save(request):
             error_value=1
     else:
         return redirect('login_page')
+    
+
+
+
+def Course_catgeory(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        courses = course_details.objects.get(id=pk)
+        coategs = Course_catgeorys.objects.filter(Cate_course_id=courses)
+        return render(request,'admin/CourseCategory.html',{'courses':courses,'coategs':coategs})
+    else:
+        return redirect('login_page')
+    
+
+def Course_category_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        courses=course_details.objects.get(id=pk)
+
+        try:
+
+            if request.method=='POST':
+                
+                course=Course_catgeorys()
+                course.Cate_course_id=courses
+                course.Type = request.POST['ctype']
+                course.Fee = request.POST['cfee']
+                course.Offer_Head = request.POST['coffer_head']
+                course.Offer_Fee = request.POST['coffer_fee']
+                course.Duration = request.POST['cduriation']
+                course.Start_date = request.POST['cstart']
+                course.save()
+                coategs = Course_catgeorys.objects.all()
+
+
+                msg='Course Category added Success !'
+                return render(request,'admin/CourseCategory.html', {'msg':msg,'courses':courses,'coategs':coategs})
+            
+            else:
+                return render(request,'admin/CourseCategory.html')
+        except:
+            error_value=1
+    else:
+        return redirect('login_page')
+    
+
+
+def course_category_edit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        coateg = Course_catgeorys.objects.get(id=pk)
+        cid=coateg.Cate_course_id.id
+        coategs = Course_catgeorys.objects.all()
+        courses = course_details.objects.get(id=cid)
+        return render(request,'admin/CourseCategory_edit.html',{'courses':courses,'coategs':coategs,'coateg':coateg})
+    else:
+        return redirect('login_page')
+    
+    
+
+
+def Course_categoryedit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+
+        try:
+
+            if request.method=='POST':
+                
+                course=Course_catgeorys.objects.get(id=pk)
+                course.Type = request.POST.get('ctype')
+                course.Fee = request.POST.get('cfee')
+                course.Offer_Head = request.POST.get('coffer_head')
+                course.Offer_Fee = request.POST.get('coffer_fee')
+                course.Duration = request.POST.get('cduriation')
+                if request.POST.get('cstart'):
+                    course.Start_date = request.POST.get('cstart')
+                else:
+                    course.Start_date = course.Start_date
+                course.save()
+
+                courses = course_details.objects.all()
+                coategs = Course_catgeorys.objects.all()
+                return render(request,'admin/CoursePage.html',{'courses':courses,'coategs':coategs})
+            
+            else:
+                return render(request,'admin/CourseCategory.html')
+        except:
+            error_value=1
+    else:
+        return redirect('login_page')
+    
+
+
+def course_category_remove(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        categ = Course_catgeorys.objects.get(id=pk)
+        
+        categ.delete()
+        return redirect('Course_page')
+    else:
+        return redirect('login_page')
+    
+
     
 def Course_pageedit(request,pk):
     if 'uid' in request.session:
@@ -250,18 +381,10 @@ def Course_edit_save(request,pk):
                 
                 course=course_details.objects.get(id=pk)
                 course.course_name = request.POST.get('cname')
-                course.type = request.POST.get('ctype')
                 course.description = request.POST.get('cdiscr')
                 course.fee = request.POST.get('cfee')
                 course.offer_head = request.POST.get('coffer_head')
                 course.offer_fee = request.POST.get('coffer_fee')
-                course.duration = request.POST.get('cduriation')
-               
-
-                if request.POST.get('cstart'):
-                    course.start_date = request.POST.get('cstart')
-                else:
-                    course.start_date = course.start_date 
 
                 if request.FILES.get('cimage'):
                     course.image = request.FILES.get('cimage')
@@ -277,13 +400,11 @@ def Course_edit_save(request,pk):
                 msg='Course Error !'
                 courses=course_details.objects.get(id=pk)
                 return render(request,'admin/CoursePageedit.html',{'msg':msg,'courses':courses})
-
    
-
-            
-        
     else:
         return redirect('login_page')
+
+
 
 
 def Course_Delete(request,pk):
@@ -308,98 +429,15 @@ def Course_Details(request,pk):
         else:
             return redirect('/')
         courses = course_details.objects.get(id=pk)
-        if courses.type == '3':
-            course_ojt = courojt_details.objects.filter(course_id__id=pk)
-            course_ojt_points = courseojtPoints.objects.all()
-            return render(request,'admin/OJTcourseDetails.html', {'courses':courses,'course_ojt':course_ojt,'course_ojt_points':course_ojt_points})
-        
-        else:
-            course_inter = courseinternship_details.objects.filter(course_id__id=pk)
-            return render(request,'admin/CourseDetails.html', {'courses':courses,'course_inter':course_inter})
-    else:
-        return redirect('login_page')
-    
-def Courseinternship_save(request,pk):
-    if 'uid' in request.session:
-        if request.session.has_key('uid'):
-            uid = request.session['uid']
-        else:
-            return redirect('/')
-        
-        courses = course_details.objects.get(id=pk)
-
-        try:
-
-            if request.method=='POST':
-                
-                course=courseinternship_details()
-                course.course_id=courses
-                course.course_points = request.POST['cinter_points']
-                course.save()
-                courses = course_details.objects.get(id=pk)
-                course_inter = courseinternship_details.objects.filter(course_id__id=pk)
-
-                msg='Course Point added. !'
-                return render(request,'admin/CourseDetails.html', {'msg':msg,'courses':courses,'course_inter':course_inter})
-            
-            else:
-                course_inter = courseinternship_details.objects.filter(course_id=pk)
-                return render(request,'admin/CourseDetails.html',{'courses':courses,'course_inter':course_inter})
-        except:
-            error_value=1
-    else:
-        return redirect('login_page')
-    
-    
-
-def Coursepoint_edit(request,pk):
-    if 'uid' in request.session:
-        if request.session.has_key('uid'):
-            uid = request.session['uid']
-        else:
-            return redirect('/')
-        
-        course_inter = courseinternship_details.objects.get(id=pk)
-        courses = course_details.objects.get(id=course_inter.course_id.id)
-
-        return render(request,'admin/CourseDetailspointsEdit.html', {'courses':courses,'course_inter':course_inter})
-    else:
-        return redirect('login_page')
-    
-
-def Courseinternship_edit_save(request,pk):
-    if 'uid' in request.session:
-        if request.session.has_key('uid'):
-            uid = request.session['uid']
-        else:
-            return redirect('/')
-        
-        if request.method=='POST':
-                
-                course=courseinternship_details.objects.get(id=pk)
-                course.course_points = request.POST.get('cinter_points')
-                course.save()
-                cid=course.course_id.id
-                return redirect('Course_Details',cid)
-
-    else:
-        return redirect('login_page')
-    
-    
-def Coursepoint_delete(request,pk):
-    if 'uid' in request.session:
-        if request.session.has_key('uid'):
-            uid = request.session['uid']
-        else:
-            return redirect('/')
-        course_points = courseinternship_details.objects.get(id=pk)
-        cid=course_points.course_id.id
-        course_points.delete()
-        return redirect('Course_Details',cid)
-        
+       
+        course_ojt = courojt_details.objects.filter(course_id__id=pk)
+        course_ojt_points = courseojtPoints.objects.all()
+        return render(request,'admin/OJTcourseDetails.html', {'courses':courses,'course_ojt':course_ojt,'course_ojt_points':course_ojt_points})
         
     else:
         return redirect('login_page')
+    
+
     
 
 
@@ -996,7 +1034,8 @@ def shot_course(request):
             uid = request.session['uid']
         else:
             return redirect('/')
-        couse=course_details.objects.filter(type='1')
+        categ = Course_catgeorys.objects.filter(Type='1')
+        couse=course_details.objects.filter(id__in=categ)
         enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
@@ -1009,7 +1048,8 @@ def ojt_course(request):
             uid = request.session['uid']
         else:
                 return redirect('/')
-        couse=course_details.objects.filter(type='3')
+        categ = Course_catgeorys.objects.filter(Type='3')
+        couse=course_details.objects.filter(id__in=categ)
         enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
@@ -1023,7 +1063,8 @@ def internship_course(request):
             uid = request.session['uid']
         else:
             return redirect('/')
-        couse=course_details.objects.filter(type='2')
+        categ = Course_catgeorys.objects.filter(Type='2')
+        couse=course_details.objects.filter(id__in=categ)
         enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:

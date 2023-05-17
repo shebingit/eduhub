@@ -200,6 +200,7 @@
         justify-content: space-between;
         font-size: 0.80em;
         margin-bottom: 0.70em;
+        gap: 0.60em;
     }
     .section_bottom span
     {
@@ -273,11 +274,7 @@
                         {% endif %}
                     </div>
                     <div class="course-details">
-                        <!-- <div class="action">
-                            <span><a href="#">Details</a></span>
-                            <span><a href="#">Edit</a></span>
-                            <span><a href="#" class="remove">Remove</a></span>
-                        </div> -->
+                       
                         <h6>{{courses.course_name}}</h6>
                         <p class="course-dis">{{courses.description}}</p>
                         <hr>
@@ -290,12 +287,9 @@
                         </ul>
                       
                         <div class="section_bottom">
-                            <span>Course Duration : {{courses.duration}} </span>
-                            <span>Course Start Date : {{courses.start_date}} </span>
-                        </div>
-                        <div class="section_bottom">
-                            <span>Course Fee : {{courses.fee}} </span>
-                            <span>Course Offer Fees : </span>
+                            <span>Course Fee : Rs {{courses.fee}} /- </span>
+                            <span> Offer Head : {{courses.offer_head}} </span>
+                            <span> Offer Fee : Rs {{courses.offer_fee}}/- </span>
                         </div>
                         
 

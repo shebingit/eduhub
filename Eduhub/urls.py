@@ -42,15 +42,19 @@ urlpatterns = [
 
     path('Course-page',views.Course_page,name="Course_page"),
     path('Course-Save',views.Course_save,name="Course_save"),
+
+    path('Course-Category/<pk>',views.Course_catgeory,name="Course_catgeory"),
+    path('Course-Category-Save/<pk>',views.Course_category_save,name="Course_category_save"),
+    path('Course-Category-Edit/<pk>',views.course_category_edit,name="course_category_edit"),
+    path('Course-Category-Edit-Save/<pk>',views.Course_categoryedit_save,name="Course_categoryedit_save"),
+    path('Course-Category-Remove/<pk>',views.course_category_remove,name="course_category_remove"),
+
     path('Course-Edit-Page/<pk>',views.Course_pageedit,name ="Course_pageedit"),
     path('Course-Edit-Save/<pk>',views.Course_edit_save,name ="Course_edit_save"),
     path('Course-Delete/<pk>',views.Course_Delete,name ="Course_Delete"),
 
     path('Course-Details/<pk>',views.Course_Details,name ="Course_Details"),
-    path('Course-Details-Save/<pk>',views.Courseinternship_save,name ="Courseinternship_save"),
-    path('Course-Points-Edit/<pk>',views.Coursepoint_edit,name = "Coursepoint_edit"),
-    path('Course-Points-Edit-Save/<pk>',views.Courseinternship_edit_save,name ="Courseinternship_edit_save"),
-    path('Course-Points-Remove/<pk>',views.Coursepoint_delete,name = "Coursepoint_delete"),
+   
 
     path('OJT-Details-Save/<pk>',views.Courseojt_save,name = "Courseojt_save"),
     path('OJT-Subcontent-Edit/<pk>',views.ojtsubcontent_edit,name = "ojtsubcontent_edit"),
