@@ -1881,46 +1881,71 @@ body.dark-theme {
 }
 
 /* ============= POPUP BOX ========== */
-.popup_container
-{
-  padding: 1.5rem;
-}
+
+
 .popup_box_offer
 {
-  background-color: #f0efef;
-  width: 330px;
+  background-color: #ffffff;
+  width: 600px;
   padding: 1rem 1.2rem;
   position: fixed;
   transform: translate(-50%,-50%);
   left:50%;
   top:50%;
   z-index: 2;
-  height: 260px;
+ 
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  border-radius: 20px;
+  border-radius: 25px;
   display: none;
   
 }
+.popupbox
+{
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap:1.3rem
+}
+.ofer_image
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
 .popup_box_offer button{
   display: block;
-  margin: 0 0 20px auto;
+  margin: 0 0 2px auto;
   background-color: transparent;
   font-size: 22px;
-  color: #c5c5c5;
+  color: #1c1a1a;
   border: none;
   cursor: pointer;
 }
+.celebr
+{
+  width: 60px;
+  height: 60px;
+}
+.celebr img{
+  width: 100%;
+  height: 100%;
+}
 .popup_box_offer h2{
- color: #1b1a1a;
- letter-spacing: 0.05em;
- margin-bottom: 0.50rem;
+ color: #19265d;
+ letter-spacing: 0.06em;
+ margin-bottom: 0.80rem;
+ font-size:1.1rem;
+ 
+ font-weight: 600;
 }
 .popup_box_offer p
 {
-  font-size: 0.85rem;
+  font-size: var(--smaller-font-size);
   text-align: justify;
   line-height: 1.4rem;
-  margin-bottom: 0.50rem;
+  margin-bottom: 1.5rem;
+  color: #1b1a1a ;
+  text-align: start;
 }
 .popup_box_offer a{
   display:block ;
@@ -1929,5 +1954,61 @@ body.dark-theme {
   width: 150px;
   background-color: #252525;
   color: #FFF;
-  padding: 0.70rem 0.90rem;
+  padding: 0.60rem 0.60rem;
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.07rem;
+  border-radius: 1rem;
+  margin-bottom: 1.3rem;
 }
+.check_offer
+    {
+     display: flex;
+     align-items: center;
+     justify-content: end;
+    }
+.popup_box_offer a:hover{
+
+background-color: var(--first-color);
+
+  color: #1c1a1a;
+  }
+  @media   (min-width:332px)  and (max-width:632px) {
+
+    .popup_box_offer
+  {
+    background-color: #ffffff;
+    width: 290px;
+    top:45%
+  }
+    .popupbox
+    {
+      display: grid;
+      grid-template-columns:repeat(1,1.3fr);
+      gap: 1rem;
+    }
+    .popup_box_offer h2
+    {
+      
+      text-align: center;
+    }
+    .popup_box_offer p
+    {
+      font-size: var(--smaller-font-size);
+    }
+    .ofer_image
+    {
+      margin-top: -1.5rem;
+    }
+   
+    .ofer_image img {
+      width: 30%;
+      height: 80%;
+    }
+    .check_offer
+    {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+    }
+  }

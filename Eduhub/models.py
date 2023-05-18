@@ -100,3 +100,4 @@ class Enquir(models.Model):
 class OfferBox(models.Model):
     title_name = models.CharField(max_length=255, null=True,blank=True,default='')
     offer_dics = models.TextField(null=True,blank=True,default='')
+    offer_status = models.CharField(max_length=10, null=True,blank=True,default=0)

@@ -158,6 +158,7 @@
     {
         font-size: 0.83em;
         line-height: 1.8em;
+        margin-top: 1em;
     }
     .card-body
     {
@@ -233,7 +234,7 @@
                 
             {% endif %}
            
-            <form action="#" class="form-submit" method="post" enctype="multipart/form-data">
+            <form action="{% url 'offer_save' %}" class="form-submit" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <a href="{% url 'Course_page' %}"><i class="fas fa-arrow-left"></i></a>
                 <h6 class="course-head">Offer Message</h6>
@@ -267,7 +268,7 @@
             {% endif %}
             <h5 class="course-head" > Message </h5>
             
-            {% for msgs in offer %}
+    
 
             <div class="card">
                 
@@ -279,18 +280,22 @@
                     </div>
                     <div class="course-details">
                         
-                        <h6>{{msgs.title_name}}</h6>
-                        <p class="course-dis">{{msgs.offer_dics}}</p>
+                        <h6>{{offer.title_name}}</h6>
+                        <p class="course-dis">{{offer.offer_dics}}</p>
                         <hr>
-                       
-                       
+                        {% if offer.offer_status == 0 %}
+                        <a href="{% url 'status_change_offerbox' %}" style="color: rgb(45, 109, 13); font-size:0.85em;  font-weight: 600;">Active</a>
+                        {% else %}
+                        <a href="{% url 'status_change_offerbox' %}" style="color: rgb(184, 24, 24);font-size:0.85em;  font-weight: 600;">Deactive</a>
+                        {% endif %}
+
 
                     </div>
                 </div>
                 
 
             </div>
-            {% endfor %}
+        
             
         </div>
     </div>

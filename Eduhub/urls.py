@@ -102,7 +102,11 @@ urlpatterns = [
     path('Enquiry-Remove/<pk>',views.enquery_remove,name = "enquery_remove"),
     path('Enquiry-Update/<pk>',views.enquery_upadte,name = "enquery_upadte"),
 
-    path('Offer-Box',views.Offer_box,name="Offer_box"),
+    path('Offer-Box',views.Offer_box,name="Offer_box"),  
+    path('Offer-Box-Save',views.offer_save,name="offer_save"),
+    path('Offer-Change-Status',views.status_change_offerbox,name="status_change_offerbox"),
+    
+    
 
 
     path('logout',views.logout,name="logout"),

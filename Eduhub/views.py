@@ -15,8 +15,9 @@ def HomePage(request):
     courses = course_details.objects.all()
     instrs = instructors.objects.all()
     testims = testimonial.objects.all()
+    offer= OfferBox.objects.all().first()
   
-    return render(request, 'user/index.html',{'courses':courses,'instrs':instrs,'testims':testims})
+    return render(request, 'user/index.html',{'courses':courses,'instrs':instrs,'testims':testims,'offer':offer})
 
 def AboutPage(request):
     instrs = instructors.objects.all()
@@ -50,27 +51,25 @@ def shortTeamInternship(request):
     categ = Course_catgeorys.objects.filter(Type='1')
     courses = course_details.objects.filter(id__in=categ.values('Cate_course_id'))
     ojt = courojt_details.objects.all()
-    ojtcourse_sub=courseinternship_details.objects.all()
     ojtpoints = courseojtPoints.objects.all()
-    return render(request, 'user/shortTeamInternship.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
+    return render(request, 'user/shortTeamInternship.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtpoints':ojtpoints})
 
 
 def Internship(request):
     categ = Course_catgeorys.objects.filter(Type='2')
     courses = course_details.objects.filter(id__in=categ.values('Cate_course_id'))
     ojt = courojt_details.objects.all()
-    ojtcourse_sub=courseinternship_details.objects.all()
+
     ojtpoints = courseojtPoints.objects.all()
-    return render(request, 'user/internship.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
+    return render(request, 'user/internship.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtpoints':ojtpoints})
 
 
 def Course_full(request):
     categ = Course_catgeorys.objects.filter(Type='3')
     courses = course_details.objects.filter(id__in=categ.values('Cate_course_id'))
     ojt = courojt_details.objects.all()
-    ojtcourse_sub=courseinternship_details.objects.all()
     ojtpoints = courseojtPoints.objects.all()
-    return render(request, 'user/coursefull.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtcourse_sub':ojtcourse_sub,'ojtpoints':ojtpoints})
+    return render(request, 'user/coursefull.html',{'courses':courses,'categ':categ,'ojt':ojt,'ojtpoints':ojtpoints})
    
 
 
@@ -1195,8 +1194,58 @@ def Offer_box(request):
             uid = request.session['uid']
         else:
             return redirect('/')
-        offer=OfferBox.objects.all()
+        offer=OfferBox.objects.all().first()
+        return render(request,'admin/Offerbox.html', {'offer':offer})
+    else:
+        return redirect('login_page')
+
+
+def offer_save(request):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        if request.method == 'POST':
+
+            if OfferBox.objects.all().first() :
+                offer= OfferBox.objects.all().first() 
+                offer.title_name= request.POST['offer_head']
+                offer.offer_dics = request.POST['msg_disc']
+                offer.save()
+            else:
+                offer = OfferBox()
+                offer.title_name= request.POST['offer_head']
+                offer.offer_dics = request.POST['msg_disc']
+                offer.save()
+
+            return render(request,'admin/Offerbox.html', {'offer':offer})
+        else:
+            return redirect('Offer_box')
+
+    else:
+        return redirect('login_page')
     
+
+    
+    
+def status_change_offerbox(request):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        offer=OfferBox.objects.all().first()
+
+        if offer.offer_status == '0':
+            offer.offer_status = 1
+        else:
+            offer.offer_status = 0
+
+        offer.save()
         return render(request,'admin/Offerbox.html', {'offer':offer})
     else:
         return redirect('login_page')

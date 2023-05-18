@@ -166,17 +166,30 @@
 
 
         <!-- ===================POPUP CARD OFFER ==================-->
-        {% if msg %}
-        <div class="container popup_container" >
-            <div class="popup_box_offer" id="popupbox">
+        {% if offer.offer_status == '0' %}
+        <div class="container popup_container" id="popupbox">
+            <div class="popup_box_offer" >
                 <button id="close_popup">&times</button>
-                <h2>Title</h2>
-                <p> 
-                    Altos Eduhub is the best software training institute in Kochi, Kerala, 
-                    owned by Altos Technologies, a leading software development company in Kerala. 
-                    We offer 
-                 </p>
-                 <a href="#">check it</a>
+                <div class="celebr">
+                    <img src="{% static 'img/celebration.jpg' %}" alt="The best software training institute in Kochi">
+                </div>
+                <div class="popupbox">
+                   
+                    <div class="ofer_image">
+                        <img src="{% static 'img/offerimage.jpg' %}" alt="The best software training institute in Kochi">
+                    </div>
+                    <div>
+                        <h2>{{offer.title_name}}</h2>
+                        <p> 
+                            {{offer.offer_dics}}
+                        </p>
+                        <div class="check_offer">
+                            <a href="{% url 'CoursePage' %}#featured">CHECH IT NOW</a>
+                        </div>
+                       
+                    </div>
+                </div>
+                
             </div>
 
         </div>
