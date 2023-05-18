@@ -26,10 +26,6 @@ class Course_catgeorys(models.Model):
     Start_date = models.DateField(null=True,blank=True)
     
 
-class courseinternship_details(models.Model):
-    course_id = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
-    course_points = models.TextField(null=True,blank=True,default='')
-
 class courojt_details(models.Model):
     course_id = models.ForeignKey(course_details, on_delete=models.CASCADE, null=True,default='')
     course_subhead =  models.CharField(max_length=255,null=True,blank=True)
@@ -101,3 +97,6 @@ class Enquir(models.Model):
     enq_status = models.CharField(max_length=50,null=True,blank=True,default='0')
 
 
+class OfferBox(models.Model):
+    title_name = models.CharField(max_length=255, null=True,blank=True,default='')
+    offer_dics = models.TextField(null=True,blank=True,default='')

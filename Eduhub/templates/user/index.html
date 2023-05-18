@@ -19,6 +19,8 @@
        
 
         <title>EduHub</title>
+
+    
     </head>
     <body>
         <!--==================== HEADER ====================-->
@@ -162,13 +164,33 @@
             </div> -->
         </div>
 
+
+        <!-- ===================POPUP CARD OFFER ==================-->
+        {% if msg %}
+        <div class="container popup_container" >
+            <div class="popup_box_offer" id="popupbox">
+                <button id="close_popup">&times</button>
+                <h2>Title</h2>
+                <p> 
+                    Altos Eduhub is the best software training institute in Kochi, Kerala, 
+                    owned by Altos Technologies, a leading software development company in Kerala. 
+                    We offer 
+                 </p>
+                 <a href="#">check it</a>
+            </div>
+
+        </div>
+        {% endif %}
+       
+
+
         <!--==================== MAIN ====================-->
         <main class="main">
             <!--==================== HOME ====================-->
             <section class="home" id="home" style="background-image: url('static/img/bg3.jpg'); background-size:cover;">
                 <div class="home__container container grid">
-                    <div class="home__img-bg" style="background-image: url('static/img/home_bg.jpg'); background-size:cover;">
-                        <img src="{% static 'img/about_bg.jpg' %}" alt="" class="home__img">
+                    <div class="home__img-bg" style="background-image: url('static/img/bg17.png'); background-size:cover">
+                        <img src="#" alt="" class="home__img">
                     </div>
     
                     <div class="home__social">
@@ -184,7 +206,7 @@
                     </div>
     
     
-                    <div class="home__data">
+                    <div class="home__data" >
                         <h1 class="home__title">Best Software Training <br> Institute of Kerala </h1>
                         <p class="home__description1 ">
                             <span>Enhance Your Skills with Top-Rated Software Courses in Kochi</span>
@@ -614,6 +636,7 @@
 
         <!--=============== MAIN JS ===============-->
         <script src="static/js/main.js"></script>
+        <script src="static/js/index.js"></script>
 
    
 
@@ -623,18 +646,7 @@
          <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
          <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-         <script>
-            var image = document.getElementsByClassName('home__img');
-            new simpleParallax(image, {
-                delay: .6,
-                scale: 1.1,
-                transition: 'cubic-bezier(0,0,0,1)'
-                
-            });
-
-            
-
-         </script>
+        
         
     </body>
 </html>

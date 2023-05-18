@@ -48,7 +48,7 @@ def CarrerRestart(request):
 
 def shortTeamInternship(request):
     categ = Course_catgeorys.objects.filter(Type='1')
-    courses = course_details.objects.filter(id__in=categ)
+    courses = course_details.objects.filter(id__in=categ.values('Cate_course_id'))
     ojt = courojt_details.objects.all()
     ojtcourse_sub=courseinternship_details.objects.all()
     ojtpoints = courseojtPoints.objects.all()
@@ -57,7 +57,7 @@ def shortTeamInternship(request):
 
 def Internship(request):
     categ = Course_catgeorys.objects.filter(Type='2')
-    courses = course_details.objects.filter(id__in=categ)
+    courses = course_details.objects.filter(id__in=categ.values('Cate_course_id'))
     ojt = courojt_details.objects.all()
     ojtcourse_sub=courseinternship_details.objects.all()
     ojtpoints = courseojtPoints.objects.all()
@@ -66,7 +66,7 @@ def Internship(request):
 
 def Course_full(request):
     categ = Course_catgeorys.objects.filter(Type='3')
-    courses = course_details.objects.filter(id__in=categ)
+    courses = course_details.objects.filter(id__in=categ.values('Cate_course_id'))
     ojt = courojt_details.objects.all()
     ojtcourse_sub=courseinternship_details.objects.all()
     ojtpoints = courseojtPoints.objects.all()
@@ -310,12 +310,9 @@ def Course_categoryedit_save(request,pk):
         if request.session.has_key('uid'):
             uid = request.session['uid']
         else:
-            return redirect('/')
-        
+            return redirect('/')       
 
-        try:
-
-            if request.method=='POST':
+        if request.method=='POST':
                 
                 course=Course_catgeorys.objects.get(id=pk)
                 course.Type = request.POST.get('ctype')
@@ -329,14 +326,10 @@ def Course_categoryedit_save(request,pk):
                     course.Start_date = course.Start_date
                 course.save()
 
-                courses = course_details.objects.all()
-                coategs = Course_catgeorys.objects.all()
-                return render(request,'admin/CoursePage.html',{'courses':courses,'coategs':coategs})
+                return redirect('Course_page')
             
-            else:
+        else:
                 return render(request,'admin/CourseCategory.html')
-        except:
-            error_value=1
     else:
         return redirect('login_page')
     
@@ -1106,6 +1099,25 @@ def enroll_remove(request,pk):
         return render(request,'admin/Enroll.html', {'enqs':enqs,'confirm_msg':confirm_msg})
     else:
         return redirect('login_page')
+    
+    
+def enroll_check(request,pk):
+    
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        try:
+           
+            enqs = Enroll.objects.get(id=pk)
+            confirm_msg='Data found.'
+        except Enroll.DoesNotExist:
+            confirm_msg='No data found.'
+        return render(request,'admin/Enrollcheck.html', {'enqs':enqs,'confirm_msg':confirm_msg})
+    else:
+        return redirect('login_page')
+
 
 
 def enroll_update(request,pk):
@@ -1171,7 +1183,24 @@ def enquery_remove(request,pk):
         return render(request,'admin/Enquiry.html', {'enqs':enqs})
     else:
         return redirect('login_page')
+    
 
+# ======== oFFERBox =============
+
+
+def Offer_box(request):
+
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        offer=OfferBox.objects.all()
+    
+        return render(request,'admin/Offerbox.html', {'offer':offer})
+    else:
+        return redirect('login_page')
+    
     
 
 def logout(request):

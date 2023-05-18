@@ -95,11 +95,14 @@ urlpatterns = [
 
     path('Enroll',views.enroll_view,name="enroll_view"),
     path('Enroll-Remove/<pk>',views.enroll_remove,name = "enroll_remove"),
+    path('Enroll-Check/<pk>',views.enroll_check,name = "enroll_check"),
     path('Enroll-Update/<pk>',views.enroll_update,name = "enroll_update"),
 
     path('Enquiry',views.enquery_view,name="enquery_view"),
     path('Enquiry-Remove/<pk>',views.enquery_remove,name = "enquery_remove"),
     path('Enquiry-Update/<pk>',views.enquery_upadte,name = "enquery_upadte"),
+
+    path('Offer-Box',views.Offer_box,name="Offer_box"),
 
 
     path('logout',views.logout,name="logout"),

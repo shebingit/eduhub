@@ -87,9 +87,9 @@
                     <td class="text-center">
                        
                         {% if enq.enq_status == '0' %}
-                            <a href="{% url 'enroll_update' enq.id %}">check</a>
+                            <a href="{% url 'enroll_check' enq.id %}">check</a>
                         {% else %}
-                            <span>checked</span>
+                        <a href="{% url 'enroll_check' enq.id %}">checked</a>
                         {% endif %}
                         <a href="{% url 'enroll_remove' enq.id %}" style="color: red; padding-left:0.70em">remove</a>
                     </td>

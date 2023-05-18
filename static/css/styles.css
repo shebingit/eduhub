@@ -1879,3 +1879,55 @@ body.dark-theme {
 {
   margin-top: 0.80rem;
 }
+
+/* ============= POPUP BOX ========== */
+.popup_container
+{
+  padding: 1.5rem;
+}
+.popup_box_offer
+{
+  background-color: #f0efef;
+  width: 330px;
+  padding: 1rem 1.2rem;
+  position: fixed;
+  transform: translate(-50%,-50%);
+  left:50%;
+  top:50%;
+  z-index: 2;
+  height: 260px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 20px;
+  display: none;
+  
+}
+.popup_box_offer button{
+  display: block;
+  margin: 0 0 20px auto;
+  background-color: transparent;
+  font-size: 22px;
+  color: #c5c5c5;
+  border: none;
+  cursor: pointer;
+}
+.popup_box_offer h2{
+ color: #1b1a1a;
+ letter-spacing: 0.05em;
+ margin-bottom: 0.50rem;
+}
+.popup_box_offer p
+{
+  font-size: 0.85rem;
+  text-align: justify;
+  line-height: 1.4rem;
+  margin-bottom: 0.50rem;
+}
+.popup_box_offer a{
+  display:block ;
+  position: relative;
+  text-align: center;
+  width: 150px;
+  background-color: #252525;
+  color: #FFF;
+  padding: 0.70rem 0.90rem;
+}

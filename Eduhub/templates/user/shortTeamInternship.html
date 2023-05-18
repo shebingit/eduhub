@@ -279,16 +279,20 @@
                                 
                             {% endif %}
                         {% endfor %}
+                        {% for ctg in categ %}
+                        {% if course.id == ctg.Cate_course_id.id %}
                         <div class="course_bottom_details">
-                            <div>Duration : {{course.duration}}</div>
-                            <div>Next Batch On : {{course.start_date}}</div>
+                            <div>Duration : {{ctg.Duration}}</div>
+                            <div>Next Batch On : {{ctg.Start_date}}</div>
                             
-                            {% if course.offer_fee %}
-                            <div>Fee :Rs <del class="course_price">{{course.fee}} /-</del> &nbsp; Rs&nbsp;<span class="offer_price">{{course.offer_fee}}</span>/-</div>
+                            {% if ctg.Offer_Fee %}
+                            <div>Fee :Rs <del class="course_price">{{ctg.Fee}} /-</del> &nbsp; Rs&nbsp;<span class="offer_price">{{ctg.Offer_Fee}}</span>/-</div>
                             {% else %}
-                            <div class="course_price" >Fee :Rs {{course.fee}} /-</div>
+                            <div class="course_price" >Fee :Rs {{ctg.Fee}} /-</div>
                             {% endif %}
                         </div>
+                        {% endif %}
+                        {% endfor %}
                         <div class="course_btn_box">
                             <a href="{% url 'RegisterForm' %}" class="button button--small">Enroll Now</a>
                         </div>

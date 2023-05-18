@@ -1,0 +1,86 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+
+<style>
+    .table_box
+    {
+        padding: 2em 1.7em;
+        background: #FFFFF7;
+        font-size: 0.87em;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+        border-radius: 10px;
+    }
+    .msg_remove
+    {
+        font-size: 0.85em;
+        color: rgb(220, 40, 40);
+        font-weight: 800;
+
+    }
+    .info_box
+    {
+        text-align: center;
+        padding: 1em ;
+        font-size: 0.85em;
+        font-weight: 500;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        margin: 0.60em;
+    }
+</style>
+
+
+<!-- Message Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h4 mb-0 text-Primary-600">Course Enroll </h1>
+    </div>
+
+    {% if confirm_msg %}
+    <div class="info_box">
+       
+        <p>{{confirm_msg}}</p>
+       
+    </div>
+    {% endif %}
+
+    <!-- Main table-Box content -->
+  
+        
+                    
+                    {{enqs.enq_date}}
+                    {{enqs.name}}
+                    {{enqs.email}}
+                    {{enqs.phone}}
+                    {{enqs.course.course_name}}
+                    
+                        {% if enqs.ctype == '1' %}
+                            Short Term Internship
+                        {% elif enqs.ctype == '2' %}
+                             Internship
+                        {% elif enqs.ctype == '3' %}
+                           OJT
+                        {% else %}
+                            No Data
+                        {% endif %}
+                  
+                       
+                        {% if enqs.enq_status == '0' %}
+                            <a href="{% url 'enroll_update' enqs.id %}">check</a>
+                        {% else %}
+                            <span>checked</span>
+                        {% endif %}
+                        <a href="{% url 'enroll_remove' enqs.id %}" style="color: red; padding-left:0.70em">remove</a>
+               
+                
+
+</div>
+<!-- End Page Content -->
+
+
+
+
+{% endblock %}
