@@ -14,3 +14,13 @@ document.querySelector("#close_popup").addEventListener("click", function()
 {
 document.querySelector(".popup_box_offer").style.display="none";
 });
+
+
+
+
+
+
+
+
+
+

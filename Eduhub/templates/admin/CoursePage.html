@@ -211,7 +211,25 @@
         font-weight: 500;
         color: rgb(27, 26, 26);
     }
-
+    @media  (min-width:332px) and (max-width:1032px)
+    {
+        .form-section
+        {
+        
+            display: block;
+            
+        }
+        .card-body
+        {
+           
+            grid-template-columns:repeat(1,1fr) ;
+           
+        }
+        .card-footer
+        {
+            overflow-x: scroll;
+        }
+    }
    
    
 </style>
@@ -331,7 +349,7 @@
                                     <td>{{categ.Start_date}}</td>
                                     <td>
                                         {% if categ.Type == '1' %}
-                                            Shot Team Internship
+                                            Short Team Internship
                                         {% elif categ.Type == '2' %}
                                             Internship
                                         {% else %}

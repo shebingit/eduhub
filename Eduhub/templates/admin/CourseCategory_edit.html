@@ -211,6 +211,26 @@
         font-weight: 500;
         color: rgb(27, 26, 26);
     }
+    @media  (min-width:332px) and (max-width:1032px)
+{
+    .form-section
+    {
+    
+        display: block;
+        
+    }
+    .card-body
+    {
+       
+        grid-template-columns:repeat(1,1fr) ;
+       
+    }
+    .card-footer
+    {
+        overflow-x: scroll;
+    }
+}
+
 
    
    
@@ -329,6 +349,7 @@
                         </thead>
                         <tbody>
                             {% for categ in coategs %}
+                            {% if courses.id == categ.Cate_course_id.id %}
                             
                             <tr>
                                 
@@ -347,6 +368,7 @@
                                 <td>{{categ.Offer_Fee}}</td>
                                 <td>{{categ.Duration}}</td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         
                             
