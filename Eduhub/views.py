@@ -27,6 +27,14 @@ def CoursePage(request):
     courses = course_details.objects.all()
     return render(request, 'user/course.html',{'courses':courses})
 
+def CourseDetails(request,pk):
+    courses = course_details.objects.get(id=pk)
+    cid=courses.id
+    ojt = courojt_details.objects.filter(course_id_id=cid)
+    ojtpoints = courseojtPoints.objects.all()
+    categ= Course_catgeorys.objects.filter(Cate_course_id_id=cid)
+    return render(request, 'user/coursedetails.html',{'courses':courses,'ojt':ojt,'ojtpoints':ojtpoints,'categ':categ})
+
 def PlacementPage(request):
     placement = placements.objects.all()
     return render(request, 'user/placement.html',{'placement':placement})
@@ -462,8 +470,8 @@ def Courseojt_save(request,pk):
                 return render(request,'admin/OJTcourseDetails.html', {'msg':msg,'courses':courses,'course_ojt':course_ojt,'course_ojt_points':course_ojt_points})
             
             else:
-                course_inter = courseinternship_details.objects.filter(course_id=pk)
-                return render(request,'admin/OJTcourseDetails.html',{'courses':courses,'course_inter':course_inter,'course_ojt_points':course_ojt_points})
+               
+                return render(request,'admin/OJTcourseDetails.html',{'courses':courses,'course_ojt_points':course_ojt_points})
         except:
             error_value=1
     else:

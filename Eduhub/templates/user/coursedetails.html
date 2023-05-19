@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+       
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Best software development in Kerala" name="keywords">
+        <meta content="Explore Altos Eduhub's on-the-job training programs, where you can gain hands-on experience in software development. Learn more about our comprehensive OJT courses offered by the best software training company in Kerala. Boost your skills and launch your career with Altos Eduhub today!" name="description">
+
+       <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+       <!--=============== BOXICONS ===============-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+       <!--=============== SWIPER CSS ===============--> 
+       <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+       <!--=============== CSS ===============-->
+       <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+       <title>EduHub</title>
+   </head>
+   <body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="{% url 'HomePage' %}" class="nav__logo">
+                    <img src="{% static 'img/logo1.png' %}" style="width:100%; height:100%">
+                </a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="{% url 'HomePage' %}" class="nav__link ">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'AboutPage' %}" class="nav__link ">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'CoursePage' %}" class="nav__link active-link">Course</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'PlacementPage' %}" class="nav__link ">Placement</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class='bx bx-x' ></i>
+                    </div>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                    <div class="nav__shop" id="cart-shop">
+                        <i class='bx bxs-chat'></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-grid-alt' ></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+       
+         <!--==================== CHAT BOX ====================-->
+         <div class="cart" id="cart">
+            <i class='bx bx-x cart__close' id="cart-close"></i>
+
+            <!-- <h2 class="cart__title-center">Chat</h2> -->
+            <div class="card ChatBox" id="chat-container">
+                <div class="card-head">
+                    <div class="chatimg"></div>
+                    <img src="{% static 'img/favicon.ico' %}">
+                    <p>Altos EduHub</p>
+                </div>
+                <div class="card-body">
+                    <div class="chat_img_box">
+                        <img src="{% static 'img/logo1.png' %}">
+                    </div>
+                    <div  class="chat_messages" id="chat-messages"></div>
+                   
+                    <!-- <p> Welcome To Altos EduHub</p> -->
+                </div>
+                <div class="card-footer">
+                    <input type="text" id="user-input" class="int_text" placeholder="Type your message...">
+                    <button class="send_btn" type="button" id="send-btn"><i class='bx bxs-send' ></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <main class="main">
+              
+                
+
+                <!-- ================== SHORT TEAM COURSE DETAILS =========-->
+                
+               
+                <section class="newsletter section container" >
+                    <div class="newsletter__bg grid">
+                        <div>
+                            <h2 class="newsletter__title">{{courses.course_name}} </h2>
+                            <p class="course__description mb-3">
+                                {{courses.description}}
+                            </p>
+                            <div class=" course_details_img_box">
+                                {% if courses.image %}
+                                <img src="{{courses.image.url}}" alt="Short Term Internship">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% for ojts in ojt %}
+                            {% if ojts.course_id.id == courses.id %}
+                                <div class="course_sub_details">
+                                    <h5>{{ojts.course_subhead}}</h5>
+                                    <p>{{ojts.course_subetails}}</p>
+                                    <div class="about_list_box">
+                                        <!-- <h4 class="course_sub_head">Why Choose Us </h4> -->
+                                        <ul>
+                                            {% for point in ojtpoints %}
+                                                {% if point.courseojt_id.id == ojts.id %}
+                                                    <li><i class='bx bx-chevrons-right'></i> {{point.courseojt_points}}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+    
+                                    </div>
+                                </div>
+                                
+                            {% endif %}
+                        {% endfor %}
+    
+                    </div>
+
+                    <div class="course_categoryBox" >
+                        {% for ctg in categ %}
+                            
+                            <div class="card Detail_card">
+                                <div class="card-head">
+                                    {% if ctg.Type == '1' %}
+                                        <h5>SHORT TERM INTERNSHIP</h5>
+                                    {% elif ctg.Type == '2' %}
+                                        <h5>INTERNSHIP</h5>
+                                    {% else %}
+                                        <h5>ON JOB TRAINING</h5>
+                                    {% endif %}
+                                </div>
+                                <div class="card-body">
+                                    <p>Duration : {{ctg.Duration}}</p>
+                                    <p>Next Batch On : {{ctg.Start_date}}</p>
+                                </div>
+                               
+                                {% if ctg.Offer_Fee %}
+                                <div>
+                                    <h6>Fee : Rs <del class="course_pricebox">{{ctg.Fee}} /-</del> </h6>
+                                    <h6> Offer  : {{ctg.Offer_Head}}</h6>
+                                     <h5 class="offer_price">Rs {{ctg.Offer_Fee}} /-</h5>
+                                </div>
+                                {% else %}
+                                <div class="course_pricebox" >
+                                    <h6>Fee : Rs {{ctg.Fee}} /-</h6>
+                                </div>
+
+                                {% endif %}
+                                <div class="course_btn_box">
+                                    <a href="{% url 'RegisterForm' %}" class="button button--small">Enroll Now</a>
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+                        
+                        
+                    </div>
+                    
+                </section>
+           
+     
+        </main>
+
+            <!--==================== FOOTER ====================-->
+            <footer class="footer section">
+                <div class="footer__container container grid">
+                    <div class="footer__content">
+                        <h3 class="footer__title">ALTOS EDUHUB</h3>
+
+                        <ul class="footer__list">
+                            <li> 1st Floor - Thapasya Building Infopark</li>
+                            <li>Kakkanad, Cochin</li>
+                            <li> +91 974 663 2202</li>
+                            <li> info@Altostechnologies.in</li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h3 class="footer__title">Quick Link</h3>
+
+                        <ul class="footer__links">
+                        
+                            <li>
+                                <a href="{% url 'AboutPage' %}" class="footer__link">About Us</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ContactPage' %}" class="footer__link">Contact</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer__link">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer__link">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer__link">FAQs & Help</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                    
+
+                    <div class="footer__content">
+                        <h3 class="footer__title">Social</h3>
+
+                        <ul class="footer__social">
+                            <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-facebook'></i>
+                            </a>
+                            <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-whatsapp' ></i>
+                            </a>
+                        
+                            <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-youtube' ></i>
+                            </a>
+
+                            <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-linkedin' ></i>
+                            </a>
+
+                            <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-instagram' ></i>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+
+                <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+            </footer>
+
+
+        <!--=============== SCROLL UP ===============-->
+        <a href="#" class="scrollup" id="scroll-up"> 
+            <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+            
+        </a>
+        <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+            
+            <i class='bx bxl-whatsapp scrollwh__icon' ></i>
+        </a>
+
+        <!--=============== SWIPER JS ===============-->
+        <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+        <!--=============== MAIN JS ===============-->
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="static/js/chat.js"></script>
+
+        <!--===============PARALLS JS ===============-->
+        <script src="{% static 'js/index.js ' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+        
+        <script>
+            var image = document.getElementsByClassName('home__img');
+            new simpleParallax(image, {
+                delay: .4,
+                scale: 1.1,
+                transition: 'cubic-bezier(0,0,0,1)'
+                
+            });
+            
+        </script>
+
+
+    </body>
+</html>

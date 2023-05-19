@@ -10,6 +10,8 @@ urlpatterns = [
     path('Course',views.CoursePage,name='CoursePage'),
     path('Placement',views.PlacementPage,name='PlacementPage'),
     path('Contact',views.ContactPage,name='ContactPage'),
+    path('Course-Details/<pk>',views.CourseDetails,name='CourseDetails'),
+
 
     path('Short-Team-Internship',views.shortTeamInternship,name='shortTeamInternship'),
     path('Internship',views.Internship,name='Internship'),
@@ -53,7 +55,7 @@ urlpatterns = [
     path('Course-Edit-Save/<pk>',views.Course_edit_save,name ="Course_edit_save"),
     path('Course-Delete/<pk>',views.Course_Delete,name ="Course_Delete"),
 
-    path('Course-Details/<pk>',views.Course_Details,name ="Course_Details"),
+    path('CourseDetails/<pk>',views.Course_Details,name ="Course_Details"),
    
 
     path('OJT-Details-Save/<pk>',views.Courseojt_save,name = "Courseojt_save"),

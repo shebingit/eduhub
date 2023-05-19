@@ -79,7 +79,7 @@
             <i class='bx bx-x cart__close' id="cart-close"></i>
 
             <!-- <h2 class="cart__title-center">Chat</h2> -->
-            <div class="card ChatBox">
+            <div class="card ChatBox" id="chat-container">
                 <div class="card-head">
                     <div class="chatimg"></div>
                     <img src="{% static 'img/favicon.ico' %}">
@@ -89,25 +89,18 @@
                     <div class="chat_img_box">
                         <img src="{% static 'img/logo1.png' %}">
                     </div>
+                    <div  class="chat_messages" id="chat-messages"></div>
                    
                     <!-- <p> Welcome To Altos EduHub</p> -->
                 </div>
                 <div class="card-footer">
-                    <input type="text" class="int_text">
-                    <button class="send_btn" type="button"><i class='bx bxs-send' ></i></button>
+                    <input type="text" id="user-input" class="int_text" placeholder="Type your message...">
+                    <button class="send_btn" type="button" id="send-btn"><i class='bx bxs-send' ></i></button>
                 </div>
             </div>
 
-            <!-- <div class="cart__container">
-                
-            </div> -->
-
-            <!-- <div class="cart__prices">
-                <span class="cart__prices-item"></span>
-                <span class="cart__prices-total"></span>
-            </div>  -->
         </div>
-
+       
 
         <!-- ===================POPUP CARD OFFER ==================-->
         {% if offer.offer_status == '0' %}
@@ -291,7 +284,7 @@
                         <div class="swiper-wrapper">
                             {% for cours in courses %}
                             <article class="new__card swiper-slide">
-                                <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span>
+                                <!-- <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span> -->
                                 {% if cours.image %}
                                 <img src="{{cours.image.url}}" alt="" class="new__img">
                                 {% endif %}
@@ -301,7 +294,7 @@
                                     <!-- <span class="new__price">980</span> -->
                                 </div>
 
-                                <a class="button new__button"href="{% url 'RegisterForm' %}" class="button home__button">
+                                <a class="button new__button"href="{% url 'CourseDetails' cours.id %}" class="button home__button">
                                     Join Now
                                 </a>
         
@@ -593,11 +586,12 @@
         <!--=============== MAIN JS ===============-->
         <script src="static/js/main.js"></script>
         <script src="static/js/index.js"></script>
+        <script src="static/js/chat.js"></script>
 
    
 
          <!--===============PARALLS JS ===============-->
-         <script src="static/js/index.js"></script>
+       
          <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
          <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
          <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
