@@ -2030,14 +2030,14 @@ background-color: var(--first-color);
   .ChatBox .card-head
   {
       background-color: rgb(7, 7, 90);
-    
      
-      padding: 0.50rem;
+      padding: 0.80rem;
       display: flex;
       align-items: center;
       justify-content: start;
       gap: 1rem;
-      margin: 1rem 0rem;
+      border-top-left-radius: 10px;
+      border-top-right-radius:10px ;
   }
   .ChatBox .card-head p{
       color: #fff;
@@ -2047,10 +2047,12 @@ background-color: var(--first-color);
   }
   .ChatBox .card-body
   {
-      min-height:350px;
+      height: 370px;
+      max-height:400px;
       background-color: #fefdfd;
       padding: 0.60rem;
       padding-top: 3rem;
+      overflow-y: scroll;
   }
   .chat_img_box
   {
@@ -2060,6 +2062,19 @@ background-color: var(--first-color);
   }
   .chat_img_box img{
       width: 50%;
+  }
+  .chatmain_content
+  {
+    padding: 1rem 0.60rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.30rem;
+  }
+  .chatmain_content p{
+    font-size: var(--smaller-font-size);
+    line-height: 1.4rem;
+    text-align:center ;
   }
   .card-footer
   {

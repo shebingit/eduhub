@@ -44,6 +44,7 @@ urlpatterns = [
 
     path('Course-page',views.Course_page,name="Course_page"),
     path('Course-Save',views.Course_save,name="Course_save"),
+    path('Course-active_deative/<pk>',views.Course_active_deative,name="Course_active_deative"),
 
     path('Course-Category/<pk>',views.Course_catgeory,name="Course_catgeory"),
     path('Course-Category-Save/<pk>',views.Course_category_save,name="Course_category_save"),

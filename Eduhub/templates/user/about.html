@@ -27,7 +27,7 @@
         <header class="header" id="header">
             <nav class="nav container">
                 <a href="{% url 'HomePage' %}" class="nav__logo">
-                    <img src="static/img/logo1.png" style="width:100%; height:100%">
+                    <img src="static/img/logo1.png" style="width:100%; height:100%" alt="Altos Eduhub logo">
                 </a>
 
                 <div class="nav__menu" id="nav-menu">
@@ -83,6 +83,12 @@
                 <div class="card-body">
                     <div class="chat_img_box">
                         <img src="{% static 'img/logo1.png' %}">
+                    </div>
+                    <div class="chatmain_content">
+                        <p>Welcome to altos eduhub! Use the chat box to get 
+                            in touch with us and we'll be happy to assist you 
+                            with any questions or inquiries you may have.
+                        </p>
                     </div>
                     <div  class="chat_messages" id="chat-messages"></div>
                    
@@ -218,7 +224,7 @@
                                 <article class="new__card swiper-slide">
                                     <!-- <span class="new__tag">New</span> -->
                                     {% if inst.image %}
-                                    <img src="{{inst.image.url}}" alt="Instructor" class="new__img">
+                                    <img src="{{inst.image.url}}" alt="{{inst.instalttag}}" class="new__img">
                                     {% endif %}
             
                                     <div class="new__data">

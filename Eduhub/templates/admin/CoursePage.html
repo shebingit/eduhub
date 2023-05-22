@@ -268,7 +268,7 @@
 
                 <div class="group-input-course">
                     <label> Course Fee : </label>
-                    <input type="number" min="0" name="cfee" required>
+                    <input type="text"  name="cfee" >
                 </div>
                 <div class="group-input-course">
                     <label> Course Offer Head : </label>
@@ -276,12 +276,16 @@
                 </div>
                 <div class="group-input-course">
                     <label> Course Offer Fee : </label>
-                    <input type="number" min="0" name="coffer_fee" >
+                    <input type="text"  name="coffer_fee" >
                 </div>
                
                 <div class="group-input-course">
                     <label> Course Image : </label>
                     <input type="file" name="cimage" required>
+                </div>
+                <div class="group-input-course">
+                    <label>Alt tag : </label>
+                    <textarea type="text"  name="calttag" ></textarea>
                 </div>
                 <div class="group-input-coursebtns">
                     <button type="reset" class="resetbtn">Reset</button>
@@ -311,6 +315,11 @@
                     </div>
                     <div class="course-details">
                         <div class="action">
+                            {% if course.active_status == '0' %}
+                            <span><a href="{% url 'Course_active_deative' course.id  %}">Active </a></span>
+                            {% else %}
+                            <span><a href="{% url 'Course_active_deative' course.id  %}" style="color: rgb(240, 20, 20);">Deactive </a></span>
+                            {% endif %}
                             <span><a href="{% url 'Course_catgeory' course.id  %}">Categeory</a></span>
                             <span><a href="{% url 'Course_Details' course.id  %}">Details</a></span>
                             <span><a href="{% url 'Course_pageedit' course.id %}">Edit</a></span>
@@ -318,6 +327,7 @@
                         </div>
                         <h6>{{course.course_name}}</h6>
                         <p class="course-dis">{{course.description}}</p>
+                        <p class="course-dis">Alt tag : " {{course.calttag}} "</p>
                         <hr>
                         <div class="section_bottom">
                             <span> Fee : Rs {{course.fee}}/- </span>

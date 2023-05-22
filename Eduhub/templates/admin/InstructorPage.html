@@ -271,6 +271,10 @@
                     <input type="file" name="instimage" required>
                 </div>
                 <div class="group-input-course">
+                    <label> Alt Tag : </label>
+                    <textarea  name="instalt" required></textarea>
+                </div>
+                <div class="group-input-course">
                     <label> Discription : </label>
                     <textarea name="instdiscr" required></textarea>
                 </div>
@@ -310,6 +314,7 @@
                         </div>
                         <h6>{{inst.name}}</h6>
                         <p class="course-dis">{{inst.description}}</p>
+                        <p class="course-dis">Alt Tag : " {{inst.instalttag}} "</p>
                         <hr>
                         <div class="section_bottom">
                             <span>Designation : {{inst.designation}} </span>

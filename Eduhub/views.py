@@ -12,7 +12,7 @@ from datetime import date
 # User section 
 
 def HomePage(request):
-    courses = course_details.objects.all()
+    courses = course_details.objects.filter(active_status='0')
     instrs = instructors.objects.all()
     testims = testimonial.objects.all()
     offer= OfferBox.objects.all().first()
@@ -24,7 +24,7 @@ def AboutPage(request):
     return render(request, 'user/about.html',{'instrs':instrs})
 
 def CoursePage(request):
-    courses = course_details.objects.all()
+    courses = course_details.objects.filter(active_status='0')
     return render(request, 'user/course.html',{'courses':courses})
 
 def CourseDetails(request,pk):
@@ -228,6 +228,7 @@ def Course_save(request):
                 course.offer_head = request.POST['coffer_head']
                 course.offer_fee = request.POST['coffer_fee']
                 course.image = request.FILES.get('cimage')
+                course.calttag = request.POST['coffer_fee']
                 course.save()
                 courses = course_details.objects.all()
                 coategs = Course_catgeorys.objects.all()
@@ -242,6 +243,33 @@ def Course_save(request):
     else:
         return redirect('login_page')
     
+
+def Course_active_deative(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        course = course_details.objects.get(id=pk)
+        
+        if course.active_status == '0' :
+            course.active_status = 1
+           
+            course.save( )
+            print(course.active_status)
+          
+        else :
+            course.active_status = 0
+            course.save()
+            print(course.active_status)
+
+        
+        courses = course_details.objects.all()
+        coategs = Course_catgeorys.objects.all()  
+        return render(request,'admin/CoursePage.html', {'courses':courses,'coategs':coategs})
+    else:
+        return redirect('login_page')
 
 
 
@@ -390,6 +418,9 @@ def Course_edit_save(request,pk):
                     course.image = request.FILES.get('cimage')
                 else:
                     course.image = course.image
+
+                course.calttag = request.POST.get('calttag')
+
                 course.save()
                 courses=course_details.objects.get(id=pk)
 
@@ -676,6 +707,7 @@ def Instructor_save(request):
                 instr.description = request.POST['instdiscr']
                 
                 instr.image = request.FILES.get('instimage')
+                instr.instalttag = request.POST['instalt']
                 instr.save()
                 instrs = instructors.objects.all()
 
@@ -726,6 +758,7 @@ def Instructoredit_save(request,pk):
                     instr.image = request.FILES.get('instimage')
                 else:
                       instr.image = instr.image 
+                instr.instalttag = request.POST.get('instalt')  
                 instr.save()
               
 
@@ -788,9 +821,10 @@ def Placement_save(request):
                 pla.name = request.POST['planame']
                 pla.company = request.POST['placompny']
                 pla.desig = request.POST['pladesig']
-                pla.plyear = request.POST['playear']
+                pla.plyear = request.POST['playear'] 
                 
                 pla.image = request.FILES.get('plaimage')
+                pla.plaalttag = request.POST['plaalt'] 
                 pla.save()
                 placement = placements.objects.all()
 
@@ -839,6 +873,8 @@ def Placementedit_save(request,pk):
                     pla.image = request.FILES.get('plaimage')
                 else:
                      pla.image = pla.image
+
+                pla.plaalttag = request.POST.get('plaalt')      
                 pla.save()
                 placement = placements.objects.all()
 
@@ -905,6 +941,8 @@ def Testimonial_save(request):
                 testim.description = request.POST['testdiscr']
                 
                 testim.image = request.FILES.get('testimage')
+                testim.testalttag = request.POST['testalt']
+              
                 testim.save()
                 testims = testimonial.objects.all()
 
@@ -955,6 +993,7 @@ def Testimonial_edit_save(request,pk):
                     testim.image = request.FILES.get('testimage')
                 else:
                      testim.image = testim.image
+                testim.testalttag = request.POST.get('testalt')
                 testim.save()
                 testims = testimonial.objects.all()
 

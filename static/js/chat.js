@@ -1,7 +1,21 @@
   // Predefined questions and answers
   const faq = [
-    { question: "What is your name?", answer: "My name is ChatBot." },
-    { question: "What can you do?", answer: "I can answer frequently asked questions." },
+    { question: "hai", answer: "Hai How can i help you ?" },
+    { question: "hello", answer: "Hai How can i help you ?" },
+    { question: "hi", answer: "Hai How can i help you ?" },
+    { question: "goodbye", answer: "Talk to you later!" },
+    { question: "nice talking to you!", answer: "I am glad I could help" },
+    { question: "internship", answer: "We are providing internships for Python,React,Digital marketing ,Machine learning." },
+    { question: "what internship", answer: "We are providing internships for Python,React,Digital marketing ,Machine learning." },
+    { question: "what internship?", answer: "We are providing internships for Python,React,Digital marketing ,Machine learning." },
+    { question: "wfh", answer: "Currently we are providing Work from home" },
+    { question: "work from home", answer: "Currently we are providing Work from home" },
+    { question: "are you sure that i will get job in this company itself?", answer: "Yes,you will get job confirmation offer letter within 2 days of your joining." },
+    { question: "is this work from home or work from office?", answer: "is this work from home or work from office?" },
+    { question: "will i ever have to come the office for work?", answer: "According to our rules and regulations if any time relocation is available you have to accept it." },
+    { question: "", answer: "" },
+    { question: "", answer: "" },
+    
     // Add more question-answer pairs here
   ];
 
@@ -38,14 +52,14 @@
     userInput.value = ""; // Clear the input field
 
     if (question !== "") {
-      displayMessage(question); // Display user question
+      displayMessage("Q: "+ question); // Display user question
 
       // Search for a matching question in the faq array
       const matchingQuestion = faq.find((entry) => entry.question.toLowerCase() === question.toLowerCase());
       if (matchingQuestion) {
-        displayMessage(matchingQuestion.answer); // Display the corresponding answer
+        displayMessage("Ans: "+ matchingQuestion.answer); // Display the corresponding answer
       } else {
-        displayMessage("Sorry, ."); // Display default response
+        displayMessage("Please contact to our HR  for more details, tel: +91 9074 156 818 "); // Display default response
       }
     }
   });

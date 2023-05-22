@@ -32,7 +32,7 @@
         <header class="header" id="header">
             <nav class="nav container">
                 <a href="{% url 'HomePage' %}" class="nav__logo">
-                    <img src="static/img/logo1.png" style="width:100%; height:100%">
+                    <img src="static/img/logo1.png" style="width:100%; height:100%" alt="Altos Eduhub logo">
                 </a>
 
                 <div class="nav__menu" id="nav-menu">
@@ -89,9 +89,15 @@
                     <div class="chat_img_box">
                         <img src="{% static 'img/logo1.png' %}">
                     </div>
+                    <div class="chatmain_content">
+                        <p>Welcome to altos eduhub! Use the chat box to get 
+                            in touch with us and we'll be happy to assist you 
+                            with any questions or inquiries you may have.
+                        </p>
+                    </div>
                     <div  class="chat_messages" id="chat-messages"></div>
                    
-                    <!-- <p> Welcome To Altos EduHub</p> -->
+                   
                 </div>
                 <div class="card-footer">
                     <input type="text" id="user-input" class="int_text" placeholder="Type your message...">
@@ -286,7 +292,7 @@
                             <article class="new__card swiper-slide">
                                 <!-- <span class="new__tag"><i class='bx bx-right-arrow-alt'></i></span> -->
                                 {% if cours.image %}
-                                <img src="{{cours.image.url}}" alt="" class="new__img">
+                                <img src="{{cours.image.url}}" alt="{{cours.calttag}}" class="new__img">
                                 {% endif %}
         
                                 <div class="new__data">
@@ -380,7 +386,9 @@
                     <div>
                         <h2 class="newsletter__title">We Take Pride in  <br> Our Numbers</h2>
                         <p class="newsletter__description">
-                           
+                            Discover our impressive track record with countless successful placements, 
+                            extensive years of experience, a wide range of facilities, and a diverse selection of courses. 
+                            Explore our achievements and expertise in one place.
                         </p>
                     </div>
 
@@ -428,7 +436,7 @@
                     {% for inst in instrs %}
                     <article class="products__card">
                         {% if inst.image %}
-                        <img src="{{inst.image.url}}" alt="Instructor" class="products__img">
+                        <img src="{{inst.image.url}}" alt="{{inst.instalttag}}" class="products__img">
                         {% endif %}
 
                         <h3 class="products__title">{{inst.name}}</h3>
@@ -465,7 +473,7 @@
         
                                 <div class="testimonial__perfil">
                                     {% if testi.image %}
-                                    <img src="{{testi.image.url}}" alt="" class="testimonial__perfil-img">
+                                    <img src="{{testi.image.url}}" alt="{{testi.testalttag}}" class="testimonial__perfil-img">
                                     {% endif %}
         
                                     <div class="testimonial__perfil-data">

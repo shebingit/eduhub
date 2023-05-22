@@ -28,7 +28,7 @@
         <header class="header" id="header">
             <nav class="nav container">
                 <a href="{% url 'HomePage' %}" class="nav__logo">
-                    <img src="static/img/logo1.png" style="width:100%; height:100%">
+                    <img src="static/img/logo1.png" style="width:100%; height:100%" alt="Altos Eduhub logo">
                 </a>
 
                 <div class="nav__menu" id="nav-menu">
@@ -85,6 +85,12 @@
                 <div class="card-body">
                     <div class="chat_img_box">
                         <img src="{% static 'img/logo1.png' %}">
+                    </div>
+                    <div class="chatmain_content">
+                        <p>Welcome to altos eduhub! Use the chat box to get 
+                            in touch with us and we'll be happy to assist you 
+                            with any questions or inquiries you may have.
+                        </p>
                     </div>
                     <div  class="chat_messages" id="chat-messages"></div>
                    
@@ -237,7 +243,7 @@
                             <span class="featured__tag"><del>₹ {{cours.fee}}/-</span>
                             {% endif %}
                             {% if cours.image %}
-                            <img src="{{cours.image.url}}" alt="" class="featured__img">
+                            <img src="{{cours.image.url}}" alt="{{cours.calttag}}" class="featured__img">
                             {% endif %}
 
                             <div class="featured__data">
@@ -246,7 +252,11 @@
                             
                                 <span class="featured__price">₹ {{cours.offer_fee}}/-</span>
                                 {% else %}
-                                <span class="featured__price">₹ {{cours.fee}}/-</span>
+                                    {% if cours.fee %}
+                                    <span class="featured__price">₹ {{cours.fee}}/-</span>
+                                    {% else %}
+                                    <br>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             <a href="{% url 'RegisterForm' %}" class="button featured__button">JOIN NOW</a>

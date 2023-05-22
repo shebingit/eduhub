@@ -268,6 +268,10 @@
                     <input type="file" name="plaimage" >
                 </div>
                 <div class="group-input-course">
+                    <label> Alt Tag : </label>
+                    <textarea  name="plaalt" >{{placement.plaalttag}}</textarea>
+                </div>
+                <div class="group-input-course">
                     <label> Designation : </label>
                     <input name="pladesig" required value="{{placement.desig}}">
                 </div>
@@ -313,6 +317,7 @@
                         <h6>{{placement.name}}</h6>
                         <p class="course-dis">  <span>Company Name : {{placement.company}}</p>
                         <p class="course-dis">  <span>Designation : {{placement.desig}}</p>
+                            <p class="course-dis">  <span>Alt Tag : "{{placement.plaalttag}} "</p>
                         <hr>
                         <div class="section_bottom">
                             <span> Year of Placed: {{placement.plyear}}</span>

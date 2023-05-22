@@ -12,7 +12,10 @@ class course_details(models.Model):
     description = models.CharField(max_length=255,null=True,blank=True)
     offer_head=models.CharField(max_length=100,null=True,blank=True,default='')
     offer_fee =models.CharField(max_length=100,null=True,blank=True,default='')
-    fee = models.IntegerField(null=True,blank=True)
+    fee = models.CharField(max_length=100,null=True,blank=True,default='')
+    calttag = models.TextField(null=True,blank=True,default='')  
+    active_status = models.CharField(max_length=10,null=True,blank=True,default='0')
+
     
 
 
@@ -21,7 +24,7 @@ class Course_catgeorys(models.Model):
     Type = models.CharField(max_length=50,null=True,blank=True)
     Offer_Head=models.CharField(max_length=100,null=True,blank=True,default='')
     Offer_Fee =models.CharField(max_length=100,null=True,blank=True,default='')
-    Fee = models.IntegerField(null=True,blank=True)
+    Fee = models.CharField(max_length=100,null=True,blank=True,default='')
     Duration = models.CharField(max_length=100,null=True,blank=True)
     Start_date = models.DateField(null=True,blank=True)
     
@@ -42,6 +45,7 @@ class instructors(models.Model):
     name = models.CharField(max_length=255, null=True,blank=True)
     designation = models.CharField(max_length=255,null=True,blank=True)
     description = models.CharField(max_length=255,null=True,blank=True)
+    instalttag = models.TextField(null=True,blank=True,default='')   
 
     
 class placements(models.Model):
@@ -50,6 +54,8 @@ class placements(models.Model):
     company = models.CharField(max_length=255,null=True,blank=True)
     desig = models.CharField(max_length=255,null=True,blank=True)
     plyear = models.CharField(max_length=255,null=True,blank=True)
+    plaalttag = models.TextField(null=True,blank=True,default='')   
+
 
 class testimonial(models.Model):
     image = models.ImageField(null=True,blank = True,upload_to = 'img/testimonial')
@@ -57,6 +63,8 @@ class testimonial(models.Model):
     profession = models.CharField(max_length=255,null=True,blank=True)
     company = models.CharField(max_length=100,null=True,blank=True)
     description = models.CharField(max_length=255,null=True,blank=True)
+    testalttag = models.TextField(null=True,blank=True,default='')   
+
 
 class contactus(models.Model):
 

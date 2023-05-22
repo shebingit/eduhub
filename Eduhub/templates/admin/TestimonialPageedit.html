@@ -275,6 +275,10 @@
                     <input type="file" name="testimage" >
                 </div>
                 <div class="group-input-course">
+                    <label> Alt Tag  : </label>
+                    <textarea  name="testalt" >{{testims.testalttag}}</textarea>
+                </div>
+                <div class="group-input-course">
                     <label> Discription : </label>
                     <textarea name="testdiscr" required>{{testims.description}}</textarea>
                 </div>
@@ -311,6 +315,7 @@
                         
                         <h6>{{testims.name}}</h6>
                         <p class="course-dis">{{testims.description}}</p>
+                        <p class="course-dis">Alt Tag :" {{testims.description}} "</p>
                         <hr>
                         <div class="section_bottom">
                             <span>profession : {{testims.profession}} </span>

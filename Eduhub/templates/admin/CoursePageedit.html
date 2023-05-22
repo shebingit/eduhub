@@ -246,7 +246,7 @@
 
                 <div class="group-input-course">
                     <label> Course Fee : </label>
-                    <input type="number" min="0" name="cfee" required value="{{courses.fee}}">
+                    <input type="text"  name="cfee"  value="{{courses.fee}}">
                 </div>
                 <div class="group-input-course">
                     <label> Course Offer Head : </label>
@@ -254,12 +254,16 @@
                 </div>
                 <div class="group-input-course">
                     <label> Course Offer Fee : </label>
-                    <input type="number" min="0" name="coffer_fee" value="{{courses.offer_fee}}">
+                    <input type="text" name="coffer_fee" value="{{courses.offer_fee}}">
                 </div>
                 
                 <div class="group-input-course">
                     <label> Course Image : </label>
                     <input type="file" name="cimage" >
+                </div>
+                <div class="group-input-course">
+                    <label>Alt tag : </label>
+                    <textarea type="text"  name="calttag" >{{courses.calttag}}</textarea>
                 </div>
                 <div class="group-input-coursebtns">
                     <a href="{% url 'Course_page' %}" class="resetbtn">Back</a>
@@ -291,6 +295,7 @@
                        
                         <h6>{{courses.course_name}}</h6>
                         <p class="course-dis">{{courses.description}}</p>
+                        <p class="course-dis">Alt tag : " {{courses.calttag}} "</p>
                         <hr>
                         
                         <div class="section_bottom">
