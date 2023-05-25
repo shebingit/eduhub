@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>404 Page</title>
+
+        <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="static/css/styles.css">
+
+
+        
+    </head>
+
+    <body>
+        
+        <!---================ Error Page ============-->
+
+        <section>
+            <div class="container">
+                <h2>404 Page</h2>
+                <p>This is an error page !</p>
+                <a href="{% url 'HomePage' %}"><button>Back To Home</button></a>
+
+            </div>
+        </section>
+        <!---================ End Error Page ============-->
+       
+    </body>
+</html>

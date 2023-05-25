@@ -8,6 +8,11 @@ from .models import *
 from datetime import date
 
 
+# 404 page
+
+def View_404Page(request, exception):
+    return render(request, 'user/404.html', status=404)
+
 
 # User section 
 

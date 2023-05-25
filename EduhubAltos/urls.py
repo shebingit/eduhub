@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from Eduhub.views import View_404Page
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Eduhub.urls'))
 ]
+#  ==================== 404 error handel
+
+handler404 = 'Eduhub.views.View_404Page'
+
+
