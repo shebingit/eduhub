@@ -29,6 +29,13 @@
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         margin: 0.60em;
     }
+    .view__dtails
+    {
+        font-size: 0.80rem;
+        color: rgb(19, 19, 116);
+        font-weight: 500;
+        padding-right: 0.30rem;
+    }
     @media  (min-width:332px) and (max-width:1032px)
     {
         
@@ -93,6 +100,7 @@
                     </td>
                     
                     <td class="text-center">
+                        <a href="{% url 'Enroll_Candidate_Details' enq.id %}" class="view__dtails">view</a>
                        
                         {% if enq.enq_status == '0' %}
                             <a href="{% url 'enroll_check' enq.id %}">check</a>

@@ -101,10 +101,13 @@ urlpatterns = [
     path('Enroll-Remove/<pk>',views.enroll_remove,name = "enroll_remove"),
     path('Enroll-Check/<pk>',views.enroll_check,name = "enroll_check"),
     path('Enroll-Update/<pk>',views.enroll_update,name = "enroll_update"),
+    path('Enquiry-Candidate/<pk>',views.Enroll_Candidate_Details,name = "Enroll_Candidate_Details"),
 
     path('Enquiry',views.enquery_view,name="enquery_view"),
     path('Enquiry-Remove/<pk>',views.enquery_remove,name = "enquery_remove"),
     path('Enquiry-Update/<pk>',views.enquery_upadte,name = "enquery_upadte"),
+
+    
 
     path('Offer-Box',views.Offer_box,name="Offer_box"),  
     path('Offer-Box-Save',views.offer_save,name="offer_save"),
@@ -113,6 +116,8 @@ urlpatterns = [
     
 
 
+    path('Password-Change',views.password_Change,name="password_Change"),
+    path('Password-Change-Save/<pk>',views.Password_changeSave,name = "Password_changeSave"),
     path('logout',views.logout,name="logout"),
 
     

@@ -1,0 +1,179 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<style>
+    .candidate__box
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        
+    }
+    .candidate__card
+    {
+        padding: 1.2rem 1.6rem;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    }
+    .card-head
+    {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 1.5rem;
+        border-bottom: 2px solid #e9e8e8;
+    }
+    .card-head .fa
+    {
+        font-size: 11px;
+        padding-right: 0.30rem;
+    }
+    .candidate__imgbox
+    {
+        width: 50px;
+        height: 100px;
+    }
+    .candidate__imgbox img{
+        width: 100%;
+        height: auto;
+    }
+    .candidate_top__Details h6{
+        font-size: 0.90rem;
+        letter-spacing: 0.06rem;
+        font-weight: 500;
+    }
+    .candidate_top__Details p, .messages__box p{
+        font-size: 0.80rem;
+    }
+
+    .candidate_top__Details p span{
+        margin-top: 0.80rem;
+        padding-right: 0.60rem;
+    }
+    .candidate__education, .candidate__experience
+    {
+        border-bottom: 2px solid #e9e8e8;
+    }
+    .candidate__education h6, .candidate__experience h6, .candidate__apply h6{
+        font-size: 0.90rem;
+        margin-top: 0.70rem;
+        margin-bottom: 0.80rem;
+    }
+    .candidate__education p, .candidate__experience p, .candidate__apply p{
+        font-size: 0.80rem;
+        font-weight: 500;
+    }
+</style>
+
+<!-- ========= CANDIDATE DETAILS SECTION ========== -->
+
+<div class="container-fluid">
+    <div class="candidate__box">
+        <div class="card candidate__card">
+            <div class="card-head">
+                <div class="candidate__imgbox">
+                    <img src="{% static 'img/dummy_candidate.png' %}" class="#" alt="Candidate_Dummy Image">
+                </div>
+                <div class="candidate_top__Details">
+                    <h6>{{enroll_candidate.name}}</h6>
+                    <P>
+                        <span><i class="fa fa-envelope" aria-hidden="true"></i> {{enroll_candidate.email}}</span><br>
+                        <span><i class="fa fa-phone" aria-hidden="true"></i>  {{enroll_candidate.phone}}</span><br>
+                        <span><i class="fa fa-map-marker" aria-hidden="true"></i>  {{enroll_candidate.place}}</span>
+                    </P>
+
+                </div>
+    
+            </div>
+            <div class="card-body">
+                <div class="candidate__education">
+                    <h6>Education</h6>
+                    <p> Program  : {{enroll_candidate.qualification}}</p>
+                    <p> Stream   : {{enroll_candidate.stream}}</p>
+                    <p> Passout  : {{enroll_candidate.pasout_year}}</p>
+                    <p> Duration : {{enroll_candidate.start_date}} - {{enroll_candidate.end_date}}</p> 
+                    {% if enroll_candidate.message %}
+                    <div class="messages__box">
+                        <p>Message : {{enroll_candidate.message}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% if enroll_candidate.expe == 'y' %}
+                <div class="candidate__experience">
+                    <h6>Experience</h6>
+                    <p>Experienced : 
+                        {% if enroll_candidate.expe == 'n' %}
+                        No
+                        {% elif  enroll_candidate.expe == 'y' %}
+                        Yes
+                        {% endif %}
+                    </p>
+                    <p>Experience Year :
+                        {% if enroll_candidate.expe == 'n' %}
+                        0 Year
+                        {% else %}
+                        {{enroll_candidate.expe_no}}
+                        {% endif %}
+                    </p>
+                    <p>Designation : {{enroll_candidate.designation}}</p>
+                </div>
+                {% endif %}
+                <div class="candidate__apply">
+                    <h6>Enroll Details</h6>
+                    <p> Course  : {{enroll_candidate.course.course_name}}</p>
+                    <p>
+                        <span>Category   : 
+                        {% if enroll_candidate.ctype == '1' %}
+                            Short Team Internship
+                        {% elif  enroll_candidate.ctype == '2' %}
+                            Internship
+                        {% elif  enroll_candidate.ctype == '3' %}
+                        On Job Training
+                        {% endif %}
+                        </span>
+                    </p>
+                    {% for categ in categ_details %}
+                    <p> 
+                        <span>Fee : Rs {{categ.Fee}} /-</span>&nbsp;&nbsp;
+                        <span>Course Start Date  : {{categ.Start_date}}</span>
+                    </p>
+                    <p>
+                        <span>Duration : {{categ.Duration}}</span>
+                    </p>
+                    {% if categ.Offer_Fee %}
+                    <p> 
+                        <span>Offer Head : {{categ.Offer_Head}}</span> &nbsp; &nbsp;
+                        <span>Offer Fee : Rs {{categ.Offer_Fee}} /-</span>
+                    </p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+               
+            </div>
+        </div>    
+
+    </div>
+</div>
+
+<!--======== END CANDIDATE DETAILS SECTION ======== -->
+
+
+
+
+
+
+
+
+<script>
+    setTimeout(function() {
+        document.getElementById('msgbox').classList.add('hidden');
+        document.getElementById('msgboxs').classList.add('hidebox');
+    }, 5000);
+</script>
+
+
+
+{% endblock %}

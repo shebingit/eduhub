@@ -26,6 +26,23 @@
     .form-right i {
         font-size: 100px;
     }
+    .error__box
+    {
+        background-color:rgba(229, 41, 41, 0.8);
+        color: #fff;
+       
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.60rem;
+    }
+    .error__box p{
+        font-size: 0.865rem;
+        text-align: center;
+        padding: 0.10rem 0.40rem;
+        padding-left: 0.80rem;
+    }
+   
  </style>
 </head>
 <body>
@@ -37,15 +54,22 @@
                   <h3 class="mb-3">Login Now</h3>
                     <div class="bg-white shadow rounded">
                         <div class="row">
+                            
                             <div class="col-md-7 pe-0">
                                 <div class="form-left h-100 py-5 px-5">
+                                    {% if msg %}
+                                    <div class="error__box" id="error__box" >
+                                        <p>{{msg}}</p>
+                                       
+                                    </div>
+                                    {% endif %}
                                     <form action="{% url 'loginadmin' %}" class="row g-4" method="post">
                                         {% csrf_token %}
                                             <div class="col-12">
                                                 <label>Username<span class="text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                                    <input type="text" name="uname" class="form-control" placeholder="Enter Username">
+                                                    <input type="text" name="uname" class="form-control" placeholder="Enter Username" required>
                                                 </div>
                                             </div>
 
@@ -53,11 +77,9 @@
                                                 <label>Password<span class="text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                                                    <input type="text" name="psw" class="form-control" placeholder="Enter Password">
+                                                    <input type="text" name="psw" class="form-control" placeholder="Enter Password" required>
                                                 </div>
                                             </div>
-
-                                            
 
                                              <!-- <div class="col-sm-6">
                                                 <a href="#" class="float-end text-primary">Forgot Password?</a>
@@ -87,6 +109,12 @@
     </div>
 
     <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#error__box').fadeOut('normal');
+        }, 3000); 
+    </script>
      
 </body>
 </html>

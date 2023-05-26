@@ -13,8 +13,12 @@
     { question: "are you sure that i will get job in this company itself?", answer: "Yes,you will get job confirmation offer letter within 2 days of your joining." },
     { question: "is this work from home or work from office?", answer: "is this work from home or work from office?" },
     { question: "will i ever have to come the office for work?", answer: "According to our rules and regulations if any time relocation is available you have to accept it." },
-    { question: "", answer: "" },
-    { question: "", answer: "" },
+    { question: "Is there any bond in your company ?", answer: "No" },
+    { question: "What about the salary package?", answer: "12k to 18k" },
+    { question: "What about the working hours?", answer: "8 hours" },
+    { question: "Other than python in which other streams do you provide internships?", answer: "For React,Digital marketing ,Machine learning." },
+    { question: "How can I apply for this?", answer: "Please contact to our HR , tel: +91 9074 156 818 " },
+
     
     // Add more question-answer pairs here
   ];

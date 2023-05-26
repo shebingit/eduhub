@@ -37,22 +37,15 @@
        grid-template-columns: 1fr 1fr;
         padding:0.60em 1em;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-       
-      
-       
     }
-
-    
     .recent-files-box .card
     {
-
-      
         border: none;
         outline: none;
         font-size: 0.90em;
         margin: 0.60em;
         padding: 0.90em 1.3em;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(185, 185, 186, 0.2) 0px 7px 29px 0px;
         border: 16px;
         font-size: 0.87em;
         font-weight: 500;
@@ -60,21 +53,114 @@
     .enquery-box, .enroll-box 
     {
         display: flex;
-        text-align: center;
-        flex-direction: row;
-        justify-content: space-between;
+        text-align: start;
+        flex-direction: column;
+        justify-content: start;
+        gap: 1rem;
+       
     }
     .enroll-box h5, .enquery-box h5{
-        font-size: 0.98em;
-        color: rgb(21, 21, 85);
+        font-size: 0.90em;
+        color: rgb(39, 39, 105);
         letter-spacing: 0.06em;
         margin-top: 1em;
+    }
+    .card h6
+    {
+        font-size: 0.90rem;
+    }
+    .card h6 .fa{
+        padding: 0.10rem  0.30rem;
+    }
+    .enroll__top__box
+    {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+    }
+    .enroll__top__box span
+    
+    {
+        padding: 0.20rem 0.55rem;
+        background-color: rgb(43, 185, 206);
+        color: #fff;
+    }
+    .enroll__top__box span .fa{
+        font-size: 10px;
+    }
+    .Details__box span
+    {
+     padding: 0.20rem  0.30rem;
+     margin-top: 0.50rem;
+    }
+    .Details__box__message
+    {
+        
+        margin-top: 0.80rem;
+    }
+    .Details__box__message span
+    {
+        padding: 0.20rem  0.30rem;
+        margin-top: 0.50rem;
+        font-size: 0.80rem;
+    }
+    .Details__box__message span .fa
+    {
+        font-size: 12px;
+        padding-right: 0.25rem;
+    }
+    .Details__box span .fa
+    {
+        font-size: 12px;
+        padding-right: 0.25rem;
     }
     .recent-files-box .card .card-header
     {
         border: none;
         outline: none;
      
+    }
+    .enqueies__details__box
+    {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+    
+    @media (max-width:762px)
+    {
+        .recent-files-box
+    {
+       display: grid;
+       grid-template-columns:repeat(1,1fr)
+    }
+    .enquery-box, .enroll-box 
+    {
+        display: flex;
+        text-align: start;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .enqueies__details__box
+    {
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+    }
+    .enqueies__details__box span
+    {
+        margin-top: 0.40rem;
+    }
+    .enroll__top__box span
+    
+    {
+        padding: 0.10rem 0.45rem;
+        background-color: rgb(43, 185, 206);
+        color: #fff;
+    }
+    .enroll__top__box span .fa{
+        font-size: 8px;
+    }
     }
    
 </style>
@@ -187,15 +273,21 @@
         <div class="enroll-box p-3">
             
             {% if enrolls %}
+            <h5 class="mb-3 text-center"> Today Enrolls </h5>
            
             {% for enrl in enrolls %}
             <div class="card">
-                <h6>Name : {{enrl.name}} </h6>
-                <p> Email: {{enrl.email}}</p>
-                <p>
-                    <span> Phone No: {{enrl.phone}} </span>&nbsp; &nbsp; 
-                    <span> Course : {{enrl.course.course_name}} </span> 
-                 </p>
+                <div class="enroll__top__box">
+                    <h6><i class="fa fa-user" aria-hidden="true"></i>  {{enrl.name}} </h6>
+                    <a href="{% url 'Enroll_Candidate_Details' enrl.id %}"><span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
+                </div>
+               
+                <p class="Details__box">  
+                    <span><i class="fa fa-envelope" aria-hidden="true"></i> {{enrl.email}} </span>
+                    <span> <i class="fa fa-phone" aria-hidden="true"></i>  {{enrl.phone}} </span>
+                    <span> <i class="fa fa-graduation-cap" aria-hidden="true"></i>  {{enrl.course.course_name}} </span> 
+                </p>
+                
             </div>
             {% endfor %}
             {% else %}
@@ -204,12 +296,23 @@
         </div>
         <div class="enquery-box p-3">
             {% if enquerys %}
-          
+            <h5 class="mb-3 text-center"> Today Enquries </h5>
             {% for enq in enquerys %}
             <div class="card">
-                <h6>Name: {{enq.name}}</h6>
-                <p> Email: {{enq.email}} </p>
-                <p><span>Phone No: {{enq.phone}}</span> </p>
+                <p class="enqueies__details__box"> 
+                    <span><i class="fa fa-user" aria-hidden="true"></i> {{enq.name}}</span>
+                    
+                    
+                </p>
+                <div class="Details__box">
+                    <span><i class="fa fa-envelope" aria-hidden="true"></i> {{enq.email}}</span> 
+                    <span><i class="fa fa-phone" aria-hidden="true"></i> {{enq.phone}}</span>
+                    <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{enq.place}}</span>
+                </div>
+                <div class="Details__box__message">
+                    <span><i class="fa fa-comments" aria-hidden="true"></i>{{enq.enq_msg}}</span>
+                </div>
+               
             </div>
             {% endfor %}
             {% else %}

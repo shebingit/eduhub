@@ -174,10 +174,13 @@ def loginadmin(request):
             file_up_count=course_details.objects.all().count
             enrolls = Enroll.objects.filter(enq_date=date.today())
             enrolls_count= Enroll.objects.all().count()
-            return render(request,'admin/DashboardHome.html',{'file_up_count':file_up_count,'enrolls':enrolls,'enrolls_count':enrolls_count})
+            enquerys= Enquir.objects.filter(enq_date=date.today())
+            enquerys_count= Enquir.objects.all().count()
+      
+            return render(request,'admin/DashboardHome.html',{'file_up_count':file_up_count,'enrolls':enrolls,'enrolls_count':enrolls_count,'enquerys':enquerys,'enquerys_count':enquerys_count})
         else:
-            messages.info(request, 'Invalid Username or Password. Try Again.')
-            return redirect('login_page')
+            msg='Invalid Username or Password ! Try Again.'
+            return render(request, 'user/login.html',{'msg':msg})
     else:
         return redirect('login_page')
 
@@ -1079,8 +1082,9 @@ def shot_course(request):
         else:
             return redirect('/')
         categ = Course_catgeorys.objects.filter(Type='1')
-        couse=course_details.objects.filter(id__in=categ)
+        couse=course_details.objects.filter(id__in=categ.values_list('Cate_course_id', flat=True))
         enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
+        print(enqs)
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
         return redirect('login_page')
@@ -1093,7 +1097,7 @@ def ojt_course(request):
         else:
                 return redirect('/')
         categ = Course_catgeorys.objects.filter(Type='3')
-        couse=course_details.objects.filter(id__in=categ)
+        couse=course_details.objects.filter(id__in=categ.values_list('Cate_course_id', flat=True))
         enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
@@ -1108,7 +1112,7 @@ def internship_course(request):
         else:
             return redirect('/')
         categ = Course_catgeorys.objects.filter(Type='2')
-        couse=course_details.objects.filter(id__in=categ)
+        couse=course_details.objects.filter(id__in=categ.values_list('Cate_course_id', flat=True))
         enqs= Enroll.objects.filter(course__in=couse).order_by('-id')
         return render(request,'admin/sti.html', {'enqs':enqs})
     else:
@@ -1302,6 +1306,53 @@ def status_change_offerbox(request):
     else:
         return redirect('login_page')
     
+
+
+def Enroll_Candidate_Details(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        enroll_candidate = Enroll.objects.get(id=pk)
+       
+        categ_details = Course_catgeorys.objects.filter(Cate_course_id=enroll_candidate.course,Type=enroll_candidate.ctype)
+       
+        return render(request,'admin/Enroll_CandidateDetails.html',{'enroll_candidate':enroll_candidate,'categ_details':categ_details})
+    else:
+        return redirect('login_page')
+    
+
+
+#============ PASSWORD CHANGE ===============
+def password_Change(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        users=User.objects.get(id=uid)
+        return render(request,'admin/PasswordChange.html',{'users':users})
+    else:
+        return redirect('login_page')
+    
+def Password_changeSave(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        if request.method == 'POST':
+            psw=request.POST['psw']
+            users=User.objects.get(id=pk)
+            users.set_password(psw)
+            users.save()
+            msg='Password Changed.'
+            return render(request,'admin/PasswordChange.html',{'users':users,'msg':msg})
+    else:
+        return redirect('login_page')
+
+
     
 
 def logout(request):
