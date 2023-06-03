@@ -44,6 +44,16 @@ def PlacementPage(request):
     placement = placements.objects.all()
     return render(request, 'user/placement.html',{'placement':placement})
 
+def GalleryPage(request):
+    placement = placements.objects.all()
+    return render(request, 'user/gallery.html',{'placement':placement})
+
+def EventsPage(request):
+    placement = placements.objects.all()
+    return render(request, 'user/events.html',{'placement':placement})
+
+
+
 def ContactPage(request):
     return render(request, 'user/contact.html')
 
@@ -1321,8 +1331,32 @@ def Enroll_Candidate_Details(request,pk):
         return render(request,'admin/Enroll_CandidateDetails.html',{'enroll_candidate':enroll_candidate,'categ_details':categ_details})
     else:
         return redirect('login_page')
+
+
+# ======================== Gallery section ========================  
+
+def GalPage(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        return render(request,'admin/Gallery_Images.html',)
+    else:
+        return redirect('login_page')
     
 
+# ======================== Events section ========================  
+
+def EvePage(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        return render(request,'admin/Events_Page.html',)
+    else:
+        return redirect('login_page')
 
 #============ PASSWORD CHANGE ===============
 def password_Change(request):

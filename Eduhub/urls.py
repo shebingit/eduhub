@@ -10,6 +10,8 @@ urlpatterns = [
     path('About',views.AboutPage,name='AboutPage'),
     path('Course',views.CoursePage,name='CoursePage'),
     path('Placement',views.PlacementPage,name='PlacementPage'),
+    path('Gallery',views.GalleryPage,name='GalleryPage'),
+    path('Events',views.EventsPage,name='EventsPage'),
     path('Contact',views.ContactPage,name='ContactPage'),
     path('Course-Details/<pk>',views.CourseDetails,name='CourseDetails'),
 
@@ -112,6 +114,10 @@ urlpatterns = [
     path('Offer-Box',views.Offer_box,name="Offer_box"),  
     path('Offer-Box-Save',views.offer_save,name="offer_save"),
     path('Offer-Change-Status',views.status_change_offerbox,name="status_change_offerbox"),
+
+    path('Gallery-Image',views.GalPage,name="GalPage"), 
+
+    path('Events-Section',views.EvePage,name="EvePage"),   
     
     
 

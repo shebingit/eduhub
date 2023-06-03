@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta content="" name="keywords">
+       <meta content="" name="description">
+       
+
+
+       <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+
+       <!--=============== BOXICONS ===============-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+       <!--=============== SWIPER CSS ===============--> 
+       <link rel="stylesheet" href="static/css/swiper-bundle.min.css">
+
+       <!--=============== CSS ===============-->
+       <link rel="stylesheet" href="static/css/styles.css">
+      
+
+       <title>EduHub</title>
+
+   
+   </head>
+   <body>
+       <!--==================== HEADER ====================-->
+       <header class="header" id="header">
+           <nav class="nav container">
+               <a href="{% url 'HomePage' %}" class="nav__logo">
+                   <img src="static/img/logo1.png" style="width:100%; height:100%" alt="Altos Eduhub logo">
+               </a>
+
+               <div class="nav__menu" id="nav-menu">
+                   <ul class="nav__list">
+                       <li class="nav__item">
+                           <a href="{% url 'HomePage' %}" class="nav__link">Home</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'AboutPage' %}" class="nav__link">About</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'CoursePage' %}" class="nav__link">Course</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'PlacementPage' %}" class="nav__link">Placement</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'EventsPage' %}" class="nav__link">Events</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'GalleryPage' %}" class="nav__link active-link">Gallery</a>
+                       </li>
+                      
+                       <li class="nav__item">
+                           <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                       </li>
+                   </ul>
+
+                   <div class="nav__close" id="nav-close">
+                       <i class='bx bx-x' ></i>
+                   </div>
+               </div>
+
+               <div class="nav__btns">
+                   <!-- Theme change button -->
+                   <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                   <div class="nav__shop" id="cart-shop">
+                       <i class='bx bxs-chat'></i>
+                   </div>
+
+                   <div class="nav__toggle" id="nav-toggle">
+                       <i class='bx bx-grid-alt' ></i>
+                   </div>
+               </div>
+           </nav>
+       </header>
+
+       <!--==================== CART ====================-->
+       <div class="cart" id="cart">
+           <i class='bx bx-x cart__close' id="cart-close"></i>
+
+           <!-- <h2 class="cart__title-center">Chat</h2> -->
+           <div class="card ChatBox" id="chat-container">
+               <div class="card-head">
+                   <div class="chatimg"></div>
+                   <img src="{% static 'img/favicon.ico' %}">
+                   <p>Altos EduHub</p>
+               </div>
+               <div class="card-body">
+                   <div class="chat_img_box">
+                       <img src="{% static 'img/logo1.png' %}">
+                   </div>
+                   <div class="chatmain_content">
+                       <p>Welcome to altos eduhub! Use the chat box to get 
+                           in touch with us and we'll be happy to assist you 
+                           with any questions or inquiries you may have.
+                       </p>
+                   </div>
+                   <div  class="chat_messages" id="chat-messages"></div>
+                  
+                  
+               </div>
+               <div class="card-footer">
+                   <input type="text" id="user-input" class="int_text" placeholder="Type your message...">
+                   <button class="send_btn" type="button" id="send-btn"><i class='bx bxs-send' ></i></button>
+               </div>
+           </div>
+
+       </div>
+      
+
+    
+
+       <!--==================== MAIN ====================-->
+       <main class="main">
+           <!--==================== HOME ====================-->
+           <section class="home" id="home" style="background-image: url('static/img/bgr3.jpg'); background-size:cover;">
+               <div class="home__container container grid">
+                   <div class="home__img-bg" >
+                       <img src="static/img/home_inner.png" alt="" class="home__inner__img">
+                   </div>
+   
+                   <div class="home__social">
+                       <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="home__social-link">
+                           Facebook
+                       </a>
+                       <a href="https://wa.me/919074156818" target="_blank" class="home__social-link">
+                           WhatsApp
+                       </a>
+                       <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="home__social-link">
+                           Instagram
+                       </a>
+                   </div>
+   
+   
+                   <div class="home__data" >
+                       <h1 class="home__title">Best Software Training <br> Institute of Kerala </h1>
+                       <p class="home__description1 ">
+                           <span>Enhance Your Skills with Top-Rated Software Courses in Kochi</span>
+                           <span>Empowering Your Tech Career with Expert Guidance.</span>
+                           
+                       </p>
+                       
+                       <div class="home__btns">
+                           <a href="{% url 'CoursePage' %}#offered-courses" class="button button--gray button--small">
+                               View Course
+                           </a>
+                           <a href="{% url 'RegisterForm' %}" class="button home__button">
+                               JOIN NOW
+                           </a>
+
+                          
+                       </div>
+                   </div>
+               </div>
+           </section>
+           
+       
+         
+
+           <!--==================== FEATURED ====================-->
+           <section class="featured section container" id="featured">
+               <h2 class="section__title">
+                  Our Gallery
+               </h2>
+
+               <div class="featured__container grid">
+                {% for gallery_img in galleryImages %}
+                   <article class="featured__card">
+                       <span class="featured__tag"></span>
+                       {% if gallery_img %}
+
+                       <img src="{{gallery_img}}"  class="featured__img" alt="Photo">
+                       {% endif %}
+
+                   </article>
+                {% endfor %}
+               </div>
+           </section>
+
+        
+       </main>
+
+       <!--==================== FOOTER ====================-->
+       <footer class="footer section">
+           <div class="footer__container container grid">
+               <div class="footer__content">
+                   <h3 class="footer__title">ALTOS EDUHUB</h3>
+   
+                   <ul class="footer__list">
+                       <li> 1st Floor - Thapasya Building Infopark</li>
+                       <li>Kakkanad, Cochin</li>
+                       <li> +91 974 663 2202</li>
+                       <li> info@Altostechnologies.in</li>
+                   </ul>
+               </div>
+               <div class="footer__content">
+                   <h3 class="footer__title">Quick Link</h3>
+   
+                   <ul class="footer__links">
+                      
+                       <li>
+                           <a href="{% url 'AboutPage' %}" class="footer__link">About Us</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'ContactPage' %}" class="footer__link">Contact</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">Privacy Policy</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">Terms & Conditions</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">FAQs & Help</a>
+                       </li>
+                       
+                   </ul>
+               </div>
+   
+               
+   
+               <div class="footer__content">
+                   <h3 class="footer__title">Social</h3>
+   
+                   <ul class="footer__social">
+                       <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-facebook'></i>
+                       </a>
+                       <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-whatsapp' ></i>
+                       </a>
+                     
+                       <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-youtube' ></i>
+                       </a>
+   
+                       <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-linkedin' ></i>
+                       </a>
+   
+                       <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-instagram' ></i>
+                       </a>
+                   </ul>
+               </div>
+           </div>
+   
+           <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+       </footer>
+   
+
+       <!--=============== SCROLL UP ===============-->
+       <a href="#" class="scrollup" id="scroll-up"> 
+           <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+       </a>
+       <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+          
+           <i class='bx bxl-whatsapp scrollwh__icon' ></i>
+       </a>
+
+     
+
+       <!--=============== SWIPER JS ===============-->
+       <script src="static/js/swiper-bundle.min.js"></script>
+
+      
+
+       <!--=============== MAIN JS ===============-->
+       <script src="static/js/main.js"></script>
+       <script src="static/js/index.js"></script>
+       <script src="static/js/chat.js"></script>
+
+  
+
+        <!--===============PARALLS JS ===============-->
+      
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+        <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+       
+       
+   </body>
+</html>

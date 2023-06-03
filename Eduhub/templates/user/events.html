@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta content="Best Software Institute Of Kochi , Best Python Training Institute In Kerala " name="keywords">
+       <meta content="Altos Eduhub - Unleash your software skills with the leading software training Institute in Kerala.
+        Boost your career with expert-led job oriented courses, hands-on projects, and industry-relevant curriculum. 
+        Gain the competitive edge in the tech industry today." name="description">
+       
+
+
+       <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+
+       <!--=============== BOXICONS ===============-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+       <!--=============== SWIPER CSS ===============--> 
+       <link rel="stylesheet" href="static/css/swiper-bundle.min.css">
+
+       <!--=============== CSS ===============-->
+       <link rel="stylesheet" href="static/css/styles.css">
+      
+
+       <title>EduHub, Best Software Institute Of Kochi</title>
+
+   
+   </head>
+   <body>
+       <!--==================== HEADER ====================-->
+       <header class="header" id="header">
+           <nav class="nav container">
+               <a href="{% url 'HomePage' %}" class="nav__logo">
+                   <img src="static/img/logo1.png" style="width:100%; height:100%" alt="Altos Eduhub logo">
+               </a>
+
+               <div class="nav__menu" id="nav-menu">
+                   <ul class="nav__list">
+                       <li class="nav__item">
+                           <a href="{% url 'HomePage' %}" class="nav__link ">Home</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'AboutPage' %}" class="nav__link">About</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'CoursePage' %}" class="nav__link">Course</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'PlacementPage' %}" class="nav__link">Placement</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'EventsPage' %}" class="nav__link active-link">Events</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'GalleryPage' %}" class="nav__link">Gallery</a>
+                       </li>
+                      
+                       <li class="nav__item">
+                           <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                       </li>
+                   </ul>
+
+                   <div class="nav__close" id="nav-close">
+                       <i class='bx bx-x' ></i>
+                   </div>
+               </div>
+
+               <div class="nav__btns">
+                   <!-- Theme change button -->
+                   <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                   <div class="nav__shop" id="cart-shop">
+                       <i class='bx bxs-chat'></i>
+                   </div>
+
+                   <div class="nav__toggle" id="nav-toggle">
+                       <i class='bx bx-grid-alt' ></i>
+                   </div>
+               </div>
+           </nav>
+       </header>
+
+       <!--==================== CART ====================-->
+       <div class="cart" id="cart">
+           <i class='bx bx-x cart__close' id="cart-close"></i>
+
+           <!-- <h2 class="cart__title-center">Chat</h2> -->
+           <div class="card ChatBox" id="chat-container">
+               <div class="card-head">
+                   <div class="chatimg"></div>
+                   <img src="{% static 'img/favicon.ico' %}">
+                   <p>Altos EduHub</p>
+               </div>
+               <div class="card-body">
+                   <div class="chat_img_box">
+                       <img src="{% static 'img/logo1.png' %}">
+                   </div>
+                   <div class="chatmain_content">
+                       <p>Welcome to altos eduhub! Use the chat box to get 
+                           in touch with us and we'll be happy to assist you 
+                           with any questions or inquiries you may have.
+                       </p>
+                   </div>
+                   <div  class="chat_messages" id="chat-messages"></div>
+                  
+                  
+               </div>
+               <div class="card-footer">
+                   <input type="text" id="user-input" class="int_text" placeholder="Type your message...">
+                   <button class="send_btn" type="button" id="send-btn"><i class='bx bxs-send' ></i></button>
+               </div>
+           </div>
+
+       </div>
+      
+
+    
+       <!--==================== MAIN ====================-->
+       <main class="main">
+           
+       
+           <!--==================== STORY ====================-->
+           <section class="story section container">
+               <div class="story__container grid">
+                   <div class="story__data">
+                       <h2 class="section__title story__section-title">
+                           About Our Events
+                       </h2>
+   
+                       <h1 class="story__title">
+                           WELCOME TO <br> ALTOS EDUHUB 
+                       </h1>
+   
+                       <p class="home__description">
+                           Altos Eduhub is the best software training institute in Kochi, Kerala, 
+                           owned by Altos Technologies, a leading software development company in Kerala. 
+                           We offer top-notch training programs in Python, Front End Development, Digital Marketing, 
+                           React JS, and REST API. Our institute provides on-the-job training to ensure that learners 
+                           gain practical experience and are job-ready.
+                       </p>
+   
+                       <a href="{% url 'AboutPage' %}" class="button button--small">Discover</a>
+                   </div>
+
+                   <div class="story__images" >
+                       <img src="{% static 'img/bg7.jpg' %}" alt="" class="story__img">
+                       <div class="story__square" ></div>
+                   </div>
+               </div>
+           </section>
+
+           <!--==================== FEATURED ====================-->
+           <section class="featured section container" id="featured">
+               <h2 class="section__title">
+                   Our Events
+               </h2>
+
+               <div class="featured__container grid">
+
+                {% for event_details in events %}
+                   <article class="featured__card">
+                       <span class="featured__tag"></span>
+
+                        {% if event_details %}
+                        <img src="#" alt="Events Details" class="featured__img">
+                        {% endif %}
+
+                       <div class="featured__data">
+                           <h3 class="featured__title"></h3>
+                           <span class="featured__price"></span>
+                       </div>
+                      
+                       <a href="{% url 'CarrerStart' %}"  class="button featured__button">Explore</a>
+                      
+                   </article>
+                {% endfor %}
+            
+               </div>
+           </section>
+
+          
+          
+       </main>
+
+       <!--==================== FOOTER ====================-->
+       <footer class="footer section">
+           <div class="footer__container container grid">
+               <div class="footer__content">
+                   <h3 class="footer__title">ALTOS EDUHUB</h3>
+   
+                   <ul class="footer__list">
+                       <li> 1st Floor - Thapasya Building Infopark</li>
+                       <li>Kakkanad, Cochin</li>
+                       <li> +91 974 663 2202</li>
+                       <li> info@Altostechnologies.in</li>
+                   </ul>
+               </div>
+               <div class="footer__content">
+                   <h3 class="footer__title">Quick Link</h3>
+   
+                   <ul class="footer__links">
+                      
+                       <li>
+                           <a href="{% url 'AboutPage' %}" class="footer__link">About Us</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'ContactPage' %}" class="footer__link">Contact</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">Privacy Policy</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">Terms & Conditions</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">FAQs & Help</a>
+                       </li>
+                       
+                   </ul>
+               </div>
+   
+               
+   
+               <div class="footer__content">
+                   <h3 class="footer__title">Social</h3>
+   
+                   <ul class="footer__social">
+                       <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-facebook'></i>
+                       </a>
+                       <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-whatsapp' ></i>
+                       </a>
+                     
+                       <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-youtube' ></i>
+                       </a>
+   
+                       <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-linkedin' ></i>
+                       </a>
+   
+                       <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-instagram' ></i>
+                       </a>
+                   </ul>
+               </div>
+           </div>
+   
+           <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+       </footer>
+   
+
+       <!--=============== SCROLL UP ===============-->
+       <a href="#" class="scrollup" id="scroll-up"> 
+           <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+       </a>
+       <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+          
+           <i class='bx bxl-whatsapp scrollwh__icon' ></i>
+       </a>
+
+     
+
+       <!--=============== SWIPER JS ===============-->
+       <script src="static/js/swiper-bundle.min.js"></script>
+
+      
+
+       <!--=============== MAIN JS ===============-->
+       <script src="static/js/main.js"></script>
+       <script src="static/js/index.js"></script>
+       <script src="static/js/chat.js"></script>
+
+  
+
+        <!--===============PARALLS JS ===============-->
+      
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+        <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+       
+       
+   </body>
+</html>
