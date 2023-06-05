@@ -10,7 +10,6 @@ urlpatterns = [
     path('About',views.AboutPage,name='AboutPage'),
     path('Course',views.CoursePage,name='CoursePage'),
     path('Placement',views.PlacementPage,name='PlacementPage'),
-    path('Gallery',views.GalleryPage,name='GalleryPage'),
     path('Events',views.EventsPage,name='EventsPage'),
     path('Contact',views.ContactPage,name='ContactPage'),
     path('Course-Details/<pk>',views.CourseDetails,name='CourseDetails'),
@@ -115,9 +114,18 @@ urlpatterns = [
     path('Offer-Box-Save',views.offer_save,name="offer_save"),
     path('Offer-Change-Status',views.status_change_offerbox,name="status_change_offerbox"),
 
-    path('Gallery-Image',views.GalPage,name="GalPage"), 
+    path('Gallery-Image',views.GalPage,name="GalPage"),
+    path('Gallery-Image-Save',views.Image_save,name="Image_save"), 
+    path('Image-Edit/<pk>',views.image_edit,name = "image_edit"),
+    path('Image-Save-Edit/<pk>',views.Image_edit_save,name = "Image_edit_save"),
+    path('Image-Remove/<pk>',views.image_remove,name = "image_remove"),
 
-    path('Events-Section',views.EvePage,name="EvePage"),   
+
+    path('Events-Section',views.EvePage,name="EvePage"),
+    path('Events-Save',views.event_save,name="event_save"),   
+    path('Events-Edit/<pk>',views.event_edit,name = "event_edit"),
+    path('Events-Edit-Save/<pk>',views.event_edit_save,name = "event_edit_save"),  
+    path('Events-Remove/<pk>',views.event_remove,name = "event_remove"),
     
     
 

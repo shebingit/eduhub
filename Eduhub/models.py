@@ -66,6 +66,22 @@ class testimonial(models.Model):
     testalttag = models.TextField(null=True,blank=True,default='')   
 
 
+class events(models.Model):
+    event_image = models.ImageField(null=True,blank = True,upload_to = 'img/event')
+    event_type = models.CharField(max_length=255, null=True,blank=True)
+    event_name = models.CharField(max_length=255, null=True,blank=True)
+    event_link = models.CharField(max_length=100,null=True,blank=True)
+    event_description = models.TextField(null=True,blank=True,default='') 
+    event_tag = models.TextField(null=True,blank=True,default='') 
+
+class gallerys(models.Model):
+    event_id = models.ForeignKey(events, on_delete=models.CASCADE, null=True,default='')
+    images = models.ImageField(null=True,blank = True,upload_to = 'img/gallery')
+    img_tag = models.TextField(null=True,blank=True,default='') 
+
+    
+
+
 class contactus(models.Model):
 
     name = models.CharField(max_length=255, null=True,blank=True)

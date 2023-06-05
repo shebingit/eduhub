@@ -44,13 +44,10 @@ def PlacementPage(request):
     placement = placements.objects.all()
     return render(request, 'user/placement.html',{'placement':placement})
 
-def GalleryPage(request):
-    placement = placements.objects.all()
-    return render(request, 'user/gallery.html',{'placement':placement})
-
 def EventsPage(request):
-    placement = placements.objects.all()
-    return render(request, 'user/events.html',{'placement':placement})
+    eventsbox = events.objects.all().order_by('-id')
+    gallery = gallerys.objects.all().order_by('-id')
+    return render(request, 'user/events.html',{'eventsbox':eventsbox,'gallery':gallery})
 
 
 
@@ -1341,9 +1338,101 @@ def GalPage(request):
             uid = request.session['uid']
         else:
             return redirect('/')
-        return render(request,'admin/Gallery_Images.html',)
+        
+        images=gallerys.objects.all()
+        eventbox=events.objects.all()
+        return render(request,'admin/Gallery_Images.html',{'images':images,'eventbox':eventbox})
     else:
         return redirect('login_page')
+
+ # Image Save   
+
+def Image_save(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        if request.method=='POST':
+            evid= request.POST['evid']
+            eventbox=events.objects.get(id=evid)
+           
+            for img in  request.FILES.getlist('images'):
+                imgs=gallerys()
+                imgs.event_id=eventbox
+                imgs.img_tag = eventbox.event_type + '-' + eventbox.event_name
+                imgs.images = img
+                imgs.save()
+            eventbox=events.objects.all()
+            images=gallerys.objects.all()
+            return render(request,'admin/Gallery_Images.html',{'images':images,'eventbox':eventbox})
+    else:
+        return redirect('login_page')
+
+ # Image Edit    
+
+def image_edit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+       
+        images=gallerys.objects.get(id=pk)
+       
+        return render(request,'admin/Gallery_Images_edit.html',{'images':images})
+    
+    else:
+        return redirect('login_page')
+    
+#Image Edit Save
+
+
+
+def Image_edit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        if request.method=='POST':
+            imgs=gallerys.objects.get(id=pk)
+
+            if request.FILES.get('edit_images'):
+                imgs.images = request.FILES.get('edit_images')
+            else:
+                imgs.images = imgs.images
+            imgs.img_tag = request.POST.get('edit_img_tag')
+            imgs.save()
+            eventbox=events.objects.all()
+            images=gallerys.objects.all()
+            return render(request,'admin/Gallery_Images.html',{'images':images,'eventbox':eventbox})
+    else:
+        return redirect('login_page')
+    
+    
+ # Image Remove    
+def image_remove(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+       
+        imgs=gallerys.objects.get(id=pk)
+        imgs.delete()
+        msg_delete='Image Deleted from DataBase.'
+        images=gallerys.objects.all()
+        eventbox=events.objects.all()
+        return render(request,'admin/Gallery_Images.html',{'images':images,'msg_delete':msg_delete,'eventbox':eventbox})
+    
+    else:
+        return redirect('login_page')
+  
+    
+
     
 
 # ======================== Events section ========================  
@@ -1354,9 +1443,85 @@ def EvePage(request):
             uid = request.session['uid']
         else:
             return redirect('/')
-        return render(request,'admin/Events_Page.html',)
+        eventbox=events.objects.all()
+        return render(request,'admin/Events_Page.html',{'eventbox':eventbox})
     else:
         return redirect('login_page')
+    
+# Event Save
+def event_save(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        if request.method=='POST':
+            event=events()
+            event.event_type =  request.POST['event_type']
+            event.event_name =  request.POST['event_name']
+            event.event_description =  request.POST['event_disc']
+            event.event_link =  request.POST['event_link']
+            event.event_image = request.FILES.get('event_post')
+            event.event_tag = request.POST['event_name']
+            event.save()
+            eventbox=events.objects.all()
+        return render(request,'admin/Events_Page.html',{'eventbox':eventbox})
+    else:
+        return redirect('login_page')
+    
+
+def event_edit(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        eventbox=events.objects.get(id=pk)
+        return render(request,'admin/Events_Page_edit.html',{'eventbox':eventbox})
+    else:
+        return redirect('login_page')
+    
+
+def event_edit_save(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        event=events.objects.get(id=pk)
+        event.event_type =  request.POST.get('event_type')
+        event.event_name = request.POST.get('event_name')
+        event.event_description =  request.POST.get('event_disc')
+        event.event_link =  request.POST.get('event_link')
+
+        if request.FILES.get('event_post'):
+            event.event_image = request.FILES.get('event_post')
+        else:
+             event.event_image =  event.event_image 
+             
+        event.event_tag = request.POST.get('event_name')
+        event.save()
+        eventbox=events.objects.all()
+        return render(request,'admin/Events_Page.html',{'eventbox':eventbox})
+    else:
+        return redirect('login_page')
+
+
+
+def event_remove(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        event=events.objects.get(id=pk)
+        event.delete()
+        msg_delete='Image Deleted from DataBase.'
+        eventbox=events.objects.all()
+        return render(request,'admin/Events_Page.html',{'eventbox':eventbox,'msg_delete':msg_delete})
+    else:
+        return redirect('login_page')
+
 
 #============ PASSWORD CHANGE ===============
 def password_Change(request):

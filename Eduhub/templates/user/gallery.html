@@ -52,9 +52,7 @@
                        <li class="nav__item">
                            <a href="{% url 'EventsPage' %}" class="nav__link">Events</a>
                        </li>
-                       <li class="nav__item">
-                           <a href="{% url 'GalleryPage' %}" class="nav__link active-link">Gallery</a>
-                       </li>
+                      
                       
                        <li class="nav__item">
                            <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
@@ -119,48 +117,36 @@
 
        <!--==================== MAIN ====================-->
        <main class="main">
-           <!--==================== HOME ====================-->
-           <section class="home" id="home" style="background-image: url('static/img/bgr3.jpg'); background-size:cover;">
-               <div class="home__container container grid">
-                   <div class="home__img-bg" >
-                       <img src="static/img/home_inner.png" alt="" class="home__inner__img">
-                   </div>
-   
-                   <div class="home__social">
-                       <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="home__social-link">
-                           Facebook
-                       </a>
-                       <a href="https://wa.me/919074156818" target="_blank" class="home__social-link">
-                           WhatsApp
-                       </a>
-                       <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="home__social-link">
-                           Instagram
-                       </a>
-                   </div>
-   
-   
-                   <div class="home__data" >
-                       <h1 class="home__title">Best Software Training <br> Institute of Kerala </h1>
-                       <p class="home__description1 ">
-                           <span>Enhance Your Skills with Top-Rated Software Courses in Kochi</span>
-                           <span>Empowering Your Tech Career with Expert Guidance.</span>
-                           
-                       </p>
-                       
-                       <div class="home__btns">
-                           <a href="{% url 'CoursePage' %}#offered-courses" class="button button--gray button--small">
-                               View Course
-                           </a>
-                           <a href="{% url 'RegisterForm' %}" class="button home__button">
-                               JOIN NOW
-                           </a>
+         <!--==================== STORY ====================-->
+         <section class="story section container">
+            <div class="story__container grid">
+                <div class="story__data">
+                    <h2 class="section__title story__section-title">
+                        Our Gallery
+                    </h2>
 
-                          
-                       </div>
-                   </div>
-               </div>
-           </section>
-           
+                    <h1 class="story__title">
+                        WELCOME TO <br> ALTOS EDUHUB 
+                    </h1>
+
+                    <p class="home__description">
+                        Altos Eduhub is the best software training institute in Kochi, Kerala, 
+                        owned by Altos Technologies, a leading software development company in Kerala. 
+                        We offer top-notch training programs in Python, Front End Development, Digital Marketing, 
+                        React JS, and REST API. Our institute provides on-the-job training to ensure that learners 
+                        gain practical experience and are job-ready.
+                    </p>
+
+                    <a href="{% url 'AboutPage' %}" class="button button--small">Discover</a>
+                </div>
+
+                <div class="story__images" >
+                    <img src="{% static 'img/bg7.jpg' %}" alt="" class="story__img">
+                    <div class="story__square" ></div>
+                </div>
+            </div>
+        </section>
+     
        
          
 
@@ -174,9 +160,9 @@
                 {% for gallery_img in galleryImages %}
                    <article class="featured__card">
                        <span class="featured__tag"></span>
-                       {% if gallery_img %}
+                       {% if gallery_img.images %}
 
-                       <img src="{{gallery_img}}"  class="featured__img" alt="Photo">
+                       <img src="{{gallery_img.images.url}}"  class="featured__img" alt="{{gallery_img.img_tag}}">
                        {% endif %}
 
                    </article>

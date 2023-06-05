@@ -162,7 +162,7 @@
     .card-body
     {
         display:grid;
-        grid-template-columns: 0.80fr 1.2fr;
+        grid-template-columns: 1fr 1.2fr;
         gap: 1em;
     }
     .action
@@ -186,8 +186,8 @@
     }
     .course-img
     {
-        height: 160px;
-        width: 200px;
+        height: auto;
+        width: 270px;
     }
     .cimg
     {
@@ -252,35 +252,35 @@
                 
             {% endif %}
            
-            <form action="{% url 'Instructor_save' %}" class="form-submit" method="post" enctype="multipart/form-data">
+            <form action="{% url 'event_save' %}" class="form-submit" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <a href="{% url 'loginDashboard' %}"><i class="fas fa-arrow-left"></i></a>
                 <h6 class="course-head"> Add Events</h6>
 
                 <div class="group-input-course">
-                    <label>  Name : </label>
-                    <input type="text" name="instname" required>
-                </div>
-                <div class="group-input-course">
-                    <label> Designation : </label>
-                    <textarea name="instdesig" required></textarea>
+                    <label> Event Type : </label>
+                    <input type="text" name="event_type" required>
                 </div>
 
                 <div class="group-input-course">
-                    <label> Photo Upload : </label>
-                    <input type="file" name="instimage" required>
-                </div>
-                <div class="group-input-course">
-                    <label> Alt Tag : </label>
-                    <textarea  name="instalt" required></textarea>
+                    <label> Event Name : </label>
+                    <input type="text" name="event_name" required>
                 </div>
                 <div class="group-input-course">
                     <label> Discription : </label>
-                    <textarea name="instdiscr" required></textarea>
+                    <textarea name="event_disc" style="height: 150px;" ></textarea>
                 </div>
-                
-                
-                
+               
+                <div class="group-input-course">
+                    <label> Any Link : </label>
+                    <input type="text" name="event_link" >
+                </div>
+
+                <div class="group-input-course">
+                    <label> Event Poster : </label>
+                    <input type="file" name="event_post" required>
+                </div>
+               
                 <div class="group-input-coursebtns">
                     <button type="reset" class="resetbtn">Reset</button>
                     <button type="submit" class="savebtn">Save</button>
@@ -298,26 +298,28 @@
             {% endif %}
             <h5 class="course-head" > Events </h5>
 
-            {% for inst in instrs %}
+            {% for eve in eventbox %}
             <div class="card">
                 
                 <div class="card-body">
                     <div class="course-img">
-                        {% if inst.image %}
-                        <img src="{{inst.image.url}}" class="cimg" alt="Instuctor-Image">
+                        {% if eve.event_image %}
+                        <img src="{{eve.event_image.url}}" class="cimg" alt="Instuctor-Image">
                         {% endif %}
                     </div>
                     <div class="course-details">
                         <div class="action">
-                            <span><a href="{% url 'instuctor_edit' inst.id %}">Edit</a></span>
-                            <span><a href="{% url 'instuctor_remove' inst.id %}" class="remove">Remove</a></span>
+                            <span><a href="{% url 'GalPage' %}">Image</a></span>
+                            <span><a href="{% url 'event_edit' eve.id %}">Edit</a></span>
+                            <span><a href="{% url 'event_remove' eve.id %}" class="remove">Remove</a></span>
                         </div>
-                        <h6>{{inst.name}}</h6>
-                        <p class="course-dis">{{inst.description}}</p>
-                        <p class="course-dis">Alt Tag : " {{inst.instalttag}} "</p>
+                        <h3>{{eve.event_type}}</h3>
+                        <h6>{{eve.event_name}}</h6>
+                        <p class="course-dis">{{eve.event_description}}</p>
+                        <p class="course-dis">Alt Tag : " {{eve.event_tag}} "</p>
                         <hr>
                         <div class="section_bottom">
-                            <span>Designation : {{inst.designation}} </span>
+                            <span>Link : <a href="{{eve.event_link}}">{{eve.event_link}}</a> </span>
                            
                         </div>
                         

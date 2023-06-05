@@ -1,0 +1,388 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<style>
+    .msg-box
+    {
+        padding: 1em;
+        text-align: center;
+        font-size: 0.85em;
+     
+        margin-bottom: 1em;
+    }
+    .msg-box .success-msg
+    {
+        color: rgb(46, 179, 13);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        font-size: 1.1em;
+    }
+    .delete-msg
+    {
+        color: rgb(240, 19, 19);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        font-size: 1.1em;
+    }
+    #msgbox {
+        transition: opacity 1s ease-in-out;
+    }
+    #msgbox.hidden {
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+    }
+    .hidebox
+    {
+        display: none;
+    }
+
+   
+    .text-bold-7
+    {
+        font-weight: 700;
+    }
+    .form-section
+    {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 0.50em;
+    }
+  .course-head
+    {
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 0.07em;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 1.10em;
+        margin-top: 1em;
+        margin-bottom:2.2em;
+    }
+    .form-submit
+    {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+       
+        border-radius: 10px;
+        font-size: 0.85em;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    .group-input-course
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 1.5em 0.40em;
+        
+    }
+    label
+    {
+        width: 40%;
+    }
+    input, textarea
+    {
+        width: 60%;
+        height: 42px;
+        border-radius: 3px;
+        border: 1px solid #d2d0d0;
+        padding: 0.10em 0.40em;
+    }
+    input:focus, textarea:focus
+    {
+        border: none;
+        outline: none;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; 
+    }
+    .group-input-coursebtns
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2.5em 0.40em;
+        gap: 1em;
+    }
+  
+    .savebtn
+    {
+        padding: 0.40em 1.5em;
+        border: none;
+        font-size: 1em;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: #fff;
+        background-color: black;
+        
+    }
+    
+    .savebtn:hover{
+        color: rgb(255, 255, 255);
+        background-color: rgb(15, 129, 59);
+    }
+    
+    .resetbtn
+    {
+        padding: 0.40em 1.5em;
+        border: none;
+        font-size: 1em;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: #fff;
+        background-color: rgb(233, 20, 38);
+        
+    }
+    .resetbtn:hover{
+        color: rgb(255, 255, 255);
+        background-color: rgb(222, 53, 11);
+    }
+
+    .course-content
+    {
+        padding: 0.40em 1em;
+       
+        height: 600px;
+        overflow-y: scroll;
+    }
+    .course-content .card
+    {
+        
+        margin: 0.80em 0.60em;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border-radius: 10px;
+        
+    }
+    .course-dis
+    {
+        font-size: 0.83em;
+        line-height: 1.8em;
+    }
+    .card-body
+    {
+        display:grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 1em;
+    }
+    .action
+    {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 1em;
+        font-size: 0.80em;
+        font-weight: 500;
+    }
+    .action a{
+        text-decoration:none;
+    }
+    .action .remove
+    {
+        color: rgb(230, 22, 22);
+    }
+    .course-details h6{
+        color: rgb(35, 5, 111);
+    }
+    .course-img
+    {
+        height: auto;
+        width: 270px;
+    }
+    .cimg
+    {
+        width: 100%;
+        height: 100%;
+    }
+    .section_bottom
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.80em;
+        margin-bottom: 0.70em;
+    }
+    .section_bottom span
+    {
+        font-weight: 600;
+    }
+
+   
+   @media(max-width:832px)
+   {
+    .form-section
+    {
+        display: grid;
+        grid-template-columns:repeat(1,1fr)
+   }
+   .card-body
+   {
+       display:grid;
+       grid-template-columns:repeat(1,1.2fr) 
+
+   }
+   .course-img
+   {
+       height: 120px;
+       text-align: center;
+       width: auto;
+   }
+   .cimg
+   {
+       width: 60%;
+       height: 70%;
+   }
+}
+</style>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+
+    <div class="form-section">
+           
+
+        <div class="form-left">
+            {% if msg %}
+                <div class="msg-box" id="msgbox">
+                    <span class="success-msg" id="msgbox">{{msg}}</span>
+                </div>
+                
+            {% endif %}
+           
+            <form action="{% url 'event_edit_save' eventbox.id %}" class="form-submit" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <a href="{% url 'loginDashboard' %}"><i class="fas fa-arrow-left"></i></a>
+                <h6 class="course-head"> Add Events</h6>
+
+                <div class="group-input-course">
+                    <label> Event Type : </label>
+                    <input type="text" name="event_type" value="{{eventbox.event_type}}">
+                </div>
+
+                <div class="group-input-course">
+                    <label> Event Name : </label>
+                    <input type="text" name="event_name" value="{{eventbox.event_name}}">
+                </div>
+                <div class="group-input-course">
+                    <label> Discription : </label>
+                    <textarea name="event_disc" style="height: 150px;" >{{eventbox.event_description}}</textarea>
+                </div>
+               
+                <div class="group-input-course">
+                    <label> Any Link : </label>
+                    <input type="text" name="event_link" value="{{eventbox.event_link}}">
+                </div>
+
+                <div class="group-input-course">
+                    <label> Event Poster : </label>
+                    <input type="file" name="event_post">
+                </div>
+               
+                <div class="group-input-coursebtns">
+                    <button type="reset" class="resetbtn">Reset</button>
+                    <button type="submit" class="savebtn">Save</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="course-content">
+           
+            <h5 class="course-head" > Events </h5>
+
+          
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="course-img">
+                        {% if eventbox.event_image %}
+                        <img src="{{eventbox.event_image.url}}" class="cimg" alt="Instuctor-Image">
+                        {% endif %}
+                    </div>
+                    <div class="course-details">
+                        
+                        <h3>{{eventbox.event_type}}</h3>
+                        <h6>{{eventbox.event_name}}</h6>
+                        <p class="course-dis">{{eventbox.event_description}}</p>
+                        <p class="course-dis">Alt Tag : " {{eventbox.event_tag}} "</p>
+                        <hr>
+                        <div class="section_bottom">
+                            <span>Link : <a href="{{eventbox.event_link}}">{{eventbox.event_link}}</a> </span>
+                           
+                        </div>
+                        
+
+                    </div>
+                    
+
+                </div>
+
+            </div>
+          
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<!-- Confirmation Modal css -->
+<style>
+    .modal-content
+    {
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    }
+    .modal-content, .modal-header, .modal-footer
+    {
+        border: none;
+        outline: none;
+        border-radius: 0px;
+    }
+    .titlesize
+    {
+        font-size: 1.1em;
+        font-weight: 600;
+        color: rgb(227, 59, 33);
+    }
+    .modal-body
+    {
+        font-size: 0.90em;
+        font-weight: 600;
+        
+    }
+    .modal-body .file_name
+    {
+        font-size: 1em;
+        font-weight: 700;
+        color: rgb(227, 23, 23);
+    }
+    .btn
+    {
+        font-size: 0.85em;
+        border-radius: 0px;
+        font-weight: 600;
+    }
+</style>
+
+<!-- end-->
+
+
+
+
+
+
+<script>
+    setTimeout(function() {
+        document.getElementById('msgbox').classList.add('hidden');
+        document.getElementById('msgboxs').classList.add('hidebox');
+    }, 5000);
+</script>
+
+
+
+{% endblock %}

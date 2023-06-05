@@ -44,12 +44,7 @@
     {
         font-weight: 700;
     }
-    .form-section
-    {
-        display: grid;
-        grid-template-columns: 1fr 1.3fr;
-        gap: 0.50em;
-    }
+   
   .course-head
     {
         text-align: center;
@@ -81,7 +76,7 @@
     {
         width: 40%;
     }
-    input, textarea
+    input, textarea, select
     {
         width: 60%;
         height: 42px;
@@ -89,7 +84,7 @@
         border: 1px solid #d2d0d0;
         padding: 0.10em 0.40em;
     }
-    input:focus, textarea:focus
+    input:focus, textarea:focus, select:focus
     {
         border: none;
         outline: none;
@@ -141,17 +136,27 @@
 
     .course-content
     {
-        padding: 0.40em 1em;
-       
-        height: 600px;
-        overflow-y: scroll;
-    }
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        }
+        .event_head
+        {
+         margin-top: 2.5rem;
+         margin-bottom: 0.80rem;
+         text-align: center;
+        }
     .course-content .card
     {
         
-        margin: 0.80em 0.60em;
+        margin: 0.20em 0.60em;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 10px;
+        width: 20%; /* Each item takes 25% width to create four columns */
+        flex: 0 0 20%; 
+    
         
     }
     .course-dis
@@ -161,8 +166,10 @@
     }
     .card-body
     {
-        display:grid;
-        grid-template-columns: 0.80fr 1.2fr;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
         gap: 1em;
     }
     .action
@@ -186,8 +193,8 @@
     }
     .course-img
     {
-        height: 160px;
-        width: 200px;
+        height: 180px;
+        width: 220px;
     }
     .cimg
     {
@@ -208,30 +215,47 @@
     }
 
    
-   @media(max-width:832px)
+   @media (max-width:600px)
    {
     .form-section
     {
         display: grid;
         grid-template-columns:repeat(1,1fr)
    }
+   .course-content
+   {
+    flex-direction: column;
+    flex-wrap: nowrap;
+   }
+   .event_head
+   {
+    margin-top: 1rem;
+    margin-bottom: 0.80rem;
+    font-size: 1.1rem;
+   }
+   .course-content .card
+    {
+        
+        margin: 0.20em 0.60em;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border-radius: 10px;
+        width: 100%; /* Each item takes 25% width to create four columns */
+        flex: 0 0 0; 
+    }
+    .course-img
+    {
+        height: 240px;
+       
+        text-align: center;
+        width: auto;
+    }
    .card-body
    {
        display:grid;
        grid-template-columns:repeat(1,1.2fr) 
 
    }
-   .course-img
-   {
-       height: 120px;
-       text-align: center;
-       width: auto;
-   }
-   .cimg
-   {
-       width: 60%;
-       height: 70%;
-   }
+   
 }
 </style>
 
@@ -252,21 +276,26 @@
                 
             {% endif %}
            
-            <form action="{% url 'Instructor_save' %}" class="form-submit" method="post" enctype="multipart/form-data">
+            <form action="{% url 'Image_save' %}" class="form-submit" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <a href="{% url 'loginDashboard' %}"><i class="fas fa-arrow-left"></i></a>
                 <h6 class="course-head"> Add Image</h6>
 
                 
-
+                <div class="group-input-course">
+                    <label> Event Name : </label>
+                   
+                    <select name="evid">
+                        {% for i in eventbox %}
+                        <option value="{{i.id}}">{{i.event_type}} - {{i.event_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="group-input-course">
                     <label> Photo Upload : </label>
-                    <input type="file" name="instimage" required>
+                    <input type="file" name="images" multiple required>
                 </div>
-                <div class="group-input-course">
-                    <label> Alt Tag : </label>
-                    <textarea  name="instalt" required></textarea>
-                </div>
+                
                
                 
                 <div class="group-input-coursebtns">
@@ -276,48 +305,46 @@
 
             </form>
         </div>
-
-        <div class="course-content">
-            {% if msg_delete %}
+        {% if msg_delete %}
                 <div class="msg-box" id="msgboxs">
                     <span class="delete-msg" id="msgbox">{{msg_delete}}</span>
                 </div>
                 
             {% endif %}
-            <h5 class="course-head" > Gallery </h5>
+        <h5 class="course-head" > Gallery </h5>
+            
+        {% for j in eventbox %}
+            <h5 class="event_head">{{j.event_type}} - {{j.event_name}}</h5>
 
-            {% for inst in instrs %}
-            <div class="card">
+            <div class="course-content">
                 
-                <div class="card-body">
-                    <div class="course-img">
-                        {% if inst.image %}
-                        <img src="{{inst.image.url}}" class="cimg" alt="Instuctor-Image">
-                        {% endif %}
-                    </div>
-                    <div class="course-details">
-                        <div class="action">
-                            <span><a href="{% url 'instuctor_edit' inst.id %}">Edit</a></span>
-                            <span><a href="{% url 'instuctor_remove' inst.id %}" class="remove">Remove</a></span>
-                        </div>
-                        <h6>{{inst.name}}</h6>
-                        <p class="course-dis">{{inst.description}}</p>
-                        <p class="course-dis">Alt Tag : " {{inst.instalttag}} "</p>
-                        <hr>
-                        <div class="section_bottom">
-                            <span>Designation : {{inst.designation}} </span>
-                           
-                        </div>
+                {% for img in images %}
+                {% if img.event_id.id == j.id %}
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <div class="course-img">
+                                {% if img.images %}
+                                <img src="{{img.images.url}}" class="cimg" alt="{{img.img_tag}}">
+                                {% endif %}
+                            </div>
+                            <div class="course-details">
+                                <p class="course-dis">Alt Tag : "{{img.img_tag}} "</p> 
+                                <div class="action">
+                                    <span><a href="{% url 'image_edit' img.id %}">Edit</a></span>
+                                    <span><a href="{% url 'image_remove' img.id %}" class="remove">Remove</a></span>
+                                </div>
                         
 
+                            </div>
+                        </div>
+
                     </div>
-                    
-
-                </div>
-
+                {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
+
+        {% endfor %}
     </div>
 
 

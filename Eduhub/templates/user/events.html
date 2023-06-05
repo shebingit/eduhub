@@ -23,7 +23,8 @@
 
        <!--=============== CSS ===============-->
        <link rel="stylesheet" href="static/css/styles.css">
-      
+
+
 
        <title>EduHub, Best Software Institute Of Kochi</title>
 
@@ -54,9 +55,7 @@
                        <li class="nav__item">
                            <a href="{% url 'EventsPage' %}" class="nav__link active-link">Events</a>
                        </li>
-                       <li class="nav__item">
-                           <a href="{% url 'GalleryPage' %}" class="nav__link">Gallery</a>
-                       </li>
+                     
                       
                        <li class="nav__item">
                            <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
@@ -142,7 +141,7 @@
                            gain practical experience and are job-ready.
                        </p>
    
-                       <a href="{% url 'AboutPage' %}" class="button button--small">Discover</a>
+                       <a href="#featured" class="button button--small">Discover</a>
                    </div>
 
                    <div class="story__images" >
@@ -160,26 +159,60 @@
 
                <div class="featured__container grid">
 
-                {% for event_details in events %}
+                {% for event_details in eventsbox %}
                    <article class="featured__card">
                        <span class="featured__tag"></span>
 
                         {% if event_details %}
-                        <img src="#" alt="Events Details" class="featured__img">
+                        <img  src="{{event_details.event_image.url}}" alt="Events Details" class="event__img">
                         {% endif %}
 
                        <div class="featured__data">
-                           <h3 class="featured__title"></h3>
-                           <span class="featured__price"></span>
+                        <p class="event__description"> {{event_details.event_description}}</p>
+                           <!-- <h3 class="featured__title">{{event_details.event_image}}</h3> -->
+                           <a href="{{event_details.event_link}}"><span class="event__link">Link : {{event_details.event_link}}</span></a>  
+                           
                        </div>
                       
-                       <a href="{% url 'CarrerStart' %}"  class="button featured__button">Explore</a>
+                       <a href="#{{event_details.id}}gallery"  class="button featured__button">Photos</a>
                       
                    </article>
                 {% endfor %}
             
                </div>
            </section>
+
+
+
+           {% for event_details in eventsbox %}
+           <span id="{{event_details.id}}gallery"></span>
+             <!--==================== GALLERY ====================-->
+             <section class="featured section container" id="featured">
+                <h2 class="section__title" >
+                   {{event_details.event_type}} -   {{event_details.event_name}}
+                </h2>
+ 
+                <div class="featured__container grid">
+ 
+                    {% for img in gallery %}
+                    {% if img.event_id.id == event_details.id %}
+                    <article class="featured__card">
+                        <span class="featured__tag"></span>
+ 
+                         {% if img %}
+                        
+                         <img src="{{img.images.url}}" alt="{{img.img_tag}}" class="featured__img">
+                         {% endif %}
+ 
+                    </article>
+                    {% endif %}
+                    {% endfor %}
+               
+                </div>
+            </section>
+            {% endfor %}
+             
+ 
 
           
           
@@ -282,6 +315,8 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
         <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <script src="/path/to/cdn/jquery.min.js"></script>
+       
 
        
        
