@@ -1,0 +1,760 @@
+{% load static %}
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta content="On-The-Job Training, Graduates, Career Development, Skill Enhancement" name="keywords">
+       <meta content="How on-the-job training benefits students, Advantages of on-the-job training for students,
+       On-the-job training for student career growth, Importance of on-the-job training for
+       students, Enhancing student skills through on-the-job training" name="description">
+       
+
+
+       <!--=============== FAVICON ===============-->
+       <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+
+       <!--=============== BOXICONS ===============-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+       <!--=============== SWIPER CSS ===============--> 
+       <link rel="stylesheet" href="static/css/swiper-bundle.min.css">
+
+       <!--=============== CSS ===============-->
+       <link rel="stylesheet" href="static/css/styles.css">
+      
+
+       <title>Blog/Best Software Training Institute in Kerala</title>
+
+   
+   </head>
+   <body>
+       <!--==================== HEADER ====================-->
+       <header class="header" id="header">
+           <nav class="nav container">
+               <a href="{% url 'HomePage' %}" class="nav__logo">
+                   <img src="static/img/logo1.png" style="width:100%; height:100%" alt="Altos Eduhub logo">
+               </a>
+
+               <div class="nav__menu" id="nav-menu">
+                   <ul class="nav__list">
+                       <li class="nav__item">
+                           <a href="{% url 'HomePage' %}" class="nav__link">Home</a>
+                       </li>
+                       
+                       <li class="nav__item">
+                           <a href="{% url 'AboutPage' %}" class="nav__link">About</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'CoursePage' %}" class="nav__link">Course</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'PlacementPage' %}" class="nav__link">Placement</a>
+                       </li>
+                       <li class="nav__item">
+                           <a href="{% url 'EventsPage' %}" class="nav__link">Events</a>
+                       </li>
+                       <li class="nav__item">
+                        <a href="{% url 'BlogPage' %}" class="nav__link active-link">Blog</a>
+                        </li>
+                      
+                       <li class="nav__item">
+                           <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                       </li>
+                   </ul>
+
+                   <div class="nav__close" id="nav-close">
+                       <i class='bx bx-x' ></i>
+                   </div>
+               </div>
+
+               <div class="nav__btns">
+                   <!-- Theme change button -->
+                   <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                   <div class="nav__shop" id="cart-shop">
+                       <i class='bx bxs-chat'></i>
+                   </div>
+
+                   <div class="nav__toggle" id="nav-toggle">
+                       <i class='bx bx-grid-alt' ></i>
+                   </div>
+               </div>
+           </nav>
+       </header>
+
+       <!--==================== CART ====================-->
+       <div class="cart" id="cart">
+           <i class='bx bx-x cart__close' id="cart-close"></i>
+
+           <!-- <h2 class="cart__title-center">Chat</h2> -->
+           <div class="card ChatBox" id="chat-container">
+               <div class="card-head">
+                   <div class="chatimg"></div>
+                   <img src="{% static 'img/favicon.ico' %}">
+                   <p>Altos EduHub</p>
+               </div>
+               <div class="card-body">
+                   <div class="chat_img_box">
+                       <img src="{% static 'img/logo1.png' %}">
+                   </div>
+                   <div class="chatmain_content">
+                       <p>Welcome to altos eduhub! Use the chat box to get 
+                           in touch with us and we'll be happy to assist you 
+                           with any questions or inquiries you may have.
+                       </p>
+                   </div>
+                   <div  class="chat_messages" id="chat-messages"></div>
+                  
+                  
+               </div>
+               <div class="card-footer">
+                   <input type="text" id="user-input" class="int_text" placeholder="Type your message...">
+                   <button class="send_btn" type="button" id="send-btn"><i class='bx bxs-send' ></i></button>
+               </div>
+           </div>
+
+       </div>
+      
+       <style>
+            .section
+            {
+                padding: 2rem 0rem;
+            }
+            h2
+            {
+                font-size: 1.5rem;
+                font-weight: 600;
+                letter-spacing: 0.06rem;
+            }
+            h3{
+                font-size: 1.2rem;
+                font-weight: 600;
+                letter-spacing: 0.06rem;
+            }
+            p{
+                font-size: 1rem;
+                line-height: 1.8rem;
+                letter-spacing: 0.06rem;
+                margin: 1.5rem 0rem;
+            }
+            .blog__section
+            {
+                
+                padding-top:6rem ;
+                margin-top:3rem ;
+                
+            }
+            .blog__container
+            {
+               padding: 2rem 0.50rem;
+            }
+            .blog__head
+            {
+                border-bottom: 5px solid #f1c255;
+                padding-bottom: 0.8rem;
+                font-size: 2rem;
+                font-weight: 400;
+                letter-spacing: 0.07rem;
+            }
+            
+            .blogimage__Box
+            {
+                height: 500px;
+                width: 100%;
+                background: #ffff;
+                margin-top: 2rem;
+            }
+            .blogimage__Box img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .benifit__Box
+            {
+                display: grid;
+                grid-template-columns: repeat(2,2fr);
+                gap: 1rem;
+                margin-top:1rem ;
+                margin-bottom: 2rem;
+            }
+            .lineBox
+            {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .lineBox .line
+            {
+                border-bottom: 2px solid #f1c255;
+                background: #d0d1d5;
+                width: 100px;
+                margin-top: 0.50rem;
+            }
+            .lineBox .line:nth-child(2)
+            {
+                width: 80px;
+            }
+            .lineBox .line:nth-child(3)
+            {
+                width: 50px;
+            }
+            .content__container
+            {
+                margin-top: 3rem;
+            }
+            .contentBox p{
+                margin-bottom: 3rem;
+            }
+
+            .benift__item
+            {
+                border:2px solid #ebebe9;
+                padding: 1rem 1.5rem;
+            }
+            .benift__item:hover
+            {
+               border:0.5px solid #f1c255;
+               
+            }
+            .call__action
+            {
+                display: grid;
+                grid-template-columns:2fr 1.5fr;
+                gap: 1rem;
+                margin-top: 2rem;
+                padding: 6rem 0.05rem;
+               
+            }
+            .call__left p
+            {
+                line-height: 1.9rem;
+                font-size: 0.99rem;
+            }
+            .call__button
+            {
+                text-align: center;
+            }
+            .call__button a{
+                
+                font-family: inherit;
+                font-weight: 500;
+                font-size: 17px;
+                padding: 0.8em 1.5em 0.8em 1.2em;
+                color: white;
+                background: #ad5389;
+                background: linear-gradient(0deg, rgba(77,54,208,1) 0%, rgba(132,116,254,1) 100%);
+                border: none;
+                box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
+                letter-spacing: 0.05em;
+                border-radius: 20em;
+            }
+            .call__button a:hover {
+                box-shadow: 0 0.5em 1.5em -0.5em #4d36d0be;
+              }
+              
+              .call__button a:active {
+                box-shadow: 0 0.3em 1em -0.5em #4d36d0be;
+              }
+                .call__right
+                {
+                    background: #ffd723;
+                    
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .call__right img{
+                    border-radius: 50%;
+                    width: 80%;
+                    height: 85%;
+                    -webkit-animation: mover 2s infinite  alternate;
+                    animation: mover 1s infinite  alternate;
+                }
+            img.vert-move {
+                -webkit-animation: mover 1s infinite  alternate;
+                animation: mover 1s infinite  alternate;
+            }
+            @-webkit-keyframes mover {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-20px); }
+            }
+                @keyframes mover {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-20px); }
+                }
+                .faq
+                {
+                    margin-top: 3rem;
+                }
+                .faq_header-title{
+                    font-size: 24px;
+                    color: #fff;
+                    margin-bottom: 20px;
+                }
+                .faq__panel{
+                    padding: 6px 21px;
+                    margin-bottom: 24px;
+                    border: 1px solid #777e91;
+                    border-radius: 7px;
+                }
+                .faq__label{
+                    padding-block: 7px;
+                    color: #f4f5f6;
+                    cursor: pointer;
+                }
+                .faq__panel-answer{
+                    color: #d0d1d5;
+                    padding-top: 1px;
+                    padding-bottom: 7px;
+                    font-size: 0.90rem;
+                }
+
+                @media (max-width:675px)
+                {
+                    .blog__head
+                    {
+                        font-size: 1.3rem;
+                        line-height: 1.8rem;
+                        text-align: center;
+                    }
+                    .blog__section {
+                       
+                        padding-top: 3rem; 
+                        margin-top: 2rem; 
+                    }
+                    .blog__container
+                    {
+                    padding: 0.20rem 0rem;
+                    }
+                    .blogimage__Box
+                    {
+                        height: auto;
+                    }
+                    
+                    .benifit__Box
+                    {
+                        grid-template-columns: repeat(2,1fr);
+                    }
+                }
+                @media (675px > width )
+                {
+                    .benifit__Box
+                    {
+                        grid-template-columns: repeat(1,1fr);
+                    }
+                }
+                @media (width <= 832px)
+                {
+                    .call__action
+                    {
+                        grid-template-columns: repeat(1,1fr);
+                    }
+                    .call__button
+                    {
+                        margin-top: 3rem;
+                        margin-bottom: 2rem;
+                    }
+                }
+
+
+       </style>
+       
+      
+
+
+       <!--==================== MAIN ====================-->
+       <main class="main">
+
+       <!--==================== Blog Section ====================-->
+
+        <section class="blog__section section">
+
+            <div class="blog__container container">
+                <h1 class="blog__head">
+                    The Life-Changing Benefits of On-The-Job Training for Students
+                </h1>
+                <div class="blogimage__Box">
+                    <img src="{% static 'img/image-001.jpg'%}" alt="Blog Image">
+                </div>
+
+                <p>
+                    In today's fast-paced and rapidly evolving professional landscape, students face the
+                    challenge of acquiring practical skills and real-world experience to enhance their
+                    employability. While classroom education is valuable, it often falls short in providing the
+                    hands-on training necessary to thrive in the workplace. This is where on-the-job training
+                    (OJT) comes into play. On-the-job training offers a transformative learning experience for
+                    students, bridging the gap between theory and practice and equipping them with the tools
+                    they need to succeed in their future careers.
+
+                </p>
+                <p>
+                    On-the-job training allows students to step out of the traditional classroom setting and
+                    immerse themselves in real work environments. It offers a unique opportunity to apply
+                    their theoretical knowledge and learn from experienced professionals who serve as
+                    mentors. By actively engaging in tasks and projects related to their field of study, students
+                    gain practical skills, industry insights, and valuable connections that can shape their
+                    professional journey.
+                </p>
+                <p>
+                    In this article, we will explore the life-changing benefits of on-the-job training for students.
+                    From acquiring practical skills and building a professional network to gaining real-world
+                    experience and fostering personal growth, we will delve into how OJT can positively impact
+                    a student's career trajectory. Through on-the-job training, students not only develop the
+                    necessary expertise but also cultivate essential qualities like confidence, adaptability, and
+                    resilience. We will also address frequently asked questions to provide a comprehensive
+                    understanding of the topic.
+                </p>
+            </div>
+            <div class="lineBox">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+            <div class="content__container container">
+
+                <div class="contentBox">
+                    <h2>What is On-The-Job Training</h2>
+                    <p>
+                        On-the-job training refers to the process of learning and acquiring skills while working in a
+                        professional setting. It allows students to apply their theoretical knowledge in real-world
+                        scenarios, gaining hands-on experience in their chosen field. This type of training typically
+                        occurs within the workplace, where students receive guidance from experienced
+                        professionals who serve as mentors.
+                    </p>
+                   
+                    <h2>The Life-Changing Benefits of On-The-Job Training for Students</h2>
+                    <p>
+                        Learn about the transforming effect of on-the-job training, which combines classroom
+                        instruction with practical experience. Real-world instruction can help you reach your full
+                        potential while learning priceless skills and information. Accept the chance to advance
+                        professionally and personally, which will offer up new employment opportunities. Utilize
+                        the benefits of practical education that can change your life to create a better future. Take
+                        your adventure to the next level with on-the-job training and start on a road of continued
+                        success.
+
+                    </p>
+                    <div class="benifit__Box">
+                        <div class="benift__item">
+                            <h3>1. Acquiring Practical Skills</h3>
+                            <p>
+                                One of the primary benefits of on-the-job training is the acquisition of practical skills. Unlike
+                                traditional classroom learning, OJT enables students to put their knowledge into practice,
+                                solving real problems and completing tasks relevant to their industry. This hands-on
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>2. Building a Professional Network</h3>
+                            <p>
+
+                                During on-the-job training, students have the opportunity to interact with professionals in
+                                their field. This interaction helps them build a valuable professional network, which can be
+                                instrumental in their career development. Networking opens doors to potential job
+                                opportunities, mentorship, and access to industry insights and trends. By establishing
+                                meaningful connections, students increase their chances of success in the competitive job
+                                market.
+                                                    
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>3. Gaining Real-World Experience</h3>
+                            <p>
+                                On-the-job training provides students with a glimpse into the real world of work. It exposes
+                                them to the challenges, dynamics, and intricacies of their chosen industry. Students learn
+                                how to navigate work environments, collaborate with colleagues, meet deadlines, and
+                                overcome obstacles. This real-world experience prepares them for the demands and
+                                expectations they will encounter in their future careers.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>4. Developing Confidence and Adaptability</h3>
+                            <p>
+                                Through on-the-job training, students develop a sense of confidence in their abilities. As
+                                they successfully tackle tasks and gain proficiency, their self-assurance grows. Additionally,
+                                OJT promotes adaptability, as students learn to navigate different work situations and
+                                handle unexpected challenges. These qualities are highly valued by employers and
+                                contribute to long-term professional success.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>5. Exploring Career Paths</h3>
+                            <p>
+                                OJT provides students with a firsthand experience of various career paths within their
+                                chosen field. By working alongside professionals in different roles, students gain insights
+                                into different job responsibilities and functions. This exposure helps them make informed
+                                decisions about their career goals and aspirations, ensuring that they choose a path that
+                                aligns with their interests and strengths.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>6. Enhancing Employability</h3>
+                            <p>
+                                Employers often prioritize practical experience when hiring new graduates. On-the-job
+                                training significantly enhances students' employability by demonstrating their ability to
+                                apply knowledge in a practical setting. The skills, experience, and industry-specific insights
+                                gained through OJT make students stand out in the job market, giving them a competitive
+                                edge over their peers.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>7. Fostering Personal Growth</h3>
+                            <p>
+                                On-the-job training is not only about professional development but also personal growth.
+                                Students encounter diverse work environments, cultures, and perspectives, broadening
+                                their horizons and fostering a sense of empathy. They learn to work collaboratively, adapt
+                                to different personalities, and appreciate the value of teamwork. These personal growth
+                                experiences contribute to their overall development as individuals.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>8. Improving Communication Skills</h3>
+                            <p>
+                                Effective communication is a vital skill in the workplace. On-the-job training provides
+                                students with ample opportunities to enhance their communication skills. They learn to
+                                articulate their ideas, listen actively, and interact professionally with colleagues, clients, and
+                                stakeholders. These improved communication skills have far-reaching benefits in both
+                                personal and professional contexts.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>9. Experiencing Industry Trends</h3>
+                            <p>
+                                By engaging in on-the-job training, students gain firsthand exposure to industry trends and
+                                innovations. They witness how professionals in their field adapt to technological
+                                advancements, market changes, and evolving customer needs. This experience allows them
+                                to stay updated with the latest developments, positioning them as valuable assets to future
+                                employers.
+                            </p>  
+                        </div>
+                        <div class="benift__item">
+                            <h3>10. Promoting Self-Discovery</h3>
+                            <p>
+                                On-the-job training is a journey of self-discovery for students. It allows them to explore
+                                their strengths, weaknesses, and areas of interest. Through exposure to different roles and
+                                responsibilities, students can identify their passions and find the career path that aligns
+                                with their values and aspirations. OJT acts as a catalyst for self-reflection and helps
+                                students make informed decisions about their future.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>11. Encouraging Lifelong Learning</h3>
+                            <p>
+                                On-the-job training instills a sense of curiosity and a desire for lifelong learning. Students
+                                witness the importance of continuous professional development and the need to adapt to
+                                a rapidly changing work landscape. This mindset of constant learning prepares them to
+                                embrace new challenges, acquire new skills, and stay relevant throughout their careers.
+                            </p>
+                        </div>
+                        <div class="benift__item">
+                            <h3>12. Overcoming Challenges and Building Resilience</h3>
+                            <p>
+                                On-the-job training exposes students to real-world challenges and obstacles. They learn to
+                                persevere, problem-solve, and handle setbacks. By overcoming these challenges, students
+                                build resilience and develop a growth mindset that is invaluable in their professional
+                                journeys. OJT equips them with the tools to navigate adversity and emerge stronger.
+                            <p>
+                        </div>
+
+                    </div>
+                    
+                    <h3>Conclusion</h3>
+                    <p>
+                        On-the-job training offers students a transformative experience that goes beyond
+                        theoretical learning. It equips them with practical skills, industry insights, and a network of
+                        professionals. From building confidence to fostering personal growth, the benefits of OJT
+                        are truly life-changing. By embracing on-the-job training opportunities, students pave the
+                        way for a successful and fulfilling career.
+
+                </div>
+                
+            </div>
+
+            <div class="call__action container ">
+                <div class="call__left">
+                    <h2>Call to Action</h2>
+                    
+                    <p>
+                        Ready to take your career to the next level? Enroll in our comprehensive on-the-job training
+                        program today and unlock a world of endless opportunities! Gain hands-on experience,
+                        sharpen your skills, and accelerate your professional growth under the guidance of industry
+                        experts. Don't miss out on this exclusive chance to bridge the gap between theory and
+                        practice, and be equipped with the real-world knowledge employers value. Join us now and
+                        empower yourself with the practical skills necessary to thrive in today's competitive job
+                        market. Visit our website or contact us to secure your spot in our life-changing on-the-job
+                        training program. Your future success starts here!
+                    </p>
+                    <div class="call__button">
+                        <a href="{% url 'CoursePage' %}">Check Out</a>
+                    </div>
+                </div>
+                <div class="call__right">
+                   
+                    <img src="{% static 'img/blog_contact.jpg' %}" alt="#">
+                
+                </div>
+
+            </div>
+            
+            <div class="faq container" aria-level="Frequently Asked Questions">
+                <header class="faq_header">
+                    <h2 class="faq_header-title">Frequently Asked Questions</h2>
+                </header>
+               <div class="faq__body">
+                   <details aria-expanded="true" class="faq__panel" open>
+                       <summary class="faq__label">Is on-the-job training only for specific industries?</summary>
+                       <div class="faq__panel-body">
+                       <p class="faq__panel-answer">No, on-the-job training is available across various industries and sectors. It
+                        offers valuable learning opportunities regardless of the field.
+                        </p>
+                       </div>
+                   </details>
+                   <details aria-expanded="false" class="faq__panel">
+                       <summary class="faq__label">How long does on-the-job training typically last?</summary>
+                       <div class="faq__panel-body">
+                        <p class="faq__panel-answer">
+                            The duration of on-the-job training varies depending on the program or position. It can range from a few weeks to several months.
+                        </p>
+                       </div>
+                   </details>
+                   <details aria-expanded="false" class="faq__panel">
+                       <summary class="faq__label">Can on-the-job training lead to employment opportunities?</summary>
+                       <div class="faq__panel-body">
+                       <p class="faq__panel-answer">Yes, on-the-job training can often lead to employment opportunities. Many
+                        employers prefer candidates with practical experience gained through OJT.</p>
+                       </div>
+                   </details>
+                   <details aria-expanded="false" class="faq__panel">
+                    <summary class="faq__label">Is on-the-job training suitable for all educational backgrounds?</summary>
+                    <div class="faq__panel-body">
+                    <p class="faq__panel-answer">Yes, on-the-job training can be beneficial for students from diverse
+                        educational backgrounds. It complements classroom learning and enhances
+                        practical skills.
+                    </p>
+                    </div>
+                   </details>
+                   <details aria-expanded="false" class="faq__panel">
+                    <summary class="faq__label">How can I find on-the-job training opportunities?</summary>
+                    <div class="faq__panel-body">
+                    <p class="faq__panel-answer">
+                        On-the-job training opportunities can be found through career centers, job
+                        boards, company websites, and networking with professionals in your
+                        chosen industry.
+                    </p>
+                    </div>
+                   </details>
+                   
+               </div>
+            
+            </div>
+
+           
+
+        </section>
+            
+       </main>
+
+       <!--==================== FOOTER ====================-->
+       <footer class="footer section">
+           <div class="footer__container container grid">
+               <div class="footer__content">
+                   <h3 class="footer__title">ALTOS EDUHUB</h3>
+   
+                   <ul class="footer__list">
+                       <li> 1st Floor - Thapasya Building Infopark</li>
+                       <li>Kakkanad, Cochin</li>
+                       <li> +91 974 663 2202</li>
+                       <li> info@Altostechnologies.in</li>
+                   </ul>
+               </div>
+               <div class="footer__content">
+                   <h3 class="footer__title">Quick Link</h3>
+   
+                   <ul class="footer__links">
+                      
+                       <li>
+                           <a href="{% url 'AboutPage' %}" class="footer__link">About Us</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'ContactPage' %}" class="footer__link">Contact</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">Privacy Policy</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">Terms & Conditions</a>
+                       </li>
+                       <li>
+                           <a href="#" class="footer__link">FAQs & Help</a>
+                       </li>
+                       
+                   </ul>
+               </div>
+   
+               
+   
+               <div class="footer__content">
+                   <h3 class="footer__title">Social</h3>
+   
+                   <ul class="footer__social">
+                       <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-facebook'></i>
+                       </a>
+                       <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-whatsapp' ></i>
+                       </a>
+                     
+                       <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-youtube' ></i>
+                       </a>
+   
+                       <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-linkedin' ></i>
+                       </a>
+   
+                       <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                           <i class='bx bxl-instagram' ></i>
+                       </a>
+                   </ul>
+               </div>
+           </div>
+   
+           <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+       </footer>
+   
+
+       <!--=============== SCROLL UP ===============-->
+       <a href="#" class="scrollup" id="scroll-up"> 
+           <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+       </a>
+       <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+          
+           <i class='bx bxl-whatsapp scrollwh__icon' ></i>
+       </a>
+
+     
+
+       <!--=============== SWIPER JS ===============-->
+       <script src="static/js/swiper-bundle.min.js"></script>
+
+      
+
+       <!--=============== MAIN JS ===============-->
+       <script src="static/js/main.js"></script>
+       <script src="static/js/index.js"></script>
+       <script src="static/js/chat.js"></script>
+
+  
+
+        <!--===============PARALLS JS ===============-->
+      
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+        <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+       
+       
+   </body>
+</html>

@@ -12,6 +12,7 @@ urlpatterns = [
     path('Placement',views.PlacementPage,name='PlacementPage'),
     path('Events',views.EventsPage,name='EventsPage'),
     path('Contact',views.ContactPage,name='ContactPage'),
+    path('Blog',views.BlogPage,name='BlogPage'),
     path('Course-Details/<pk>',views.CourseDetails,name='CourseDetails'),
 
 

@@ -50,6 +50,9 @@ def EventsPage(request):
     return render(request, 'user/events.html',{'eventsbox':eventsbox,'gallery':gallery})
 
 
+def BlogPage(request):
+    return render(request,'user/blog.html')
+
 
 def ContactPage(request):
     return render(request, 'user/contact.html')
