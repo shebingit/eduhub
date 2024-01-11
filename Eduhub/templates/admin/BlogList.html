@@ -1,0 +1,85 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<style>
+    .card
+    {
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        border: none;
+    }
+    .add-btnBox
+    {
+        display: flex;
+        justify-content: end;
+       margin-bottom: 1rem;
+       color: #ffff;
+    }
+    .fw-500
+    {
+        font-weight: 500;
+    }
+    table
+    {
+        font-size: 14px;
+    }
+    .fa
+    {
+        font-size: 13px;
+    }
+</style>
+
+
+
+
+<div class="card p-2 m-2">
+    <div class="card-body">
+        <div class="add-btnBox">
+            <a href="{% url 'blog_page' %}"  class="btn btn-primary">
+               
+                <i class="fa fa-plus mr-1"></i> <span class=" fw-500"> Add Blog</span> </a>
+           
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Add on Date</th>
+                    <th scope="col">Blog Title</th>
+                    <th scope="col">Last Update Date</th>
+                    <th scope="col">Action</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for blog in blogConent %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ blog.blog_create_date }}</td>
+                    <td>{{ blog.blog_title }}</td>
+                    <td>{{ blog.blog_update }}</td>
+                    <td>
+                        <div>
+                            <a href="{% url 'blog_details' blog.id %}" class="btn btn-secondary" title="details">
+                                <i class="fa fa-file"></i>
+                            </a>
+                            <a href="{% url 'blog_details_edit' blog.id %}" class="btn btn-primary" title="Edit">
+                                <i class="fa fa-pen"></i>
+                            </a>
+                            <a href="{% url 'blog_remove' blog.id %}" class="btn btn-danger" title="Delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

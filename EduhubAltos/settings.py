@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Eduhub'
+    'Eduhub',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

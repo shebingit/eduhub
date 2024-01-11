@@ -1,0 +1,39 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+
+<style>
+    .card
+    {
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        border: none;
+    }
+    .Back-arrow
+    {
+        display: flex;
+        align-items: end;
+        justify-content: end;
+    }
+    
+</style>
+
+
+<div class="card m-3 p-2">
+    <div class="Back-arrow">
+        <a href="{% url 'BlogListPage' %}" class="pr-2" title="Back"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+    </div>
+    <h4 class="text-center mt-3"> Blog Content Details</h4>
+    
+    <div class="card-body">
+
+        <h5 class="mt-2 mb-3"> {{ blogDetails.blog_title }}</h5>
+
+            {{ blogDetails.blog_content|safe }}
+
+    </div>
+</div>
+
+
+{% endblock %}

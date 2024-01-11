@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
 from .models import *
 from datetime import date
+from .forms import  BlogForm, BlogEditForm
+
 
 
 # 404 page
@@ -51,7 +53,8 @@ def EventsPage(request):
 
 
 def BlogPage(request):
-    return render(request,'user/blog.html')
+    blog = BlogModel.objects.all().order_by('blog_update')
+    return render(request,'user/blog.html',{'blogDetails':blog})
 
 
 def ContactPage(request):
@@ -1524,8 +1527,101 @@ def event_remove(request,pk):
         return render(request,'admin/Events_Page.html',{'eventbox':eventbox,'msg_delete':msg_delete})
     else:
         return redirect('login_page')
+    
 
 
+
+# Blog section --------------------
+    
+def BlogListPage(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        blogConent = BlogModel.objects.all().order_by('blog_create_date')
+
+        return render(request,'admin/BlogList.html',{'blogConent':blogConent})
+    else:
+        return redirect('login_page')
+
+    
+def blog_page(request):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+        if request.method == 'POST':
+            form = BlogForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('blog_page')  
+        else:
+            form = BlogForm()
+        
+        return render(request,'admin/Blog.html',{'form': form})
+    else:
+        return redirect('login_page')
+    
+
+def blog_details(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')  
+         
+        blogDetails = BlogModel.objects.get(id=pk)
+        return render(request,'admin/BlogDetails.html',{'blogDetails':blogDetails})
+    else:
+        return redirect('login_page')
+
+
+def blog_details_edit(request, pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')  
+
+        blog = BlogModel.objects.get(id=pk)
+
+        if request.method == 'POST':
+            form = BlogEditForm(request.POST, instance=blog)
+            if form.is_valid():
+                form.save()
+                return redirect('blog_details_edit', pk=pk)
+        else:
+            form = BlogEditForm(instance=blog, initial={'blog_title': blog.blog_title})
+
+        return render(request, 'admin/BlogEdit.html', {'blogEdit': blog, 'form': form})
+    else:
+        return redirect('login_page')
+
+
+def blog_remove(request,pk):
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        
+         
+        blogRemove = BlogModel.objects.get(id=pk)
+        blogRemove.delete()
+
+        blogConent = BlogModel.objects.all().order_by('blog_create_date')
+
+        return render(request,'admin/BlogList.html',{'blogConent':blogConent})
+    else:
+        return redirect('login_page')
+        
+
+# Blog Section end ----------------------
+    
 #============ PASSWORD CHANGE ===============
 def password_Change(request):
     if 'uid' in request.session:

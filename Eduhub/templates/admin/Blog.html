@@ -1,0 +1,64 @@
+{% extends 'admin/DashboardBase.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+    .card
+    {
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        border: none;
+    }
+    .Back-arrow
+    {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+    }
+    
+</style>
+
+
+<!-- Blog Section -->
+
+
+<div class="card m-2 p-3">
+   
+    <div class="Back-arrow">
+        <h4 class="ml-3">Blog Page</h4>
+        <a href="{% url 'BlogListPage' %}" class="pr-2" title="Back"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+    </div>
+
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="">
+                {{ form.media }}
+            </div>
+            
+            {{ form.as_p }}
+            <div class="submit-btn mt-2">
+                <button type="submit" class="btn btn-primary"> Save </button>
+            </div>
+        
+        </form>
+       
+    </div>
+</div>
+
+
+{% endblock %}
+
+<form action="#" method="post">
+    {% csrf_token %}
+    <div class="input-form-group mt-2">
+        <label>Blog Title</label>
+        <input class="form-control">
+    </div>
+    <div class="input-form-group mt-2">
+        <label>Blog Details</label>
+        <textarea class="form-control"></textarea>
+    </div>
+
+    
+</form>

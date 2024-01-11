@@ -224,6 +224,44 @@
                 </div>
             </section>
 
+            <style>
+                .ResponsiveYTPlayer { 
+                    position: relative;
+                     padding-bottom: 44.25%; 
+                     height: 0; overflow: hidden; max-width: 100%; } 
+                     .ResponsiveYTPlayer iframe, 
+                     .ResponsiveYTPlayer object, 
+                     .ResponsiveYTPlayer embed { 
+                        position: absolute; 
+                        top: 0; left: 0; 
+                        width: 100%; height: 100%; }
+
+                @media (max-width:732px)
+                {
+                    .ResponsiveYTPlayer { 
+                       
+                         padding-bottom: 52.25%; 
+                    }  
+                }
+                @media (max-width:532px)
+                {
+                    .ResponsiveYTPlayer { 
+                       
+                         padding-bottom: 78.25%; 
+                    }  
+                }
+            </style>
+
+            <!--=====================Vedio ====================-->
+            <section class="featured section container" id="vedio-scetion">
+                <h2 class="section__title">
+                    Altos Technologies Success Story of 2023 
+                </h2>
+                    <div class='ResponsiveYTPlayer'><iframe class="youtube-player" id="player" type="text/html" src="https://www.youtube.com/embed/d_QhmWvn-E0?si=mBDGVhxGhAjppR-A?wmode=opaque&autohide=1&autoplay=1&enablejsapi=1" frameborder="0" muted="muted"></iframe></div> 
+            </section>
+
+           
+
             <!--==================== FEATURED ====================-->
             <section class="featured section container" id="featured">
                 <h2 class="section__title">
@@ -613,7 +651,37 @@
          <script type="text/javascript" src="//use.typekit.net/rws3een.js"></script>
          <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
+         <script>
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/player_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubePlayerAPIReady() {
+                player = new YT.Player('player', {
+                playerVars: { 'autoplay': 1, 'controls': 1,'autohide':1,'wmode':'opaque' },
+                videoId: 'd_QhmWvn-E0?si=bgO19mzJorveI_eP',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+                });
+            }
+ 
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                event.target.mute();
+            }
+            function onPlayerStateChange(event) {
+                if (event.data === YT.PlayerState.ENDED) {
+                    // Video ended, play again
+                    player.playVideo();
+                }
+            }
+        </script>
         
     </body>
 </html>

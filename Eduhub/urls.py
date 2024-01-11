@@ -129,6 +129,13 @@ urlpatterns = [
     path('Events-Remove/<pk>',views.event_remove,name = "event_remove"),
     
     
+    #---- Blog Section --------------
+    path('BlogListPage-Section',views.BlogListPage,name="BlogListPage"),
+    path('BlogPage-Section',views.blog_page,name="blog_page"),
+    path('Blog-Details/<pk>',views.blog_details,name="blog_details"),
+    path('Blog-Edit/<pk>',views.blog_details_edit,name="blog_details_edit"),
+    path('Blog-Remove/<pk>',views.blog_remove,name="blog_remove"),
+    
 
 
     path('Password-Change',views.password_Change,name="password_Change"),

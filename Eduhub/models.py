@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 
@@ -125,3 +126,10 @@ class OfferBox(models.Model):
     title_name = models.CharField(max_length=255, null=True,blank=True,default='')
     offer_dics = models.TextField(null=True,blank=True,default='')
     offer_status = models.CharField(max_length=10, null=True,blank=True,default=0)
+
+
+class BlogModel(models.Model):
+    blog_title = models.CharField(max_length=200, null=True,blank=True,default='')
+    blog_content = RichTextField()
+    blog_create_date = models.DateField(auto_now_add=True,blank=False,null=True)
+    blog_update = models.DateField(auto_now=True,null=True)
